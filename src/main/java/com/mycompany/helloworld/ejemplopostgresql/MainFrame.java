@@ -74,7 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
         // nos enlazamos con el DBMS para conectarnos a la base de datos solicitada
         // utilizando las credenciales correspondientes
         //conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-        conn = DataBaseSingleton.getInstance(DB_URL, DB_USER, DB_PWD).getDBConnection();
+        conn = DataBaseSingleton.getInstance().getConnection();
         
         
         // una vez conectados, nuestro programa creará las tabas que sean necesarias
@@ -420,7 +420,6 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaPersonas = new javax.swing.JTable();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTablaObjetos = new javax.swing.JTable();
@@ -522,17 +521,12 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
         );
 
         jTabbedPane1.addTab("Lista de Personas", jPanel1);
@@ -1408,7 +1402,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JFormattedTextField jFormattedTextDate1;
     private javax.swing.JFormattedTextField jFormattedTextDate2;
     private javax.swing.JLabel jLabel1;
