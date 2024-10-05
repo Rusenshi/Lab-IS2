@@ -94,6 +94,11 @@ public class Paciente {
     public String getCorreoElectronico() {
         return correoElectronico;
     }
+
+    @Override
+    public String toString() {
+        return dni+nombre+apellido+sexo+edad+domicilio+telefono+correoElectronico;
+    }
     
     
 }

@@ -4,6 +4,7 @@
  */
 package com.mycompany.helloworld.ejemplopostgresql;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,52 +21,144 @@ public class PacienteDAOSQL implements Dao<Paciente>{
     private List<Paciente> pacientes = new ArrayList<>();
     
     public PacienteDAOSQL() {
-        pacientes.add(new Paciente("jess","ieojde",1,1,1,"","",""));
-        pacientes.add(new Paciente("jess33","i223eojde",3,1,1,"","",""));
         
     }
 
     @Override
+//    public Optional<Paciente> get(long id) {
+//        
+//        try{
+//            // Preparar Consulta
+//            // Nota: Activo es la variable para el eliminado logico
+//            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTES WHERE id=? AND activo=1");
+//            stm.setLong(1, id);
+//            ResultSet res = stm.executeQuery();
+//            
+//            // Recorrer resultado de la consulta y convertirlo en una lista
+//            while(res.next()){
+//                pacientes.add(new Paciente(res.getString(0),res.getString(0),res.getInt(0),res.getInt(0),res.getInt(0),res.getString(0),res.getString(0),res.getString(0)));
+//                // Obtiene los campos de cada columna de la base de datos y crea el objeto.
+//            }
+//        }
+//        catch(SQLException e){
+//            System.out.println("no se pudo conectar con la base de datos");
+//        }
+//        
+//        return Optional.ofNullable(pacientes.get((int) id));
+//    }
+    
+    // Retorna un Optional que indica si el objeto de clave "id" existe o no
     public Optional<Paciente> get(long id) {
         
         try{
-            ResultSet res = DataBaseSingleton.getInstance().executeQuery("SELECT * FROM PACIENTES WHERE id="+id);
+            // Preparar Consulta
+            // Nota: Activo es la variable para el eliminado logico
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTES WHERE dni=? AND activo=1");
+            stm.setLong(1, id);
+            ResultSet res = stm.executeQuery();
+            if (res.wasNull()){
+                return Optional.ofNullable(null);
+            }
+            
+            pacientes.clear();
+            // Recorrer resultado de la consulta y convertirlo en una lista
             while(res.next()){
-                pacientes.add(new Paciente(res.getString(0),res.getString(0),res.getInt(0),res.getInt(0),res.getInt(0),res.getString(0),res.getString(0),res.getString(0)));
+                
+                pacientes.add(new Paciente(res.getString(2),res.getString(3),res.getInt(1),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
             }
+            
+            if (pacientes.size() == 0) return Optional.ofNullable(null);
+            
+            return Optional.ofNullable(pacientes.get((int) 0)); // deberia haber uno solo
         }
         catch(SQLException e){
-            System.out.println("no se pudo conectar con la base de datos");
+            System.out.println("Error al buscar por clave");
+            System.out.println(e.toString());
         }
-        
-        
-        return Optional.ofNullable(pacientes.get((int) id));
+        return Optional.ofNullable(null);
+//        return Optional.ofNullable(pacientes.get((int) id));
     }
 
     @Override
     public List<Paciente> getAll() {
-        return pacientes;
+        
+        try{
+            // Preparar Consulta
+            // Nota: Activo es la variable para el eliminado logico
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTES WHERE activo=1");
+            ResultSet res = stm.executeQuery();
+            
+            pacientes.clear();
+            
+            // Recorrer resultado de la consulta y convertirlo en una lista
+            while(res.next()){
+                pacientes.add(new Paciente(res.getString(2),res.getString(3),res.getInt(1),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
+                // Obtiene los campos de cada columna de la base de datos y crea el objeto.
+            }
+            
+            return pacientes;
+        }
+        catch(SQLException e){
+            System.out.println("Error al obtener todos");
+            System.out.println(e.toString());
+            
+            return null;
+        }
+        
+        
     }
 
     @Override
     public void save(Paciente t) {
-        pacientes.add(t); // Desglosar y convertir en sql
+        try{
+            // Preparar Insercion
+            // Nota: Activo es la variable para el eliminado logico
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("INSERT INTO PACIENTES VALUES (?,?,?,?,?,?,?,?,1);");
+            stm.setInt(1, t.getDni());
+            stm.setString(2, t.getNombre());
+            stm.setString(3, t.getApellido());
+            stm.setInt(4, t.getSexo());
+            stm.setInt(5, t.getEdad());
+            stm.setString(6, t.getDomicilio());
+            stm.setString(7, t.getTelefono());
+            stm.setString(8, t.getCorreoElectronico());
+            
+            stm.executeQuery();
+        }
+        catch(SQLException e){
+            System.out.println("Error al insertar");
+            System.out.println(e.toString());
+            
+        }
+        
     }
 
     @Override
     public void update(Paciente t, String[] params) {
-        t.setNombre(Objects.requireNonNull(
-          params[0], "Name cannot be null"));
-        t.setCorreoElectronico(Objects.requireNonNull(
-          params[1], "Email cannot be null"));
+//        t.setNombre(Objects.requireNonNull(
+//          params[0], "Name cannot be null"));
+//        t.setCorreoElectronico(Objects.requireNonNull(
+//          params[1], "Email cannot be null"));
+//        
+//        pacientes.add(t);
         
-        pacientes.add(t);
     }
 
     @Override
     public void delete(Paciente t) {
-        pacientes.remove(t);
+//        pacientes.remove(t);
+        try{
+            // Preparar Eliminacion (Logica)
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("UPDATE PACIENTES SET activo=0 WHERE dni=?");
+            stm.setInt(1, t.getDni());
+            
+            stm.executeQuery();
+        }
+        catch(SQLException e){
+            System.out.println("Error al eliminar");
+            System.out.println(e.toString());
+        }
     }
     
 }

@@ -18,6 +18,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.Vector;
@@ -58,7 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() throws SQLException {
-        // Espeecificar el tema
+        // Espeecificar el tema flatlaf (look and feel)
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
         } catch (UnsupportedLookAndFeelException ex) {
@@ -95,7 +96,7 @@ public class MainFrame extends javax.swing.JFrame {
         //query.execute("DROP TABLE IF EXISTS sitios,cuadriculas,cajas,personas,objetos,liticos,ceramicos"); // Elimina todas las tablas (Evita problema de claves repetidas al hacer la precarga)
         
         try{
-            query.execute("SELECT * FROM personas"); // Consulta de prueba para detectar que existen las tablas
+            query.execute("SELECT * FROM pacientes"); // Consulta de prueba para detectar que existen las tablas
         }catch(Exception ex){
             firstTime = true;
             System.out.println("Es la 1ra vez que se ejecuta el programa");
@@ -103,6 +104,21 @@ public class MainFrame extends javax.swing.JFrame {
         
         if (firstTime){
         // Crear las tablas
+        // Tabla de prueba de pacientes
+        query.execute("CREATE TABLE IF NOT EXISTS pacientes("
+                + "dni INTEGER NOT NULL, "
+                + "nombre TEXT NOT NULL, "
+                + "apellido TEXT NOT NULL, "
+                + "sexo INTEGER NOT NULL, "
+                + "edad INTEGER NOT NULL, "
+                + "domicilio TEXT NOT NULL, "
+                + "telefono TEXT NOT NULL, "
+                + "correoElectronico TEXT NOT NULL, "
+                + "activo INT NOT NULL, "
+                + "PRIMARY KEY (dni))");
+        
+        
+        
         query.execute("CREATE TABLE IF NOT EXISTS ejemplo_personas("
                 + "DNI INTEGER NOT NULL, "
                 + "nombre TEXT NOT NULL, "
@@ -297,6 +313,23 @@ public class MainFrame extends javax.swing.JFrame {
         // 11
         //queryToTableUpdate(jTablaPersonas,"SELECT ca_cod,SUM(o_peso) FROM cajas,objetos WHERE ca_cod = ca_cod_contiene GROUP BY ca_cod");
         updateExtraQueries();
+        
+        
+        PacienteDAOSQL pacienteDao = new PacienteDAOSQL();
+        Optional p = pacienteDao.get(23);
+        if (p.isPresent()){
+            System.out.println(p.get());
+        }
+        
+        pacienteDao.save(new Paciente("juan","perez",23,1,30,"","",""));
+        
+        System.out.println(pacienteDao.getAll());
+        
+        
+        if (p.isPresent()){
+            pacienteDao.delete((Paciente) p.get());
+        }
+        
     }
     
     
@@ -503,6 +536,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Base de Datos (Laboratorio 2 SQL)");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jTablaPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1356,6 +1394,11 @@ public class MainFrame extends javax.swing.JFrame {
             System.out.println("ERROR, fecha no valida");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

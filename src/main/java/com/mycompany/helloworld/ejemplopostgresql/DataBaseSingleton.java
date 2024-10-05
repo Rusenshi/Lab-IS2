@@ -27,8 +27,8 @@ public class DataBaseSingleton {
     
     private Connection conn;
     private static Statement query = null;
-    private static PreparedStatement p_query = null;
-    private static ResultSet result = null;
+//    private static PreparedStatement p_query = null;
+//    private static ResultSet result = null;
     private static DataBaseSingleton dataBaseInstance;
 
     // Sin parametros
