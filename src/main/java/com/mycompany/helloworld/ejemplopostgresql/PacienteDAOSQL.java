@@ -51,32 +51,32 @@ public class PacienteDAOSQL implements Dao<Paciente>{
     public Optional<Paciente> get(long id) {
         
         try{
+            // Limpia la lista temporal de objetos de la consulta anterior
+            pacientes.clear();
+            
             // Preparar Consulta
             // Nota: Activo es la variable para el eliminado logico
             PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTES WHERE dni=? AND activo=1");
             stm.setLong(1, id);
-            ResultSet res = stm.executeQuery();
-            if (res.wasNull()){
-                return Optional.ofNullable(null);
-            }
+            ResultSet res = stm.executeQuery();   
             
-            pacientes.clear();
             // Recorrer resultado de la consulta y convertirlo en una lista
             while(res.next()){
-                
-                pacientes.add(new Paciente(res.getString(2),res.getString(3),res.getInt(1),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
+                pacientes.add(new Paciente(res.getString(2),res.getString(3),res.getInt(1),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
             }
             
-            if (pacientes.size() == 0) return Optional.ofNullable(null);
+            // Comprueba si encontró al paciente de dni "id"
+            if (pacientes.isEmpty()) return Optional.empty();
             
             return Optional.ofNullable(pacientes.get((int) 0)); // deberia haber uno solo
         }
         catch(SQLException e){
             System.out.println("Error al buscar por clave");
             System.out.println(e.toString());
+            return Optional.empty();
         }
-        return Optional.ofNullable(null);
+        
 //        return Optional.ofNullable(pacientes.get((int) id));
     }
 
@@ -89,12 +89,13 @@ public class PacienteDAOSQL implements Dao<Paciente>{
             PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTES WHERE activo=1");
             ResultSet res = stm.executeQuery();
             
+            // Limpia la lista de la consulta anterior
             pacientes.clear();
             
             // Recorrer resultado de la consulta y convertirlo en una lista
             while(res.next()){
-                pacientes.add(new Paciente(res.getString(2),res.getString(3),res.getInt(1),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
+                pacientes.add(new Paciente(res.getString(2),res.getString(3),res.getInt(1),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
             }
             
             return pacientes;
