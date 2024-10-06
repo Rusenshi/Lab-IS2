@@ -103,11 +103,8 @@ public class PacienteDAOSQL implements Dao<Paciente>{
         catch(SQLException e){
             System.out.println("Error al obtener todos");
             System.out.println(e.toString());
-            
             return null;
         }
-        
-        
     }
 
     @Override
@@ -125,18 +122,16 @@ public class PacienteDAOSQL implements Dao<Paciente>{
             stm.setString(7, t.getTelefono());
             stm.setString(8, t.getCorreoElectronico());
             
-            stm.executeQuery();
+            stm.execute();
         }
         catch(SQLException e){
             System.out.println("Error al insertar");
             System.out.println(e.toString());
-            
         }
-        
     }
 
     @Override
-    public void update(Paciente t, String[] params) {
+    public void update(Paciente t, Object[] params) {
 //        t.setNombre(Objects.requireNonNull(
 //          params[0], "Name cannot be null"));
 //        t.setCorreoElectronico(Objects.requireNonNull(
@@ -144,6 +139,45 @@ public class PacienteDAOSQL implements Dao<Paciente>{
 //        
 //        pacientes.add(t);
         
+        try{
+            // modificar primero el objeto paciente, y luego sincronizarlo con la base de datos
+            t.setDni((int) params[0]);
+            t.setNombre((String) params[1]);
+            t.setApellido((String) params[2]);
+            t.setSexo((int) params[3]);
+            t.setEdad((int) params[4]);
+            t.setDomicilio((String) params[5]);
+            t.setTelefono((String) params[6]);
+            t.setCorreoElectronico((String) params[7]);
+            
+            System.out.println(t);
+            
+            // Preparar Modificación
+            // Nota: Activo es la variable para el eliminado logico
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("UPDATE PACIENTES SET dni=?,nombre=?,apellido=?,sexo=?,edad=?,domicilio=?,telefono=?,correoElectronico=?,activo=? WHERE dni=?;");
+            stm.setInt(1, t.getDni());
+            stm.setString(2, t.getNombre());
+            stm.setString(3, t.getApellido());
+            stm.setInt(4, t.getSexo());
+            stm.setInt(5, t.getEdad());
+            stm.setString(6, t.getDomicilio());
+            stm.setString(7, t.getTelefono());
+            stm.setString(8, t.getCorreoElectronico());
+            stm.setInt(10, t.getDni());
+            
+            if (params.length > 8){
+                stm.setInt(9, (int) params[8]);
+            }
+            else {
+                stm.setInt(9, 1); // Potencial problema, analizar despues
+            }
+            
+            stm.execute();
+        }
+        catch(SQLException e){
+            System.out.println("Error al modificar");
+            System.out.println(e.toString());
+        }
     }
 
     @Override

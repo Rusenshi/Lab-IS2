@@ -319,16 +319,33 @@ public class MainFrame extends javax.swing.JFrame {
         Optional p = pacienteDao.get(23);
         if (p.isPresent()){
             System.out.println(p.get());
+            
         }
         
         pacienteDao.save(new Paciente("juan","perez",23,1,30,"","",""));
+        pacienteDao.save(new Paciente("juan1","perez1",24,1,30,"","",""));
+        pacienteDao.save(new Paciente("juan2","perez2",25,1,30,"","",""));
+        pacienteDao.save(new Paciente("juan3","perez43",26,1,30,"","",""));
+        pacienteDao.save(new Paciente("jasdwuan3","pereawdwz43",2326,1,30,"","",""));
+        
+        
+        // modificar
+        Object param[] = {25,"josh","broh",1,12,"","","",1};
+        pacienteDao.update((Paciente) pacienteDao.get(25).get(), param);
+        
         
         System.out.println(pacienteDao.getAll());
         
+        pacienteDao.delete(new Paciente("juan3","perez43",26,1,30,"","",""));
         
         if (p.isPresent()){
             pacienteDao.delete((Paciente) p.get());
         }
+        
+        System.out.println(pacienteDao.getAll());
+        
+        
+        queryToTableUpdate(jTablaPersonas,"SELECT * FROM pacientes");
         
     }
     
