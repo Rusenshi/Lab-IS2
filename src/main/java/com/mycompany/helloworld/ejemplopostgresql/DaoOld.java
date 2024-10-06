@@ -11,14 +11,16 @@ import java.util.Optional;
  *
  * @author jerem
  */
-public interface Dao<T,IDTYPE> {
-    Optional<T> get(IDTYPE id);
+public interface DaoOld<T> {
+    
+    Optional<T> get(long id);
     
     List<T> getAll();
     
     void save(T t);
     
-    void update(T t);
+    void update(T t, Object[] params);
     
-    void delete(IDTYPE id);
+    void delete(T t);
 }
+

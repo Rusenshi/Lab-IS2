@@ -16,7 +16,7 @@ import java.util.Optional;
  *
  * @author jerem
  */
-public class PacienteDAOSQL implements Dao<Paciente>{
+public class PacienteDAOSQL implements DaoOld<Paciente>{
     // Capa de persistencia
     private List<Paciente> pacientes = new ArrayList<>();
     

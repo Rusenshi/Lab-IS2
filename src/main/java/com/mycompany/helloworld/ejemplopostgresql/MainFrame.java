@@ -315,7 +315,7 @@ public class MainFrame extends javax.swing.JFrame {
         updateExtraQueries();
         
         
-        PacienteDAOSQL pacienteDao = new PacienteDAOSQL();
+        DaoOld pacienteDao = new PacienteDAOSQL();
         Optional p = pacienteDao.get(23);
         if (p.isPresent()){
             System.out.println(p.get());

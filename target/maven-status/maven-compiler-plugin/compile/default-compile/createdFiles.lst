@@ -17,9 +17,9 @@ com\interfaz\Main$2.class
 com\mycompany\helloworld\ejemplopostgresql\MainFrame$12.class
 com\mycompany\helloworld\ejemplopostgresql\MainFrame.class
 com\interfaz\Main$1.class
+com\mycompany\helloworld\ejemplopostgresql\DaoOld.class
 com\mycompany\helloworld\ejemplopostgresql\MainFrame$3.class
 com\mycompany\helloworld\ejemplopostgresql\DataBaseSingleton.class
-com\mycompany\helloworld\ejemplopostgresql\Dao.class
 com\mycompany\helloworld\ejemplopostgresql\MainFrame$13.class
 com\mycompany\helloworld\ejemplopostgresql\MainFrame$15.class
 com\mycompany\helloworld\ejemplopostgresql\PacienteDAOSQL.class
