@@ -33,7 +33,7 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
             // Recorrer resultado de la consulta y convertirlo en una lista
             while(res.next()){
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
-                pacientes.add(new Paciente(res.getString(2),res.getString(3),res.getInt(1),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
+                pacientes.add(new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
             }
             
             // Comprueba si encontró al paciente de dni "id"
@@ -63,7 +63,7 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
             // Recorrer resultado de la consulta y convertirlo en una lista
             while(res.next()){
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
-                pacientes.add(new Paciente(res.getString(2),res.getString(3),res.getInt(1),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
+                pacientes.add(new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
             }
         }
         catch(SQLException e){

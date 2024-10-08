@@ -4,6 +4,8 @@
  */
 package com.objetos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jerem
@@ -17,8 +19,9 @@ public class Paciente {
     private String domicilio;
     private String telefono;
     private String correoElectronico;
+    private ArrayList<ObraSocial> obrasSociales; // Para ver si es particular ver si esta lista está vacia
 
-    public Paciente(String nombre, String apellido, int dni, int sexo, int edad, String domicilio, String telefono, String correoElectronico) {
+    public Paciente(int dni, String nombre, String apellido, int sexo, int edad, String domicilio, String telefono, String correoElectronico) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;

@@ -357,17 +357,17 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         if (pacienteDao.get(23).isEmpty()){
-            pacienteDao.save(new Paciente("juan","perez",23,1,30,"","",""));
+            pacienteDao.save(new Paciente(23,"juan","perez",1,30,"","",""));
         }
         
-        pacienteDao.save(new Paciente("juan1","perez1",24,1,30,"","",""));
-        pacienteDao.save(new Paciente("juan2","perez2",25,1,30,"","",""));
-        pacienteDao.save(new Paciente("juan3","perez43",26,1,30,"","",""));
-        pacienteDao.save(new Paciente("jasdwuan3","pereawdwz43",2326,1,30,"","",""));
+        pacienteDao.save(new Paciente(24,"juan1","perez1",1,30,"","",""));
+        pacienteDao.save(new Paciente(25,"juan2","perez2",1,30,"","",""));
+        pacienteDao.save(new Paciente(26,"juan3","perez43",1,30,"","",""));
+        pacienteDao.save(new Paciente(2326,"jasdwuan3","pereawdwz43",1,30,"","",""));
         
         
         // modificar
-        Paciente pModific = new Paciente("joshadw","br22221oh",25,1,12,"","","");
+        Paciente pModific = new Paciente(25,"joshadw","br22221oh",1,12,"","","");
         pacienteDao.update(pModific);
         
         
