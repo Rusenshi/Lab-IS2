@@ -46,8 +46,9 @@ public class DataBaseSingleton {
             query = conn.createStatement();
         }
         catch(SQLException e){
-            System.out.println("Error al iniciar la base de datos");
-            conn = null;
+            System.out.println("Error al conectarse con la base de datos: el programa no puede continuar");
+            System.exit(1); // Cancelar ejecución del programa
+            //conn = null;
         }
     }
     

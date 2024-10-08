@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.persistencia;
+package com.interfaz;
 
 import com.objetos.Paciente;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.persistencia.DAOPacienteSQL;
+import com.persistencia.Dao;
+import com.persistencia.DataBaseSingleton;
 import java.io.FileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
