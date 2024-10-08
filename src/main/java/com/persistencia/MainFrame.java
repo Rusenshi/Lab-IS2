@@ -351,7 +351,7 @@ public class MainFrame extends javax.swing.JFrame {
 
 
         Dao pacienteDao = new DAOPacienteSQL();
-        Optional p = pacienteDao.get(23);
+        Optional p = pacienteDao.get(2326);
         if (p.isPresent()){
             System.out.println(p.get());
         }
@@ -360,6 +360,7 @@ public class MainFrame extends javax.swing.JFrame {
             pacienteDao.save(new Paciente(23,"juan","perez",1,30,"","",""));
         }
         
+        pacienteDao.save(new Paciente(22,"eeeeh","qwe",1,90,"casita","",""));
         pacienteDao.save(new Paciente(24,"juan1","perez1",1,30,"","",""));
         pacienteDao.save(new Paciente(25,"juan2","perez2",1,30,"","",""));
         pacienteDao.save(new Paciente(26,"juan3","perez43",1,30,"","",""));

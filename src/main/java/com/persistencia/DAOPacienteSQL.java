@@ -21,26 +21,21 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
     @Override
     public Optional<Paciente> get(Integer id) {
         try{
-            // Crea lista temporal para recorrer resultset
-            List<Paciente> pacientes = new ArrayList<>();
-            
             // Preparar Consulta
             // Nota: Activo es la variable para el eliminado logico
             PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTES WHERE activo=1 AND dni=?");
             stm.setInt(1, id);
             ResultSet res = stm.executeQuery();   
             
-            // Recorrer resultado de la consulta y convertirlo en una lista
-            while(res.next()){
+            // res tiene el cursor por defecto en -1, si res.next retorna true, significa que hay un elemento en la lista, y por ende es el buscado
+            if (res.next()){
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
-                pacientes.add(new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
+                Paciente p = new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8));
+                return Optional.ofNullable(p); 
             }
-            
-            // Comprueba si encontró al paciente de dni "id"
-            if (pacientes.isEmpty()) return Optional.empty();
-            
-            // Retorna el unico elemento que debería haber en la lista
-            return Optional.ofNullable(pacientes.get((int) 0)); 
+            else{
+                return Optional.empty();
+            }
         }
         catch(SQLException e){
             System.out.println("Error al buscar por clave");
