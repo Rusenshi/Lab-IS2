@@ -123,6 +123,12 @@ public class MainFrame extends javax.swing.JFrame {
         
         
         
+        
+        
+        
+        
+        
+        
         query.execute("CREATE TABLE IF NOT EXISTS ejemplo_personas("
                 + "DNI INTEGER NOT NULL, "
                 + "nombre TEXT NOT NULL, "

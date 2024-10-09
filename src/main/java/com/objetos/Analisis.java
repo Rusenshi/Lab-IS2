@@ -17,4 +17,5 @@ public class Analisis {
     private String metodoUsado;
     private ArrayList<Reactivo> reactivosUsados;
     private float monto;
+    
 }

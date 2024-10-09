@@ -5,6 +5,8 @@
 package com.interfaz;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.logica.ManagerPaciente;
+import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -25,6 +27,11 @@ public class Main extends javax.swing.JFrame {
             System.out.println("Error al cargar la interfaz");
         }
         initComponents();
+        
+        jCalendar1.setBackground(Color.BLACK);
+        
+        
+        ManagerPaciente.validarDni(Integer.valueOf(jTextField1.getText()));
     }
 
     /**
@@ -40,6 +47,9 @@ public class Main extends javax.swing.JFrame {
         mainJpanel = new javax.swing.JPanel();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jButton1 = new javax.swing.JButton();
+        listaProximasFechasLibres = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         crearTurnoJpanel = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         crearTurnoPasosJTabbed = new javax.swing.JTabbedPane();
@@ -88,27 +98,55 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        listaProximasFechasLibres.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout mainJpanelLayout = new javax.swing.GroupLayout(mainJpanel);
         mainJpanel.setLayout(mainJpanelLayout);
         mainJpanelLayout.setHorizontalGroup(
             mainJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainJpanelLayout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(307, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainJpanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(131, 131, 131))
+                .addGroup(mainJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainJpanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(listaProximasFechasLibres, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 180, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainJpanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         mainJpanelLayout.setVerticalGroup(
             mainJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainJpanelLayout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(mainJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(listaProximasFechasLibres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addComponent(jButton1)
-                .addGap(62, 62, 62))
+                .addContainerGap())
         );
 
         backgroundJpanel.add(mainJpanel, "card2");
@@ -565,8 +603,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JList<String> listaProximasFechasLibres;
     private javax.swing.JPanel mainJpanel;
     // End of variables declaration//GEN-END:variables
 }
