@@ -6,8 +6,12 @@ package com.interfaz;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.logica.ManagerPaciente;
+import com.objetos.ObraSocial;
+import com.objetos.Paciente;
 import com.objetos.Reactivo;
 import com.objetos.Stock;
+import com.persistencia.DAOObraSocialSQL;
+import com.persistencia.DAOPacienteSQL;
 import com.persistencia.DAOReactivoSQL;
 import com.persistencia.DAOStockSQL;
 import com.persistencia.DataBaseSingleton;
@@ -42,25 +46,48 @@ public class Main extends javax.swing.JFrame {
 //      
 
 
-        DAOReactivoSQL daoReactivo = new DAOReactivoSQL();
-        daoReactivo.save(new Reactivo("T12",123));
-        daoReactivo.save(new Reactivo("T125",123));
-        daoReactivo.save(new Reactivo("E12",123));
-        daoReactivo.save(new Reactivo("F1255",123));
-        
-        
-        DAOStockSQL daoStock = new DAOStockSQL();
-        
-        daoStock.save(new Stock(123,12,new Date(System.currentTimeMillis()),new Reactivo("T12",123)));
-        daoStock.save(new Stock(123443,12,new Date(System.currentTimeMillis()),new Reactivo("E12",123)));
-        daoStock.save(new Stock(12213,12,new Date(System.currentTimeMillis()),new Reactivo("F1255",123)));
-        
-        daoStock.delete(12213);
-        daoStock.delete(123443);
-        
-        
-        System.out.println(daoStock.getAll());
+//        DAOReactivoSQL daoReactivo = new DAOReactivoSQL();
+//        daoReactivo.save(new Reactivo("T12",123));
+//        daoReactivo.save(new Reactivo("T125",123));
+//        daoReactivo.save(new Reactivo("E12",123));
+//        daoReactivo.save(new Reactivo("F1255",123));
+//        
+//        
+//        DAOStockSQL daoStock = new DAOStockSQL();
+//        
+//        daoStock.save(new Stock(123,12,new Date(System.currentTimeMillis()),new Reactivo("T12",123)));
+//        daoStock.save(new Stock(123443,12,new Date(System.currentTimeMillis()),new Reactivo("E12",123)));
+//        daoStock.save(new Stock(12213,12,new Date(System.currentTimeMillis()),new Reactivo("F1255",123)));
+//        
+//        daoStock.delete(12213);
+//        daoStock.delete(123443);
+//        
+//        
+//        System.out.println(daoStock.getAll());
 
+        DAOObraSocialSQL daoObraSocial = new DAOObraSocialSQL();
+        
+        
+        daoObraSocial.save(new ObraSocial("DOSEP"));
+        daoObraSocial.save(new ObraSocial("DOSPU"));
+        daoObraSocial.save(new ObraSocial("PAMI"));
+//        
+//        
+//        
+//        System.out.println(daoObraSocial.getAll());
+        
+        
+        
+        DAOPacienteSQL daoPaciente = new DAOPacienteSQL();
+        Paciente p1 = new Paciente(47123871,"Jere","Julian",1,23,"la ribera","2657719541","jeremiasjulian5003@gmail.com");
+        p1.getObrasSociales().add(new ObraSocial("DOSEP"));
+        
+        daoPaciente.save(p1);
+        
+        System.out.println(daoPaciente.get(47123871));
+        System.out.println(daoPaciente.getAll());
+        
+        
     }
 
     /**

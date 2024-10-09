@@ -30,6 +30,7 @@ public class Paciente {
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
+        this.obrasSociales = new ArrayList<ObraSocial>();
     }
     
     
@@ -98,10 +99,22 @@ public class Paciente {
         return correoElectronico;
     }
 
+    public ArrayList<ObraSocial> getObrasSociales() {
+        return obrasSociales;
+    }
+
+    public void setObrasSociales(ArrayList<ObraSocial> obrasSociales) {
+        this.obrasSociales = obrasSociales;
+    }
+    
+    
+    
     @Override
     public String toString() {
-        return dni+nombre+apellido+sexo+edad+domicilio+telefono+correoElectronico;
+        return "Paciente{" + "nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", sexo=" + sexo + ", edad=" + edad + ", domicilio=" + domicilio + ", telefono=" + telefono + ", correoElectronico=" + correoElectronico + ", obrasSociales=" + obrasSociales + '}';
     }
+
+    
     
     
 }

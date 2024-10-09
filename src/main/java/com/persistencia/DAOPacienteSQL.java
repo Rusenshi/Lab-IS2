@@ -4,6 +4,7 @@
  */
 package com.persistencia;
 
+import com.objetos.ObraSocial;
 import com.objetos.Paciente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +24,7 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
         try{
             // Preparar Consulta
             // Nota: Activo es la variable para el eliminado logico
-            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTES WHERE activo=1 AND dni=?");
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTE WHERE activo=1 AND dni=?");
             stm.setInt(1, id);
             ResultSet res = stm.executeQuery();   
             
@@ -31,6 +32,16 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
             if (res.next()){
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
                 Paciente p = new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8));
+                
+                // Obtener las obras sociales vinculadas a este paciente
+                PreparedStatement stmOS = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTE_TIENE_OBRASOCIAL WHERE activo=1 AND Paciente_dni =?");
+                stmOS.setInt(1, id);
+                ResultSet resOS = stmOS.executeQuery();   
+                while(resOS.next()){
+                    p.getObrasSociales().add(new ObraSocial(resOS.getString(2)));
+                }
+                
+                
                 return Optional.ofNullable(p); 
             }
             else{
@@ -52,13 +63,25 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
         try{
             // Preparar Consulta
             // Nota: Activo es la variable para el eliminado logico
-            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTES WHERE activo=1");
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTE WHERE activo=1");
             ResultSet res = stm.executeQuery();
             
             // Recorrer resultado de la consulta y convertirlo en una lista
             while(res.next()){
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
-                pacientes.add(new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8)));
+                Paciente p = new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8));
+                
+                // Obtener las obras sociales vinculadas a este paciente
+                PreparedStatement stmOS = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTE_TIENE_OBRASOCIAL WHERE activo=1 AND Paciente_dni =?");
+                stmOS.setInt(1, p.getDni());
+                ResultSet resOS = stmOS.executeQuery();   
+                while(resOS.next()){
+                    p.getObrasSociales().add(new ObraSocial(resOS.getString(2)));
+                }
+                
+                
+                pacientes.add(p);
+                
             }
         }
         catch(SQLException e){
@@ -72,9 +95,9 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
     @Override
     public void save(Paciente t) {
         try{
-            // Preparar Insercion
+            // Preparar Insercion del paciente
             // Nota: Activo es la variable para el eliminado logico
-            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("INSERT INTO PACIENTES VALUES (?,?,?,?,?,?,?,?,1);");
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("INSERT INTO PACIENTE VALUES (?,?,?,?,?,?,?,?,1);");
             stm.setInt(1, t.getDni());
             stm.setString(2, t.getNombre());
             stm.setString(3, t.getApellido());
@@ -85,6 +108,15 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
             stm.setString(8, t.getCorreoElectronico());
             
             stm.execute();
+            
+            // Itera sobre la lista de obras sociales del paciente
+            for(ObraSocial os : t.getObrasSociales()){
+                // Prepara Insercion en la tabla que relaciona un paciente con una obra social (Paciente_tiene_obraSocial)
+                PreparedStatement stmOS = DataBaseSingleton.getInstance().getConnection().prepareStatement("INSERT INTO PACIENTE_TIENE_OBRASOCIAL VALUES (?,?,1);");
+                stmOS.setInt(1, t.getDni());
+                stmOS.setString(2, os.getNombre());
+                stmOS.execute();
+            }
         }
         catch(SQLException e){
             System.out.println("Error al insertar");
@@ -95,7 +127,7 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
             if (e.getSQLState().equals("23505")){
                 try {
                     // Preparar Eliminacion (Logica)
-                    PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("UPDATE PACIENTES SET dni=?,nombre=?,apellido=?,sexo=?,edad=?,domicilio=?,telefono=?,correoElectronico=?,activo=1 WHERE dni=?");
+                    PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("UPDATE PACIENTE SET dni=?,nombre=?,apellido=?,sexo=?,edad=?,domicilio=?,telefono=?,correoElectronico=?,activo=1 WHERE dni=?");
                     stm.setInt(1, t.getDni());
                     stm.setString(2, t.getNombre());
                     stm.setString(3, t.getApellido());
@@ -121,7 +153,7 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
         try{
             // Preparar Modificación
             // Nota: Activo es la variable para el eliminado logico
-            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("UPDATE PACIENTES SET dni=?,nombre=?,apellido=?,sexo=?,edad=?,domicilio=?,telefono=?,correoElectronico=? WHERE activo = 1 AND dni=?;");
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("UPDATE PACIENTE SET dni=?,nombre=?,apellido=?,sexo=?,edad=?,domicilio=?,telefono=?,correoElectronico=? WHERE activo = 1 AND dni=?;");
             stm.setInt(1, t.getDni());
             stm.setString(2, t.getNombre());
             stm.setString(3, t.getApellido());
@@ -144,7 +176,7 @@ public class DAOPacienteSQL implements Dao<Paciente,Integer>{
     public void delete(Integer id) {
         try{
             // Preparar Eliminacion (Logica)
-            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("UPDATE PACIENTES SET activo=0 WHERE dni=?");
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("UPDATE PACIENTE SET activo=0 WHERE dni=?");
             stm.setInt(1, id);
 
             stm.execute();

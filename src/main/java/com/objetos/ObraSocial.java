@@ -9,6 +9,24 @@ package com.objetos;
  * @author jerem
  */
 public class ObraSocial {
-    private int id;
     private String nombre;
+
+    public ObraSocial(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "ObraSocial{" + "nombre=" + nombre + '}';
+    }
+    
+    
 }

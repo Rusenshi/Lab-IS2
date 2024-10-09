@@ -6,6 +6,7 @@ com\interfaz\Main$5.class
 com\interfaz\ConsultarPaciente.class
 com\interfaz\Main.class
 com\objetos\ObraSocial.class
+com\persistencia\DAOObraSocialSQL.class
 com\interfaz\Main$10.class
 com\objetos\Paciente.class
 com\logica\ManagerPaciente.class
