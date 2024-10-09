@@ -5,10 +5,19 @@
 package com.interfaz;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.objetos.Analisis;
 import com.objetos.ObraSocial;
 import com.objetos.Paciente;
+import com.objetos.Reactivo;
+import com.objetos.Stock;
+import com.objetos.Turno;
+import com.persistencia.DAOAnalisisSQL;
 import com.persistencia.DAOObraSocialSQL;
 import com.persistencia.DAOPacienteSQL;
+import com.persistencia.DAOReactivoSQL;
+import com.persistencia.DAOStockSQL;
+import com.persistencia.DAOTurnoSQL;
+import java.sql.Date;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -36,47 +45,88 @@ public class Main extends javax.swing.JFrame {
 //        ManagerPaciente.validarDni(Integer.valueOf(jTextField1.getText()));
 //      
 
-
-//        DAOReactivoSQL daoReactivo = new DAOReactivoSQL();
-//        daoReactivo.save(new Reactivo("T12",123));
-//        daoReactivo.save(new Reactivo("T125",123));
-//        daoReactivo.save(new Reactivo("E12",123));
-//        daoReactivo.save(new Reactivo("F1255",123));
-//        
-//        
-//        DAOStockSQL daoStock = new DAOStockSQL();
-//        
-//        daoStock.save(new Stock(123,12,new Date(System.currentTimeMillis()),new Reactivo("T12",123)));
-//        daoStock.save(new Stock(123443,12,new Date(System.currentTimeMillis()),new Reactivo("E12",123)));
-//        daoStock.save(new Stock(12213,12,new Date(System.currentTimeMillis()),new Reactivo("F1255",123)));
-//        
-//        daoStock.delete(12213);
-//        daoStock.delete(123443);
-//        
-//        
-//        System.out.println(daoStock.getAll());
-
-        DAOObraSocialSQL daoObraSocial = new DAOObraSocialSQL();
+        // Cargar Reactivos de Prueba
+        DAOReactivoSQL daoReactivo = new DAOReactivoSQL();
         
+        daoReactivo.save(new Reactivo("T12",123));
+        daoReactivo.save(new Reactivo("T125",123));
+        daoReactivo.save(new Reactivo("E12",123));
+        daoReactivo.save(new Reactivo("F1255",123));
+
+        System.out.println(daoReactivo.getAll());
+        
+        // Cargar Analisis
+        DAOAnalisisSQL daoAnalisis = new DAOAnalisisSQL();
+        
+        Analisis analisis1 = new Analisis("T3",3.5f,"Metodo 1",2500);
+        analisis1.getReactivosUsados().add(new Reactivo("T12",70));
+        analisis1.getReactivosUsados().add(new Reactivo("T125",80));
+        analisis1.getReactivosUsados().add(new Reactivo("E12",20));
+        daoAnalisis.save(analisis1);
+        
+        Analisis analisis2 = new Analisis("Glucemia",3.5f,"Metodo 2",2500);
+        analisis2.getReactivosUsados().add(new Reactivo("T125",70));
+        analisis2.getReactivosUsados().add(new Reactivo("E12",20));
+        daoAnalisis.save(analisis2);
+        
+        Analisis analisis3 = new Analisis("AlgoMas",3.5f,"Metodo 3",2500);
+        analisis3.getReactivosUsados().add(new Reactivo("E12",70));
+        analisis3.getReactivosUsados().add(new Reactivo("F1255",80));
+        analisis3.getReactivosUsados().add(new Reactivo("T125",20));
+        analisis3.getReactivosUsados().add(new Reactivo("T12",20));
+        daoAnalisis.save(analisis3);
+        
+        System.out.println(daoAnalisis.getAll());
+        
+        // Cargar Stock de Prueba
+        DAOStockSQL daoStock = new DAOStockSQL();
+        
+        daoStock.save(new Stock(123,12,new Date(System.currentTimeMillis()),new Reactivo("T12",123)));
+        daoStock.save(new Stock(123443,12,new Date(System.currentTimeMillis()),new Reactivo("E12",123)));
+        daoStock.save(new Stock(12213,12,new Date(System.currentTimeMillis()),new Reactivo("F1255",123)));
+        daoStock.save(new Stock(22213,12,new Date(System.currentTimeMillis()),new Reactivo("F1255",123)));
+        
+        System.out.println(daoStock.getAll());
+        
+        // Cargar Obras Sociales
+        DAOObraSocialSQL daoObraSocial = new DAOObraSocialSQL();
         
         daoObraSocial.save(new ObraSocial("DOSEP"));
         daoObraSocial.save(new ObraSocial("DOSPU"));
         daoObraSocial.save(new ObraSocial("PAMI"));
-//        
-//        
-//        
-//        System.out.println(daoObraSocial.getAll());
         
+        System.out.println(daoObraSocial.getAll());
         
-        
+        // Cargar Pacientes
         DAOPacienteSQL daoPaciente = new DAOPacienteSQL();
-        Paciente p1 = new Paciente(47123871,"Jere","Julian",1,23,"la ribera","2657719541","jeremiasjulian5003@gmail.com");
-        p1.getObrasSociales().add(new ObraSocial("DOSEP"));
         
+        Paciente p1 = new Paciente(45123871,"Jere","Julian",1,23,"la ribera","2657719541","jeremiasjulian5003@gmail.com");
+        p1.getObrasSociales().add(new ObraSocial("DOSEP"));  
         daoPaciente.save(p1);
         
-        System.out.println(daoPaciente.get(47123871));
+        Paciente p2 = new Paciente(46123871,"Francisco","Julian",1,23,"la ribera","2657719541","jeremiasjulian5003@gmail.com");
+        p2.getObrasSociales().add(new ObraSocial("DOSPU"));  
+        daoPaciente.save(p2);
+        
+        Paciente p3 = new Paciente(47123871,"Pedro","Julian",1,23,"la ribera","2657719541","jeremiasjulian5003@gmail.com");
+        p3.getObrasSociales().add(new ObraSocial("DOSEP"));  
+        p3.getObrasSociales().add(new ObraSocial("PAMI"));  
+        daoPaciente.save(p3);
+        
         System.out.println(daoPaciente.getAll());
+        
+        
+        // Crear Turnos
+        DAOTurnoSQL daoTurno = new DAOTurnoSQL();
+        
+        Turno t1 = new Turno(12,new Date(System.currentTimeMillis()),"Marito","le duele el codo");
+        t1.setPaciente(p1);
+        t1.getAnalisis().add(analisis1);
+        t1.getAnalisis().add(analisis2);
+        daoTurno.save(t1);
+        
+        System.out.println(daoTurno.getAll());
+        
         
 //        jLabelPacienteInexistente.setVisible(false);
     }

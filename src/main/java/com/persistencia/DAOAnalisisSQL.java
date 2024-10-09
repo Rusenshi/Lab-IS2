@@ -37,7 +37,7 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
                 //Paciente p = new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8));
                 
                 // Obtener los reactivos vinculados a este analisis
-                PreparedStatement stmAnalisis = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM ANALISIS_USA_REACTIVO WHERE activo=1 AND Reactivo_nombre =?");
+                PreparedStatement stmAnalisis = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM ANALISIS_USA_REACTIVO WHERE activo=1 AND Analisis_nombre =?");
                 stmAnalisis.setString(1, nombre);
                 ResultSet resAnalisis = stmAnalisis.executeQuery();
                 
@@ -46,7 +46,7 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
                 
                 while(resAnalisis.next()){
 //                    p.getObrasSociales().add(new ObraSocial(resOS.getString(2)));
-                    Optional <Reactivo> r = daoReactivo.get(resAnalisis.getString(2));
+                    Optional <Reactivo> r = daoReactivo.get(resAnalisis.getString(1));
                     if (r.isPresent()){
                         analisis.getReactivosUsados().add(r.get());
                     }
@@ -83,7 +83,7 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
                 Analisis a = new Analisis(res.getString(1),res.getFloat(2),res.getString(3),res.getFloat(4));
                 
                 // Obtener los reactivos vinculados a este analisis
-                PreparedStatement stmAnalisis = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM ANALISIS_USA_REACTIVO WHERE activo=1 AND Reactivo_nombre =?");
+                PreparedStatement stmAnalisis = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM ANALISIS_USA_REACTIVO WHERE activo=1 AND Analisis_nombre =?");
                 stmAnalisis.setString(1, a.getNombre());
                 ResultSet resAnalisis = stmAnalisis.executeQuery();
                 
@@ -91,7 +91,7 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
                 DAOReactivoSQL daoReactivo = new DAOReactivoSQL();  
                 while(resAnalisis.next()){
 //                    p.getObrasSociales().add(new ObraSocial(resOS.getString(2)));
-                    Optional <Reactivo> r = daoReactivo.get(resAnalisis.getString(2));
+                    Optional <Reactivo> r = daoReactivo.get(resAnalisis.getString(1));
                     if (r.isPresent()){
                         a.getReactivosUsados().add(r.get());
                     }
@@ -127,8 +127,8 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
             for(Reactivo r : t.getReactivosUsados()){
                 // Prepara Insercion en la tabla que relaciona un paciente con una obra social (Paciente_tiene_obraSocial)
                 PreparedStatement stmReact = DataBaseSingleton.getInstance().getConnection().prepareStatement("INSERT INTO ANALISIS_USA_REACTIVO VALUES (?,?,1);");
-                stmReact.setString(1, t.getNombre());
-                stmReact.setString(2, r.getNombre());
+                stmReact.setString(2, t.getNombre());
+                stmReact.setString(1, r.getNombre());
                 stmReact.execute();
             }
         }

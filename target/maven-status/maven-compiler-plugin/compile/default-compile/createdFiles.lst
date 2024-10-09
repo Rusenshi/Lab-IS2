@@ -23,6 +23,7 @@ com\interfaz\Main$13.class
 com\interfaz\Main$4.class
 com\objetos\Turno.class
 com\interfaz\Main$2.class
+com\persistencia\DAOAnalisisSQL.class
 com\persistencia\DAOTurnoSQL.class
 com\interfaz\Main$6.class
 com\persistencia\Dao.class

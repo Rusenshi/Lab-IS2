@@ -24,6 +24,7 @@ public class Analisis {
         this.valorReferencia = valorReferencia;
         this.metodoUsado = metodoUsado;
         this.monto = monto;
+        this.reactivosUsados = new ArrayList<Reactivo>();
     }
 
     public String getNombre() {
@@ -72,6 +73,11 @@ public class Analisis {
 
     public void setMonto(float monto) {
         this.monto = monto;
+    }
+
+    @Override
+    public String toString() {
+        return "Analisis{" + "nombre=" + nombre + ", valorReferencia=" + valorReferencia + ", metodoUsado=" + metodoUsado + ", monto=" + monto + ", reactivosUsados=" + reactivosUsados + '}';
     }
     
     

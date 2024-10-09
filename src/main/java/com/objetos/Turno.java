@@ -22,11 +22,12 @@ public class Turno {
     private Set<Analisis> analisis;
 
     public Turno() {
+        this.analisis = new HashSet<Analisis>();
     }
 
-    public Turno(int nroOrdenServicio, Paciente paciente, Date fecha, String nombreMedico, String diagnostico) {
+    public Turno(int nroOrdenServicio, Date fecha, String nombreMedico, String diagnostico) {
         this.nroOrdenServicio = nroOrdenServicio;
-        this.paciente = paciente;
+//        this.paciente = paciente;
         this.fecha = fecha;
         this.nombreMedico = nombreMedico;
         this.diagnostico = diagnostico;
@@ -79,6 +80,11 @@ public class Turno {
 
     public void setAnalisis(Set<Analisis> analisis) {
         this.analisis = analisis;
+    }
+
+    @Override
+    public String toString() {
+        return "Turno{" + "nroOrdenServicio=" + nroOrdenServicio + ", paciente=" + paciente + ", fecha=" + fecha + ", nombreMedico=" + nombreMedico + ", diagnostico=" + diagnostico + ", analisis=" + analisis + '}';
     }
     
     
