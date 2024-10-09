@@ -5,19 +5,10 @@
 package com.interfaz;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.logica.ManagerPaciente;
 import com.objetos.ObraSocial;
 import com.objetos.Paciente;
-import com.objetos.Reactivo;
-import com.objetos.Stock;
 import com.persistencia.DAOObraSocialSQL;
 import com.persistencia.DAOPacienteSQL;
-import com.persistencia.DAOReactivoSQL;
-import com.persistencia.DAOStockSQL;
-import com.persistencia.DataBaseSingleton;
-import java.awt.Color;
-import java.time.Instant;
-import java.sql.Date;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -87,7 +78,7 @@ public class Main extends javax.swing.JFrame {
         System.out.println(daoPaciente.get(47123871));
         System.out.println(daoPaciente.getAll());
         
-        
+//        jLabelPacienteInexistente.setVisible(false);
     }
 
     /**
@@ -112,12 +103,12 @@ public class Main extends javax.swing.JFrame {
         crearTurnoP1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
+        jTextFieldDniPaciente = new javax.swing.JTextField();
+        jButtonCrearPaciente = new javax.swing.JButton();
+        jCheckBoxParticular = new javax.swing.JCheckBox();
+        jComboBoxObraSocial = new javax.swing.JComboBox<>();
+        jButtonSiguienteAgregarPacienteP1 = new javax.swing.JButton();
         crearTurnoP2 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
@@ -218,23 +209,63 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setText("DNI:");
 
-        jButton3.setText("Consultar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Obra Social: ");
+
+        jTextFieldDniPaciente.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextFieldDniPacienteCaretUpdate(evt);
+            }
+        });
+        jTextFieldDniPaciente.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTextFieldDniPacienteInputMethodTextChanged(evt);
+            }
+        });
+        jTextFieldDniPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jTextFieldDniPacienteActionPerformed(evt);
+            }
+        });
+        jTextFieldDniPaciente.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTextFieldDniPacientePropertyChange(evt);
+            }
+        });
+        jTextFieldDniPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldDniPacienteKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldDniPacienteKeyTyped(evt);
             }
         });
 
-        jLabel2.setText("Obra Social: ");
-
-        jCheckBox1.setText("Particular");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton4.setText("siguiente");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCrearPaciente.setText("Crear");
+        jButtonCrearPaciente.setEnabled(false);
+        jButtonCrearPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonCrearPacienteActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxParticular.setText("Particular");
+        jCheckBoxParticular.setEnabled(false);
+        jCheckBoxParticular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxParticularActionPerformed(evt);
+            }
+        });
+
+        jComboBoxObraSocial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxObraSocial.setEnabled(false);
+
+        jButtonSiguienteAgregarPacienteP1.setText("siguiente");
+        jButtonSiguienteAgregarPacienteP1.setEnabled(false);
+        jButtonSiguienteAgregarPacienteP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSiguienteAgregarPacienteP1ActionPerformed(evt);
             }
         });
 
@@ -244,18 +275,19 @@ public class Main extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3))
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldDniPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButtonCrearPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jComboBoxObraSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxParticular, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonSiguienteAgregarPacienteP1))))
                 .addContainerGap(492, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -265,16 +297,16 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonCrearPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldDniPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxObraSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxParticular, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSiguienteAgregarPacienteP1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(156, Short.MAX_VALUE))
         );
 
@@ -295,7 +327,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        crearTurnoPasosJTabbed.addTab("Cargar Paciente", crearTurnoP1);
+        crearTurnoPasosJTabbed.addTab("Paso 1: Cargar Paciente", crearTurnoP1);
 
         jButton6.setText("siguiente");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -354,7 +386,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        crearTurnoPasosJTabbed.addTab("Elegir Fecha", crearTurnoP2);
+        crearTurnoPasosJTabbed.addTab("Paso 2: Elegir Fecha", crearTurnoP2);
 
         jButton7.setText("Agregar");
 
@@ -447,7 +479,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        crearTurnoPasosJTabbed.addTab("Cargar Analisis", crearTurnoP3);
+        crearTurnoPasosJTabbed.addTab("Paso 3: Cargar Analisis", crearTurnoP3);
 
         jLabel7.setText("Texto con los datos para confirmar");
 
@@ -505,7 +537,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        crearTurnoPasosJTabbed.addTab("Confirmación", crearTurnoP4);
+        crearTurnoPasosJTabbed.addTab("Paso 4: Confirmación", crearTurnoP4);
 
         javax.swing.GroupLayout crearTurnoJpanelLayout = new javax.swing.GroupLayout(crearTurnoJpanel);
         crearTurnoJpanel.setLayout(crearTurnoJpanelLayout);
@@ -562,9 +594,9 @@ public class Main extends javax.swing.JFrame {
         crearTurnoJpanel.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonSiguienteAgregarPacienteP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteAgregarPacienteP1ActionPerformed
         crearTurnoPasosJTabbed.setSelectedIndex(1);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonSiguienteAgregarPacienteP1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         crearTurnoPasosJTabbed.setSelectedIndex(2);
@@ -587,9 +619,67 @@ public class Main extends javax.swing.JFrame {
         crearTurnoPasosJTabbed.setSelectedIndex(2);
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonCrearPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearPacienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonCrearPacienteActionPerformed
+
+    private void jTextFieldDniPacienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteKeyPressed
+        
+    }//GEN-LAST:event_jTextFieldDniPacienteKeyPressed
+
+    private void jTextFieldDniPacienteInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteInputMethodTextChanged
+
+    }//GEN-LAST:event_jTextFieldDniPacienteInputMethodTextChanged
+
+    private void jTextFieldDniPacienteCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteCaretUpdate
+        
+        
+        String dniString = jTextFieldDniPaciente.getText();
+        if (dniString.equals("")){
+            dniString = "0";
+        }
+        
+        int dni = Integer.valueOf(dniString);
+        DAOPacienteSQL daoPaciente = new DAOPacienteSQL();
+        if (daoPaciente.get(dni).isPresent()){
+//            jLabelPacienteInexistente.setVisible(false);
+            jButtonCrearPaciente.setEnabled(false);
+            jComboBoxObraSocial.setEnabled(true);
+            jCheckBoxParticular.setEnabled(true);
+            
+            
+            
+            System.out.println(daoPaciente.get(dni).get());
+        }
+        else{
+//            jLabelPacienteInexistente.setVisible(true);
+            jButtonCrearPaciente.setEnabled(true);
+            
+            jComboBoxObraSocial.setEnabled(false);
+            jCheckBoxParticular.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTextFieldDniPacienteCaretUpdate
+
+    private void jTextFieldDniPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDniPacienteKeyTyped
+
+    private void jTextFieldDniPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteActionPerformed
+
+    }//GEN-LAST:event_jTextFieldDniPacienteActionPerformed
+
+    private void jCheckBoxParticularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxParticularActionPerformed
+        if(jCheckBoxParticular.isSelected()){
+            jComboBoxObraSocial.setEnabled(false);
+        }
+        else{
+            jComboBoxObraSocial.setEnabled(true);
+        }
+    }//GEN-LAST:event_jCheckBoxParticularActionPerformed
+
+    private void jTextFieldDniPacientePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTextFieldDniPacientePropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDniPacientePropertyChange
 
     /**
      * @param args the command line arguments
@@ -639,17 +729,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButtonCrearPaciente;
+    private javax.swing.JButton jButtonSiguienteAgregarPacienteP1;
     private com.toedter.calendar.JCalendar jCalendar1;
     private com.toedter.calendar.JCalendar jCalendar2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JCheckBox jCheckBoxParticular;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBoxObraSocial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
@@ -662,7 +752,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldDniPaciente;
     private javax.swing.JList<String> listaProximasFechasLibres;
     private javax.swing.JPanel mainJpanel;
     // End of variables declaration//GEN-END:variables

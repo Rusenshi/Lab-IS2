@@ -5,7 +5,8 @@
 package com.objetos;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -23,13 +24,13 @@ public class Turno {
     public Turno() {
     }
 
-    public Turno(int nroOrdenServicio, Paciente paciente, Date fecha, String nombreMedico, String diagnostico, Set<Analisis> analisis) {
+    public Turno(int nroOrdenServicio, Paciente paciente, Date fecha, String nombreMedico, String diagnostico) {
         this.nroOrdenServicio = nroOrdenServicio;
         this.paciente = paciente;
         this.fecha = fecha;
         this.nombreMedico = nombreMedico;
         this.diagnostico = diagnostico;
-        this.analisis = analisis;
+        this.analisis = new HashSet<Analisis>();
     }
 
     public int getNroOrdenServicio() {

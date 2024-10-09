@@ -203,8 +203,8 @@
                 <Container class="javax.swing.JPanel" name="crearTurnoP1">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Cargar Paciente">
-                        <Property name="tabTitle" type="java.lang.String" value="Cargar Paciente"/>
+                      <JTabbedPaneConstraints tabName="Paso 1: Cargar Paciente">
+                        <Property name="tabTitle" type="java.lang.String" value="Paso 1: Cargar Paciente"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -237,20 +237,22 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jTextField1" min="-2" pref="127" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
                                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jComboBox1" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldDniPaciente" min="-2" pref="127" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jCheckBox1" min="-2" pref="81" max="-2" attributes="0"/>
+                                          <Component id="jButtonCrearPaciente" min="-2" pref="78" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jComboBoxObraSocial" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jCheckBoxParticular" min="-2" pref="81" max="-2" attributes="0"/>
+                                              <Component id="jButtonSiguienteAgregarPacienteP1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                                   <EmptySpace pref="492" max="32767" attributes="0"/>
                               </Group>
@@ -263,18 +265,18 @@
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jButton3" max="32767" attributes="0"/>
-                                      <Component id="jTextField1" min="-2" pref="34" max="-2" attributes="0"/>
+                                      <Component id="jButtonCrearPaciente" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldDniPaciente" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jComboBox1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxObraSocial" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="jCheckBoxParticular" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton4" min="-2" pref="36" max="-2" attributes="0"/>
+                                  <Component id="jButtonSiguienteAgregarPacienteP1" min="-2" pref="36" max="-2" attributes="0"/>
                                   <EmptySpace pref="156" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -286,27 +288,40 @@
                             <Property name="text" type="java.lang.String" value="DNI:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField1">
-                        </Component>
-                        <Component class="javax.swing.JButton" name="jButton3">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Consultar"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
-                          </Events>
-                        </Component>
                         <Component class="javax.swing.JLabel" name="jLabel2">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Obra Social: "/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+                        <Component class="javax.swing.JTextField" name="jTextFieldDniPaciente">
+                          <Events>
+                            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jTextFieldDniPacienteCaretUpdate"/>
+                            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jTextFieldDniPacienteInputMethodTextChanged"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldDniPacienteActionPerformed"/>
+                            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jTextFieldDniPacientePropertyChange"/>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldDniPacienteKeyPressed"/>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldDniPacienteKeyTyped"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="jButtonCrearPaciente">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Crear"/>
+                            <Property name="enabled" type="boolean" value="false"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCrearPacienteActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBoxParticular">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Particular"/>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxParticularActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JComboBox" name="jComboBox1">
+                        <Component class="javax.swing.JComboBox" name="jComboBoxObraSocial">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="4">
@@ -316,17 +331,19 @@
                                 <StringItem index="3" value="Item 4"/>
                               </StringArray>
                             </Property>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton4">
+                        <Component class="javax.swing.JButton" name="jButtonSiguienteAgregarPacienteP1">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="siguiente"/>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSiguienteAgregarPacienteP1ActionPerformed"/>
                           </Events>
                         </Component>
                       </SubComponents>
@@ -336,8 +353,8 @@
                 <Container class="javax.swing.JPanel" name="crearTurnoP2">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Elegir Fecha">
-                        <Property name="tabTitle" type="java.lang.String" value="Elegir Fecha"/>
+                      <JTabbedPaneConstraints tabName="Paso 2: Elegir Fecha">
+                        <Property name="tabTitle" type="java.lang.String" value="Paso 2: Elegir Fecha"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -423,8 +440,8 @@
                 <Container class="javax.swing.JPanel" name="crearTurnoP3">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Cargar Analisis">
-                        <Property name="tabTitle" type="java.lang.String" value="Cargar Analisis"/>
+                      <JTabbedPaneConstraints tabName="Paso 3: Cargar Analisis">
+                        <Property name="tabTitle" type="java.lang.String" value="Paso 3: Cargar Analisis"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -570,8 +587,8 @@
                 <Container class="javax.swing.JPanel" name="crearTurnoP4">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Confirmaci&#xf3;n">
-                        <Property name="tabTitle" type="java.lang.String" value="Confirmaci&#xf3;n"/>
+                      <JTabbedPaneConstraints tabName="Paso 4: Confirmaci&#xf3;n">
+                        <Property name="tabTitle" type="java.lang.String" value="Paso 4: Confirmaci&#xf3;n"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
