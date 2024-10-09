@@ -40,6 +40,11 @@ public class DataBaseSingleton {
         return query;
     }
 
+    
+    
+    
+    
+    
     private DataBaseSingleton(String DB_URL, String DB_USER, String DB_PWD) {
         try{
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);

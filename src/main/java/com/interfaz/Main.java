@@ -6,7 +6,14 @@ package com.interfaz;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.logica.ManagerPaciente;
+import com.objetos.Reactivo;
+import com.objetos.Stock;
+import com.persistencia.DAOReactivoSQL;
+import com.persistencia.DAOStockSQL;
+import com.persistencia.DataBaseSingleton;
 import java.awt.Color;
+import java.time.Instant;
+import java.sql.Date;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -28,10 +35,32 @@ public class Main extends javax.swing.JFrame {
         }
         initComponents();
         
-        jCalendar1.setBackground(Color.BLACK);
+//        jCalendar1.setBackground(Color.BLACK);
+//        
+//        
+//        ManagerPaciente.validarDni(Integer.valueOf(jTextField1.getText()));
+//      
+
+
+        DAOReactivoSQL daoReactivo = new DAOReactivoSQL();
+        daoReactivo.save(new Reactivo("T12",123));
+        daoReactivo.save(new Reactivo("T125",123));
+        daoReactivo.save(new Reactivo("E12",123));
+        daoReactivo.save(new Reactivo("F1255",123));
         
         
-        ManagerPaciente.validarDni(Integer.valueOf(jTextField1.getText()));
+        DAOStockSQL daoStock = new DAOStockSQL();
+        
+        daoStock.save(new Stock(123,12,new Date(System.currentTimeMillis()),new Reactivo("T12",123)));
+        daoStock.save(new Stock(123443,12,new Date(System.currentTimeMillis()),new Reactivo("E12",123)));
+        daoStock.save(new Stock(12213,12,new Date(System.currentTimeMillis()),new Reactivo("F1255",123)));
+        
+        daoStock.delete(12213);
+        daoStock.delete(123443);
+        
+        
+        System.out.println(daoStock.getAll());
+
     }
 
     /**

@@ -10,9 +10,19 @@ package com.objetos;
  */
 public class Reactivo {
     private String nombre;
+    private float cantidadRecipiente;
 
-    public Reactivo(String nombre) {
+    public Reactivo(String nombre, float cantidadRecipiente) {
         this.nombre = nombre;
+        this.cantidadRecipiente = cantidadRecipiente;
+    }
+
+    public float getCantidadRecipiente() {
+        return cantidadRecipiente;
+    }
+
+    public void setCantidadRecipiente(float cantidadRecipiente) {
+        this.cantidadRecipiente = cantidadRecipiente;
     }
 
     public String getNombre() {
@@ -21,6 +31,11 @@ public class Reactivo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Reactivo{" + "nombre=" + nombre + ", cantidadRecipiente=" + cantidadRecipiente + '}';
     }
     
 }
