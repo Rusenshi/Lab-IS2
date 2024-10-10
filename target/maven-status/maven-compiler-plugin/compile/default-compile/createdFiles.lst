@@ -4,8 +4,10 @@ com\persistencia\DataBaseSingleton.class
 com\objetos\Reactivo.class
 com\interfaz\Main$14.class
 com\interfaz\Main$5.class
+com\interfaz\Laboratorio.class
 com\interfaz\Main$12.class
 com\interfaz\ConsultarPaciente.class
+com\interfaz\Laboratorio$2.class
 com\interfaz\Main$17.class
 com\interfaz\Main.class
 com\objetos\ObraSocial.class
@@ -19,9 +21,12 @@ com\interfaz\Main$3.class
 com\interfaz\Main$8.class
 com\interfaz\Main$15.class
 com\persistencia\DAOPacienteSQL.class
+com\interfaz\Laboratorio$4.class
 com\interfaz\Main$13.class
+com\interfaz\Laboratorio$1.class
 com\interfaz\Main$4.class
 com\objetos\Turno.class
+com\interfaz\Laboratorio$6.class
 com\interfaz\Main$2.class
 com\persistencia\DAOAnalisisSQL.class
 com\persistencia\DAOTurnoSQL.class
@@ -30,7 +35,9 @@ com\persistencia\Dao.class
 com\interfaz\Main$1.class
 com\interfaz\Main$16.class
 com\objetos\Analisis.class
+com\interfaz\Laboratorio$5.class
 com\objetos\Stock.class
+com\interfaz\Laboratorio$3.class
 com\interfaz\Main$7.class
 com\interfaz\Main$9.class
 com\interfaz\Main$11.class
