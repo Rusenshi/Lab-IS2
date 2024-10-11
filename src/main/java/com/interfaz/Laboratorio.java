@@ -130,7 +130,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelBarraLateral.setMaximumSize(new java.awt.Dimension(200, 480));
         jPanelBarraLateral.setMinimumSize(new java.awt.Dimension(200, 480));
         jPanelBarraLateral.setPreferredSize(new java.awt.Dimension(200, 480));
-        jPanelBarraLateral.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
+        jPanelBarraLateral.setLayout(new java.awt.FlowLayout(1, 5, 0));
 
         jButtonLateralDarTurno.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralDarTurno.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
