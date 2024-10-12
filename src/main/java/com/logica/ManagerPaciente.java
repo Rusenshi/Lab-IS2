@@ -26,7 +26,7 @@ public class ManagerPaciente {
 //    private static ArrayList<Paciente> pacienteQuery = new ArrayList<Paciente>();
     
     
-    public static boolean validarDni(int dni){
+    public static boolean comprobarExistencia(int dni){
         return (dni > 0 && dni < 99999999) && daoPaciente.get(dni).isPresent();
     }
     
@@ -37,10 +37,9 @@ public class ManagerPaciente {
         }catch(NumberFormatException e){
             return false;
         }
-        
-        
-        
     }
+    
+    
     
     public static boolean validarNombre(String nombre){
         return nombre.matches ("\\w+[\\s+\\w+]*"); // Verifica solo texto
@@ -75,17 +74,18 @@ public class ManagerPaciente {
     }
     
     public static boolean validarCampos(int dni, String nombre, String apellido, int edad, String domicilio, String telefono, String correo){
-        return validarDni(dni) && validarNombre(nombre) && validarNombre(apellido) && validarEdad(edad) && validarDomicilio(domicilio) && validarTelefono(telefono) && validarCorreoElectronico(correo);
+        return comprobarExistencia(dni) && validarNombre(nombre) && validarNombre(apellido) && validarEdad(edad) && validarDomicilio(domicilio) && validarTelefono(telefono) && validarCorreoElectronico(correo);
     }
     
     public static boolean validarPaso1(int dni, String nombre, String apellido, int edad){
-        return validarDni(dni) && validarNombre(nombre) && validarNombre(apellido) && validarEdad(edad);
+        return comprobarExistencia(dni) && validarNombre(nombre) && validarNombre(apellido) && validarEdad(edad);
     }
+    
     
     
     public static ArrayList<ObraSocial> obtenerObrasSociales(int dni){
         ArrayList<ObraSocial> obrasSocialesDni = new ArrayList<>();
-        if (validarDni(dni)){
+        if (comprobarExistencia(dni)){
             obrasSocialesDni = daoObraSocial.getByDni(dni);
         }
         return obrasSocialesDni;
