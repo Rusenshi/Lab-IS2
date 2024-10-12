@@ -4,10 +4,13 @@
  */
 package com.logica;
 
+import com.objetos.Turno;
+import java.util.ArrayList;
+
 /**
  *
  * @author Ideapad Gaming 3
  */
 public class ManagerTurno {
-    
+    private static ArrayList<Turno> lastQuery;
 }

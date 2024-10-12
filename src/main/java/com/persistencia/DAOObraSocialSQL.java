@@ -45,7 +45,7 @@ public class DAOObraSocialSQL implements Dao<ObraSocial,String>{
             return Optional.empty();
         }
     }
-
+    
     @Override
     public List<ObraSocial> getAll() {
         // Crea lista temporal para recorrer resultset
@@ -71,6 +71,33 @@ public class DAOObraSocialSQL implements Dao<ObraSocial,String>{
         return obrasSociales;
     }
 
+    public ArrayList<ObraSocial> getByDni(int dni) {
+        // Crea lista temporal para recorrer resultset
+        ArrayList<ObraSocial> obrasSociales = new ArrayList<>();
+        
+        try{
+            // Preparar Consulta
+            // Nota: Activo es la variable para el eliminado logico
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTE_TIENE_OBRASOCIAL WHERE activo=1 AND Paciente_dni=?");
+            stm.setInt(1, dni);
+            ResultSet res = stm.executeQuery();
+            
+            // Recorrer resultado de la consulta y convertirlo en una lista
+            while(res.next()){
+                // Obtiene los campos de cada columna de la base de datos y crea el objeto.
+                obrasSociales.add(new ObraSocial(res.getString(2)));
+            }
+        }
+        catch(SQLException e){
+            System.out.println("Error al obtener todos");
+            System.out.println(e.toString());
+        }
+        
+        return obrasSociales;
+    }
+    
+    
+    
     @Override
     public void save(ObraSocial t) {
         try{

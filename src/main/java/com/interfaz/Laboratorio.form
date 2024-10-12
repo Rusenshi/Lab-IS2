@@ -197,9 +197,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jButton2" min="-2" pref="90" max="-2" attributes="0"/>
+                                  <Component id="jButtonCrearTurnoAnterior" min="-2" pref="90" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" pref="90" max="-2" attributes="0"/>
+                                  <Component id="jButtonCrearTurnoSiguiente" min="-2" pref="90" max="-2" attributes="0"/>
                               </Group>
                               <Component id="crearTurnoPasosJTabbed" min="-2" pref="588" max="-2" attributes="0"/>
                           </Group>
@@ -212,8 +212,8 @@
                           <Component id="crearTurnoPasosJTabbed" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="jButton2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jButtonCrearTurnoSiguiente" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jButtonCrearTurnoAnterior" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -221,21 +221,28 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="jButtonCrearTurnoSiguiente">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Siguiente"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCrearTurnoSiguienteActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="jButtonCrearTurnoAnterior">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Anterior"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCrearTurnoAnteriorActionPerformed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JTabbedPane" name="crearTurnoPasosJTabbed">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -365,18 +372,27 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="jTextFieldDniPaciente">
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldDniPacienteActionPerformed"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="jButtonCrearPaciente">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Crear"/>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCrearPacienteActionPerformed"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JCheckBox" name="jCheckBoxParticular">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Particular"/>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxParticularActionPerformed"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="jComboBoxObraSocial">
                               <Properties>
@@ -825,12 +841,12 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                              <Component id="jTabbedPanelCrearPaciente" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jButton9" min="-2" pref="84" max="-2" attributes="0"/>
+                                  <Component id="jButtonCrearPacienteAnterior" min="-2" pref="84" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton8" min="-2" pref="84" max="-2" attributes="0"/>
+                                  <Component id="jButtonCrearPacienteSiguiente" min="-2" pref="84" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -841,11 +857,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPane1" min="-2" pref="422" max="-2" attributes="0"/>
+                          <Component id="jTabbedPanelCrearPaciente" min="-2" pref="422" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton9" pref="33" max="32767" attributes="0"/>
-                              <Component id="jButton8" max="32767" attributes="0"/>
+                              <Component id="jButtonCrearPacienteAnterior" pref="33" max="32767" attributes="0"/>
+                              <Component id="jButtonCrearPacienteSiguiente" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -853,11 +869,12 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+                <Container class="javax.swing.JTabbedPane" name="jTabbedPanelCrearPaciente">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -921,12 +938,12 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldNombre" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldApellido" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldEdad" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jTextFieldDni" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
@@ -935,9 +952,9 @@
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonMujer" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonHombre" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -951,25 +968,25 @@
                                       <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField2" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldDni" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField3" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldNombre" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField4" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldApellido" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField5" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldEdad" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonMujer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonHombre" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                   </Group>
@@ -985,9 +1002,9 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField2">
+                            <Component class="javax.swing.JTextField" name="jTextFieldDni">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField3">
+                            <Component class="javax.swing.JTextField" name="jTextFieldNombre">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel10">
                               <Properties>
@@ -1005,7 +1022,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField4">
+                            <Component class="javax.swing.JTextField" name="jTextFieldApellido">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel12">
                               <Properties>
@@ -1015,7 +1032,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField5">
+                            <Component class="javax.swing.JTextField" name="jTextFieldEdad">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel13">
                               <Properties>
@@ -1025,12 +1042,12 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+                            <Component class="javax.swing.JRadioButton" name="jRadioButtonMujer">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Mujer"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+                            <Component class="javax.swing.JRadioButton" name="jRadioButtonHombre">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Hombre"/>
                               </Properties>
@@ -1092,11 +1109,11 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jTextField7" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTextField8" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldTelefono" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldCorreo" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jTextField6" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jTextFieldDomicilio" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jLabel15" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jLabel16" alignment="0" max="32767" attributes="0"/>
                                               </Group>
@@ -1113,15 +1130,15 @@
                                       <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField6" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldDomicilio" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField7" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldTelefono" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField8" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldCorreo" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1136,9 +1153,9 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField6">
+                            <Component class="javax.swing.JTextField" name="jTextFieldDomicilio">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField7">
+                            <Component class="javax.swing.JTextField" name="jTextFieldTelefono">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel15">
                               <Properties>
@@ -1156,7 +1173,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField8">
+                            <Component class="javax.swing.JTextField" name="jTextFieldCorreo">
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1187,7 +1204,7 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel8" min="-2" pref="112" max="-2" attributes="0"/>
                                               <Group type="102" attributes="0">
-                                                  <Component id="jComboBox1" min="-2" pref="170" max="-2" attributes="0"/>
+                                                  <Component id="jComboBoxObraSocialCrearPaciente" min="-2" pref="170" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                                               </Group>
@@ -1207,7 +1224,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jButton6" pref="40" max="32767" attributes="0"/>
-                                      <Component id="jComboBox1" max="32767" attributes="0"/>
+                                      <Component id="jComboBoxObraSocialCrearPaciente" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane3" pref="295" max="32767" attributes="0"/>
@@ -1222,7 +1239,7 @@
                             <Property name="text" type="java.lang.String" value="Obra Social:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JComboBox" name="jComboBox1">
+                        <Component class="javax.swing.JComboBox" name="jComboBoxObraSocialCrearPaciente">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="4">
@@ -1241,19 +1258,19 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Agregar"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPane3">
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTable3">
+                            <Component class="javax.swing.JTable" name="jTableObrasSocialesAgregarPaciente">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="4" rowCount="4">
-                                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                                  <Table columnCount="1" rowCount="4">
+                                    <Column editable="true" title="Obra Social" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
                                 <Property name="enabled" type="boolean" value="false"/>
@@ -1265,15 +1282,21 @@
                     </Container>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jButton8">
+                <Component class="javax.swing.JButton" name="jButtonCrearPacienteSiguiente">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Siguiente"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCrearPacienteSiguienteActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton9">
+                <Component class="javax.swing.JButton" name="jButtonCrearPacienteAnterior">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Anterior"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCrearPacienteAnteriorActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

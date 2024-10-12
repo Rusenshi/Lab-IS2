@@ -5,16 +5,33 @@
 package com.interfaz;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.logica.ManagerObraSocial;
+import com.logica.ManagerPaciente;
+import com.objetos.ObraSocial;
+import com.objetos.Paciente;
+import com.persistencia.DAOObraSocialSQL;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author jerem
  */
 public class Laboratorio extends javax.swing.JFrame {
-
+    // Variables Panel: Dar Turno
+    private static int crearTurnoActualStep = 0;
+    
+    // Variables Panel: Agregar Paciente
+    private static Set<String> obrasSocialesElegidas = new HashSet<>();
+    private static DefaultTableModel dataModelobrasSocialesElegidas = new DefaultTableModel();
+    private static int crearPacienteActualStep = 0;
+    
     /**
      * Creates new form Laboratorio
      */
@@ -27,6 +44,21 @@ public class Laboratorio extends javax.swing.JFrame {
         }
         initComponents();
         
+        
+        
+        
+        // Inicializacion de componentes de la interfaz
+        // Panel: Dar Turno
+        jButtonCrearTurnoAnterior.setVisible(false);
+        jComboBoxObraSocial.removeAllItems();
+        jComboBoxObraSocialCrearPaciente.removeAllItems();
+        for (ObraSocial os : ManagerObraSocial.obtenerObrasSocialesDisponibles()){
+            jComboBoxObraSocialCrearPaciente.addItem(os.getNombre());
+        }
+        
+        // Panel: Crear Paciente
+        dataModelobrasSocialesElegidas.addColumn("Obra Social");
+        jTableObrasSocialesAgregarPaciente.setModel(dataModelobrasSocialesElegidas);
     }
 
     /**
@@ -47,8 +79,8 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelBackground = new javax.swing.JPanel();
         jPanelDarTurno = new javax.swing.JPanel();
         crearTurnoJpanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonCrearTurnoSiguiente = new javax.swing.JButton();
+        jButtonCrearTurnoAnterior = new javax.swing.JButton();
         crearTurnoPasosJTabbed = new javax.swing.JTabbedPane();
         crearTurnoP1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -86,36 +118,36 @@ public class Laboratorio extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jPanelAgregarPaciente = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPanelCrearPaciente = new javax.swing.JTabbedPane();
         jPanelAgregarPacienteP1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldDni = new javax.swing.JTextField();
+        jTextFieldNombre = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldApellido = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldEdad = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButtonMujer = new javax.swing.JRadioButton();
+        jRadioButtonHombre = new javax.swing.JRadioButton();
         jPanelAgregarPacienteP2 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        jTextFieldDomicilio = new javax.swing.JTextField();
+        jTextFieldTelefono = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        jTextFieldCorreo = new javax.swing.JTextField();
         jPanelAgregarPacienteP3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxObraSocialCrearPaciente = new javax.swing.JComboBox<>();
         jButton6 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        jTableObrasSocialesAgregarPaciente = new javax.swing.JTable();
+        jButtonCrearPacienteSiguiente = new javax.swing.JButton();
+        jButtonCrearPacienteAnterior = new javax.swing.JButton();
         jPanelEnConstruccion = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
 
@@ -130,7 +162,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelBarraLateral.setMaximumSize(new java.awt.Dimension(200, 480));
         jPanelBarraLateral.setMinimumSize(new java.awt.Dimension(200, 480));
         jPanelBarraLateral.setPreferredSize(new java.awt.Dimension(200, 480));
-        jPanelBarraLateral.setLayout(new java.awt.FlowLayout(1, 5, 0));
+        jPanelBarraLateral.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
 
         jButtonLateralDarTurno.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralDarTurno.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -211,11 +243,22 @@ public class Laboratorio extends javax.swing.JFrame {
 
         crearTurnoJpanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Siguiente");
+        jButtonCrearTurnoSiguiente.setText("Siguiente");
+        jButtonCrearTurnoSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearTurnoSiguienteActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Anterior");
+        jButtonCrearTurnoAnterior.setText("Anterior");
+        jButtonCrearTurnoAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearTurnoAnteriorActionPerformed(evt);
+            }
+        });
 
         crearTurnoPasosJTabbed.setBackground(new java.awt.Color(255, 255, 255));
+        crearTurnoPasosJTabbed.setEnabled(false);
 
         crearTurnoP1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -225,11 +268,27 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jLabel2.setText("Obra Social: ");
 
+        jTextFieldDniPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDniPacienteActionPerformed(evt);
+            }
+        });
+
         jButtonCrearPaciente.setText("Crear");
         jButtonCrearPaciente.setEnabled(false);
+        jButtonCrearPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearPacienteActionPerformed(evt);
+            }
+        });
 
         jCheckBoxParticular.setText("Particular");
         jCheckBoxParticular.setEnabled(false);
+        jCheckBoxParticular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxParticularActionPerformed(evt);
+            }
+        });
 
         jComboBoxObraSocial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxObraSocial.setEnabled(false);
@@ -473,9 +532,9 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(crearTurnoJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, crearTurnoJpanelLayout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCrearTurnoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonCrearTurnoSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(crearTurnoPasosJTabbed, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         crearTurnoJpanelLayout.setVerticalGroup(
@@ -484,8 +543,8 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addComponent(crearTurnoPasosJTabbed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(crearTurnoJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonCrearTurnoSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCrearTurnoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -568,7 +627,8 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPanelCrearPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPanelCrearPaciente.setEnabled(false);
 
         jPanelAgregarPacienteP1.setBackground(new java.awt.Color(255, 255, 255));
         jPanelAgregarPacienteP1.setMaximumSize(new java.awt.Dimension(588, 38));
@@ -591,9 +651,9 @@ public class Laboratorio extends javax.swing.JFrame {
         jLabel13.setText("Sexo:");
         jLabel13.setPreferredSize(new java.awt.Dimension(200, 16));
 
-        jRadioButton1.setText("Mujer");
+        jRadioButtonMujer.setText("Mujer");
 
-        jRadioButton2.setText("Hombre");
+        jRadioButtonHombre.setText("Hombre");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -606,21 +666,21 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField5)
+                    .addComponent(jTextFieldNombre)
+                    .addComponent(jTextFieldApellido)
+                    .addComponent(jTextFieldEdad)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldDni, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(jRadioButtonMujer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButton2)
+                        .addComponent(jRadioButtonHombre)
                         .addGap(23, 23, 23)))
                 .addContainerGap())
         );
@@ -630,25 +690,25 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldDni, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(jRadioButtonMujer)
+                    .addComponent(jRadioButtonHombre))
                 .addGap(63, 63, 63))
         );
 
@@ -669,7 +729,7 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Paso 1: Datos Personales", jPanelAgregarPacienteP1);
+        jTabbedPanelCrearPaciente.addTab("Paso 1: Datos Personales", jPanelAgregarPacienteP1);
 
         jPanelAgregarPacienteP2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -695,11 +755,11 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField7)
-                    .addComponent(jTextField8)
+                    .addComponent(jTextFieldTelefono)
+                    .addComponent(jTextFieldCorreo)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldDomicilio, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -711,15 +771,15 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(178, 178, 178))
         );
 
@@ -740,29 +800,34 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Paso 2: Datos de Contacto", jPanelAgregarPacienteP2);
+        jTabbedPanelCrearPaciente.addTab("Paso 2: Datos de Contacto", jPanelAgregarPacienteP2);
 
         jPanelAgregarPacienteP3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setText("Obra Social:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxObraSocialCrearPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton6.setText("Agregar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTableObrasSocialesAgregarPaciente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Obra Social"
             }
         ));
-        jTable3.setEnabled(false);
-        jScrollPane3.setViewportView(jTable3);
+        jTableObrasSocialesAgregarPaciente.setEnabled(false);
+        jScrollPane3.setViewportView(jTableObrasSocialesAgregarPaciente);
 
         javax.swing.GroupLayout jPanelAgregarPacienteP3Layout = new javax.swing.GroupLayout(jPanelAgregarPacienteP3);
         jPanelAgregarPacienteP3.setLayout(jPanelAgregarPacienteP3Layout);
@@ -776,7 +841,7 @@ public class Laboratorio extends javax.swing.JFrame {
                         .addGroup(jPanelAgregarPacienteP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelAgregarPacienteP3Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxObraSocialCrearPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton6)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -790,17 +855,27 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAgregarPacienteP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jComboBox1))
+                    .addComponent(jComboBoxObraSocialCrearPaciente))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Paso 3: Obra Social", jPanelAgregarPacienteP3);
+        jTabbedPanelCrearPaciente.addTab("Paso 3: Obra Social", jPanelAgregarPacienteP3);
 
-        jButton8.setText("Siguiente");
+        jButtonCrearPacienteSiguiente.setText("Siguiente");
+        jButtonCrearPacienteSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearPacienteSiguienteActionPerformed(evt);
+            }
+        });
 
-        jButton9.setText("Anterior");
+        jButtonCrearPacienteAnterior.setText("Anterior");
+        jButtonCrearPacienteAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearPacienteAnteriorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -809,23 +884,23 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
+                    .addComponent(jTabbedPanelCrearPaciente)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCrearPacienteAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonCrearPacienteSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPanelCrearPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonCrearPacienteAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(jButtonCrearPacienteSiguiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -894,6 +969,166 @@ public class Laboratorio extends javax.swing.JFrame {
         cambiarPanel(jPanelEnConstruccion);
     }//GEN-LAST:event_jButtonLateralDarTurno9ActionPerformed
 
+    private void jTextFieldDniPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteActionPerformed
+        if (jTextFieldDniPaciente.getText().equals("")) return;
+        
+        int dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
+        if (ManagerPaciente.validarDni(dniPaciente)){
+            jButtonCrearPaciente.setEnabled(false);
+            jComboBoxObraSocial.setEnabled(true);
+            jCheckBoxParticular.setEnabled(true);
+            ArrayList<ObraSocial> obrasSociales = ManagerPaciente.obtenerObrasSociales(dniPaciente);
+            jComboBoxObraSocial.removeAllItems();
+            for(ObraSocial os : obrasSociales){
+                jComboBoxObraSocial.addItem(os.getNombre());
+            }
+        }
+        else{
+            jButtonCrearPaciente.setEnabled(true);
+            jComboBoxObraSocial.setEnabled(false);
+            jCheckBoxParticular.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTextFieldDniPacienteActionPerformed
+
+    private void jCheckBoxParticularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxParticularActionPerformed
+        if (jCheckBoxParticular.isSelected()){
+            jComboBoxObraSocial.setEnabled(false);
+        }
+        else{
+            jComboBoxObraSocial.setEnabled(true);
+        }
+    }//GEN-LAST:event_jCheckBoxParticularActionPerformed
+
+    private void jButtonCrearTurnoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearTurnoAnteriorActionPerformed
+        // TODO add your handling code here:
+        if (crearTurnoActualStep > 0) {
+            crearTurnoActualStep--;
+            crearTurnoPasosJTabbed.setSelectedIndex(crearTurnoActualStep);
+            jButtonCrearTurnoSiguiente.setText("Siguiente");
+            if (crearTurnoActualStep == 0){
+                jButtonCrearTurnoAnterior.setVisible(false);
+            }
+        }
+        
+//        System.out.println(crearTurnoActualStep);
+        
+        
+    }//GEN-LAST:event_jButtonCrearTurnoAnteriorActionPerformed
+
+    private void jButtonCrearTurnoSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearTurnoSiguienteActionPerformed
+        if (crearTurnoActualStep < 3) {
+            crearTurnoActualStep++;
+            crearTurnoPasosJTabbed.setSelectedIndex(crearTurnoActualStep);
+            jButtonCrearTurnoAnterior.setVisible(true);
+            
+            
+            if (crearTurnoActualStep == 3){
+                jButtonCrearTurnoSiguiente.setText("Crear");
+            }
+            else{
+                jButtonCrearTurnoSiguiente.setText("Siguiente");
+            }
+            
+        }
+//        System.out.println(crearTurnoActualStep);
+    }//GEN-LAST:event_jButtonCrearTurnoSiguienteActionPerformed
+
+    private void jButtonCrearPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearPacienteActionPerformed
+        cambiarPanel(jPanelAgregarPaciente);
+        jTextFieldDni.setText(jTextFieldDniPaciente.getText());
+    }//GEN-LAST:event_jButtonCrearPacienteActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        String nombreObraSocialElegida = (String)jComboBoxObraSocialCrearPaciente.getSelectedItem();
+//        ObraSocial os = ManagerObraSocial.recuperarObraSocial();
+        boolean obraSocialAgregada = obrasSocialesElegidas.add(nombreObraSocialElegida);
+        if (obraSocialAgregada){
+            dataModelobrasSocialesElegidas.addRow(new Object[]{nombreObraSocialElegida});
+            System.out.println(obrasSocialesElegidas);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButtonCrearPacienteSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearPacienteSiguienteActionPerformed
+        if (crearPacienteActualStep < 2) {
+            // Realizar controles necesarios mientras avanza, y solo avanza si se cumple el requisito
+            boolean avance = false;
+            System.out.println(crearPacienteActualStep);
+            switch(crearPacienteActualStep){
+                case 0:
+                    // Validar Paso 1
+                    avance = ManagerPaciente.validarDni(jTextFieldDni.getText())
+                            && ManagerPaciente.validarNombre(jTextFieldNombre.getText())
+                            && ManagerPaciente.validarNombre(jTextFieldApellido.getText())
+                            && ManagerPaciente.validarDni(jTextFieldEdad.getText());
+                    break;
+                case 1:
+                    // Validar Paso 2
+                    avance = ManagerPaciente.validarDomicilio(jTextFieldDomicilio.getText())
+                            && ManagerPaciente.validarTelefono(jTextFieldTelefono.getText())
+                            && ManagerPaciente.validarCorreoElectronico(jTextFieldCorreo.getText());
+                    break;
+            }
+            
+            System.out.println(avance);
+            
+            
+            
+                
+            
+            
+            
+            if (!avance) return;
+            
+            crearPacienteActualStep++;
+            jTabbedPanelCrearPaciente.setSelectedIndex(crearPacienteActualStep);
+            jButtonCrearPacienteAnterior.setVisible(true);
+            
+            // Cambiar label para indicar que es el ultimo paso
+            if (crearPacienteActualStep == 2){
+                jButtonCrearPacienteSiguiente.setText("Guardar");
+            }
+            else{
+                jButtonCrearPacienteSiguiente.setText("Siguiente");
+            }
+        }
+        else if (crearPacienteActualStep == 2){
+            // Guardar Paciente
+            int sexo=0;
+            if (jRadioButtonMujer.isSelected()){
+                sexo=1;
+            }
+            if (jRadioButtonHombre.isSelected()){
+                sexo=2;
+            }
+
+            ManagerPaciente.guardarPaciente(jTextFieldDni.getText(),
+                    jTextFieldNombre.getText(),
+                    jTextFieldApellido.getText(),
+                    jTextFieldEdad.getText(), sexo,
+                    jTextFieldDomicilio.getText(),
+                    jTextFieldTelefono.getText(),
+                    jTextFieldCorreo.getText(),
+                    obrasSocialesElegidas);
+
+
+            // Prepara para el siguiente
+            obrasSocialesElegidas.clear();
+        }
+        
+        
+    }//GEN-LAST:event_jButtonCrearPacienteSiguienteActionPerformed
+
+    private void jButtonCrearPacienteAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearPacienteAnteriorActionPerformed
+        if (crearPacienteActualStep > 0) {
+            crearPacienteActualStep--;
+            jButtonCrearPacienteSiguiente.setText("Siguiente");
+            jTabbedPanelCrearPaciente.setSelectedIndex(crearPacienteActualStep);
+            if (crearPacienteActualStep == 0){
+                jButtonCrearPacienteAnterior.setVisible(false);
+            }
+        }
+    }//GEN-LAST:event_jButtonCrearPacienteAnteriorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -936,16 +1171,16 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JPanel crearTurnoP3;
     private javax.swing.JPanel crearTurnoP4;
     private javax.swing.JTabbedPane crearTurnoPasosJTabbed;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonCrearPaciente;
+    private javax.swing.JButton jButtonCrearPacienteAnterior;
+    private javax.swing.JButton jButtonCrearPacienteSiguiente;
+    private javax.swing.JButton jButtonCrearTurnoAnterior;
+    private javax.swing.JButton jButtonCrearTurnoSiguiente;
     private javax.swing.JButton jButtonLateralDarTurno;
     private javax.swing.JButton jButtonLateralDarTurno6;
     private javax.swing.JButton jButtonLateralDarTurno7;
@@ -953,9 +1188,9 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonLateralDarTurno9;
     private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JCheckBox jCheckBoxParticular;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBoxObraSocial;
+    private javax.swing.JComboBox<String> jComboBoxObraSocialCrearPaciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -990,25 +1225,25 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelDarTurno;
     private javax.swing.JPanel jPanelEnConstruccion;
     private javax.swing.JPanel jPanelGenerarResultado;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButtonHombre;
+    private javax.swing.JRadioButton jRadioButtonMujer;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPanelCrearPaciente;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTableObrasSocialesAgregarPaciente;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldApellido;
+    private javax.swing.JTextField jTextFieldCorreo;
+    private javax.swing.JTextField jTextFieldDni;
     private javax.swing.JTextField jTextFieldDniPaciente;
     private javax.swing.JTextField jTextFieldDniPaciente1;
     private javax.swing.JTextField jTextFieldDniPaciente2;
+    private javax.swing.JTextField jTextFieldDomicilio;
+    private javax.swing.JTextField jTextFieldEdad;
+    private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldTelefono;
     // End of variables declaration//GEN-END:variables
 }
