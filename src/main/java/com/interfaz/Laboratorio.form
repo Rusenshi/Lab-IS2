@@ -252,6 +252,9 @@
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="crearTurnoPasosJTabbedStateChanged"/>
+                  </Events>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                   <SubComponents>
@@ -304,15 +307,17 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jTextFieldDniPaciente" pref="127" max="32767" attributes="0"/>
+                                                  <Component id="jComboBoxObraSocialTurno" max="32767" attributes="0"/>
+                                              </Group>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jTextFieldDniPaciente" min="-2" pref="127" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                                       <Component id="jButtonCrearPaciente" min="-2" pref="78" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jComboBoxObraSocial" min="-2" pref="127" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                                       <Component id="jCheckBoxParticular" min="-2" pref="81" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
@@ -325,8 +330,8 @@
                                                       <EmptySpace max="32767" attributes="0"/>
                                                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="jTextFieldDniPaciente2" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jTextFieldDniPaciente1" alignment="1" max="32767" attributes="0"/>
+                                                  <Component id="jTextFieldDniPacienteDiagnostico" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jTextFieldDniPacienteMedico" alignment="1" max="32767" attributes="0"/>
                                                   <Group type="102" attributes="0">
                                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -365,7 +370,7 @@
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jComboBoxObraSocial" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                          <Component id="jComboBoxObraSocialTurno" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                           <Component id="jCheckBoxParticular" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -374,14 +379,14 @@
                                           <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldDniPaciente1" min="-2" pref="34" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldDniPacienteMedico" min="-2" pref="34" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldDniPaciente2" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldDniPacienteDiagnostico" min="-2" pref="80" max="-2" attributes="0"/>
                                       <EmptySpace pref="31" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -421,17 +426,14 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxParticularActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="jComboBoxObraSocial">
+                            <Component class="javax.swing.JComboBox" name="jComboBoxObraSocialTurno">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="4">
-                                    <StringItem index="0" value="Item 1"/>
-                                    <StringItem index="1" value="Item 2"/>
-                                    <StringItem index="2" value="Item 3"/>
-                                    <StringItem index="3" value="Item 4"/>
-                                  </StringArray>
+                                  <StringArray count="0"/>
                                 </Property>
-                                <Property name="enabled" type="boolean" value="false"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Default Cursor"/>
+                                </Property>
                               </Properties>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -442,14 +444,14 @@
                                 <Property name="text" type="java.lang.String" value="Nombre Medico:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextFieldDniPaciente1">
+                            <Component class="javax.swing.JTextField" name="jTextFieldDniPacienteMedico">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel5">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Diagnostico:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextFieldDniPaciente2">
+                            <Component class="javax.swing.JTextField" name="jTextFieldDniPacienteDiagnostico">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel18">
                               <Properties>
@@ -623,9 +625,9 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jComboBox3" min="-2" pref="164" max="-2" attributes="0"/>
+                                                      <Component id="jComboCrearTurnoAnalisis" min="-2" pref="164" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jButtonAgregarAnalisisATurno" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <EmptySpace pref="316" max="32767" attributes="0"/>
@@ -641,8 +643,8 @@
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jButton7" pref="39" max="32767" attributes="0"/>
-                                          <Component id="jComboBox3" max="32767" attributes="0"/>
+                                          <Component id="jButtonAgregarAnalisisATurno" pref="39" max="32767" attributes="0"/>
+                                          <Component id="jComboCrearTurnoAnalisis" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jScrollPane1" pref="290" max="32767" attributes="0"/>
@@ -652,17 +654,20 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JButton" name="jButton7">
+                            <Component class="javax.swing.JButton" name="jButtonAgregarAnalisisATurno">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Agregar"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAgregarAnalisisATurnoActionPerformed"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel6">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Analisis:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="jComboBox3">
+                            <Component class="javax.swing.JComboBox" name="jComboCrearTurnoAnalisis">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="4">
@@ -681,7 +686,7 @@
 
                               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                               <SubComponents>
-                                <Component class="javax.swing.JTable" name="jTable1">
+                                <Component class="javax.swing.JTable" name="jTableAnalisisAgregarTurno">
                                   <Properties>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                       <Table columnCount="4" rowCount="4">
@@ -691,6 +696,7 @@
                                         <Column editable="true" title="Title 4" type="java.lang.Object"/>
                                       </Table>
                                     </Property>
+                                    <Property name="enabled" type="boolean" value="false"/>
                                   </Properties>
                                 </Component>
                               </SubComponents>
@@ -745,9 +751,9 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel7" pref="564" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+                                      <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="103" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -755,22 +761,192 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel7" min="-2" pref="192" max="-2" attributes="0"/>
-                                      <EmptySpace pref="183" max="32767" attributes="0"/>
+                                      <Component id="jPanel9" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel7">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Segoe UI" size="18" style="0"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="0"/>
-                                <Property name="text" type="java.lang.String" value="Texto con los datos para confirmar"/>
-                              </Properties>
-                            </Component>
+                            <Container class="javax.swing.JPanel" name="jPanel9">
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelConfirmacionFecha" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelCrearTurnoConfirmacion" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelCrearTurnoConfirmacion1" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="jLabelCrearTurnoConfirmacion2" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jLabelConfirmacionDni" min="-2" pref="150" max="-2" attributes="0"/>
+                                                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                                                  <Component id="jLabelConfirmacionObraSocial" min="-2" pref="150" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jLabelConfirmacionNombre" max="32767" attributes="0"/>
+                                              <Component id="jLabelConfirmacionApellido" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelConfirmacionMedico" max="32767" attributes="0"/>
+                                              <Component id="jLabelConfirmacionDiagnostico" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelCrearTurnoConfirmacion" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabelConfirmacionDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabelConfirmacionObraSocial" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelConfirmacionNombre" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelConfirmacionApellido" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelCrearTurnoConfirmacion1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelConfirmacionFecha" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelCrearTurnoConfirmacion2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelConfirmacionMedico" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelConfirmacionDiagnostico" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane4" pref="106" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="jLabelCrearTurnoConfirmacion">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="18" style="0"/>
+                                    </Property>
+                                    <Property name="horizontalAlignment" type="int" value="0"/>
+                                    <Property name="text" type="java.lang.String" value="Paciente"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabelConfirmacionDni">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="DNI: "/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabelConfirmacionObraSocial">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Obra Social:"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabelConfirmacionNombre">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Nombre: "/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabelConfirmacionApellido">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Apellido:"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabelCrearTurnoConfirmacion1">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="18" style="0"/>
+                                    </Property>
+                                    <Property name="horizontalAlignment" type="int" value="0"/>
+                                    <Property name="text" type="java.lang.String" value="Fecha"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JSeparator" name="jSeparator1">
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabelConfirmacionFecha">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Fecha: "/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JSeparator" name="jSeparator2">
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabelCrearTurnoConfirmacion2">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="18" style="0"/>
+                                    </Property>
+                                    <Property name="horizontalAlignment" type="int" value="0"/>
+                                    <Property name="text" type="java.lang.String" value="Analisis"/>
+                                  </Properties>
+                                </Component>
+                                <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+                                  <Properties>
+                                    <Property name="enabled" type="boolean" value="false"/>
+                                  </Properties>
+                                  <AuxValues>
+                                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                                  </AuxValues>
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JList" name="jLabelConfirmacionAnalisisList">
+                                      <Properties>
+                                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+                                          <StringArray count="24">
+                                            <StringItem index="0" value="Item 1"/>
+                                            <StringItem index="1" value="Item 2"/>
+                                            <StringItem index="2" value="Item 3"/>
+                                            <StringItem index="3" value="Item 4"/>
+                                            <StringItem index="4" value="Item 5"/>
+                                            <StringItem index="5" value="Item 5"/>
+                                            <StringItem index="6" value="Item 1"/>
+                                            <StringItem index="7" value="Item 2"/>
+                                            <StringItem index="8" value="Item 3"/>
+                                            <StringItem index="9" value="Item 4"/>
+                                            <StringItem index="10" value="Item 5"/>
+                                            <StringItem index="11" value="Item 5"/>
+                                            <StringItem index="12" value="Item 1"/>
+                                            <StringItem index="13" value="Item 2"/>
+                                            <StringItem index="14" value="Item 3"/>
+                                            <StringItem index="15" value="Item 4"/>
+                                            <StringItem index="16" value="Item 5"/>
+                                            <StringItem index="17" value="Item 5"/>
+                                            <StringItem index="18" value="Item 1"/>
+                                            <StringItem index="19" value="Item 2"/>
+                                            <StringItem index="20" value="Item 3"/>
+                                            <StringItem index="21" value="Item 4"/>
+                                            <StringItem index="22" value="Item 5"/>
+                                            <StringItem index="23" value="Item 5"/>
+                                          </StringArray>
+                                        </Property>
+                                      </Properties>
+                                      <AuxValues>
+                                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                                      </AuxValues>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                                <Component class="javax.swing.JLabel" name="jLabelConfirmacionMedico">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Medico: "/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabelConfirmacionDiagnostico">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Diagnostico: "/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
                           </SubComponents>
                         </Container>
                       </SubComponents>
@@ -1034,16 +1210,14 @@
                                                       <EmptySpace max="32767" attributes="0"/>
                                                       <Component id="jErrorCrearPacienteEdad" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="jTextFieldDni" min="-2" pref="200" max="-2" attributes="0"/>
-                                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="jLabel13" min="-2" pref="60" max="-2" attributes="0"/>
-                                                          <EmptySpace max="32767" attributes="0"/>
-                                                          <Component id="jErrorCrearPacienteSexo" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jTextFieldDni" min="-2" pref="200" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jLabel13" min="-2" pref="60" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="jErrorCrearPacienteSexo" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Component id="jRadioButtonMujer" min="-2" max="-2" attributes="0"/>

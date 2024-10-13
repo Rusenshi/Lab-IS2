@@ -10,6 +10,7 @@ import com.persistencia.DAOObraSocialSQL;
 import com.persistencia.DAOPacienteSQL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -107,6 +108,19 @@ public class ManagerPaciente {
         
         System.out.println(p);
                     
+    }
+    
+    public static Paciente obtenerPaciente(String dniString){
+        int dni = -1;
+        try{
+            dni = Integer.parseInt(dniString);
+        }
+        catch(NumberFormatException e){
+            return null;
+        }
+        Optional<Paciente> p = daoPaciente.get(dni);
+        if (p.isPresent()) return p.get();
+        return null;
     }
     
     

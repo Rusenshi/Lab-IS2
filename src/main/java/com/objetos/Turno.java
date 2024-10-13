@@ -16,6 +16,7 @@ import java.util.Set;
 public class Turno {
     private int nroOrdenServicio;
     private Paciente paciente;
+    private ObraSocial obraSocial;
     private Date fecha;
     private String nombreMedico;
     private String diagnostico;
@@ -34,6 +35,14 @@ public class Turno {
         this.analisis = new HashSet<Analisis>();
     }
 
+    public ObraSocial getObraSocial() {
+        return obraSocial;
+    }
+
+    public void setObraSocial(ObraSocial obraSocial) {
+        this.obraSocial = obraSocial;
+    }
+    
     public int getNroOrdenServicio() {
         return nroOrdenServicio;
     }
@@ -84,8 +93,10 @@ public class Turno {
 
     @Override
     public String toString() {
-        return "Turno{" + "nroOrdenServicio=" + nroOrdenServicio + ", paciente=" + paciente + ", fecha=" + fecha + ", nombreMedico=" + nombreMedico + ", diagnostico=" + diagnostico + ", analisis=" + analisis + '}';
+        return "Turno{" + "nroOrdenServicio=" + nroOrdenServicio + ", paciente=" + paciente + ", obraSocial=" + obraSocial + ", fecha=" + fecha + ", nombreMedico=" + nombreMedico + ", diagnostico=" + diagnostico + ", analisis=" + analisis + '}';
     }
+
+    
     
     
     

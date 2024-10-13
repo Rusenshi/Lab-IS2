@@ -123,6 +123,7 @@ public class Main extends javax.swing.JFrame {
         t1.setPaciente(p1);
         t1.getAnalisis().add(analisis1);
         t1.getAnalisis().add(analisis2);
+        t1.setObraSocial(new ObraSocial("DOSEP"));
         daoTurno.save(t1);
         
         System.out.println(daoTurno.getAll());
