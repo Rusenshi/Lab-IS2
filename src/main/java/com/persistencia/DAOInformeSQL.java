@@ -33,7 +33,7 @@ public class DAOInformeSQL implements Dao<Informe,Integer>{
             // res tiene el cursor por defecto en -1, si res.next retorna true, significa que hay un elemento en la lista, y por ende es el buscado
             if (res.next()){
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
-                Informe inf = new Informe(res.getInt(1),res.getString(2));
+                Informe inf = new Informe(res.getInt(1));
                 
                 // Obtener las obras sociales vinculadas a este paciente
                 PreparedStatement stmOS = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM INFORME_TIENE_ANALISIS WHERE activo=1 AND Informe_Turno_nroOrdenServicio=?");

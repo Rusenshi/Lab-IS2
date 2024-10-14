@@ -16,9 +16,9 @@ public class Informe {
     private Tecnico tecnico;
     private Hashtable<Analisis,Float> resultados;
 
-    public Informe(int nroOrdenServicio, String medioElectronico) {
+    public Informe(int nroOrdenServicio) {
         this.nroOrdenServicio = nroOrdenServicio;
-        this.medioElectronico = medioElectronico;
+        this.medioElectronico = "2";
         this.tecnico = new Tecnico();
         this.resultados = new Hashtable<>();
     }
@@ -55,6 +55,11 @@ public class Informe {
 
     public void setResultados(Hashtable<Analisis, Float> resultados) {
         this.resultados = resultados;
+    }
+
+    @Override
+    public String toString() {
+        return "Informe{" + "nroOrdenServicio=" + nroOrdenServicio + ", medioElectronico=" + medioElectronico + ", tecnico=" + tecnico + ", resultados=" + resultados + '}';
     }
     
     

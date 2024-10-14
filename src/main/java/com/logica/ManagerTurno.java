@@ -107,8 +107,11 @@ public class ManagerTurno {
         int nroOrdenServicio = ManagerTurno.hashNroOrdenServicio(fechaFormateada);
         
         Turno t = new Turno(nroOrdenServicio,fecha,s_medico,s_diagnostico);
+        
         t.setPaciente(daoPaciente.get(Integer.valueOf(s_dniPaciente)).get());
+        
         t.setObraSocial(daoObraSocial.get(s_obraSocial).get());
+        
         for(String analisisName : set_analisisElegidos){
             t.getAnalisis().add(daoAnalisis.get(analisisName).get());
         }
@@ -119,8 +122,6 @@ public class ManagerTurno {
         SimpleDateFormat format = new SimpleDateFormat("EEEE");
         
         String nombreDia = format.format(date);
-        
-        
         
         return !nombreDia.equals("sábado") && !nombreDia.equals("domingo");
     }

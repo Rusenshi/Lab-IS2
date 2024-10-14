@@ -5,17 +5,21 @@
 package com.interfaz;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.logica.ManagerInforme;
 import com.logica.ManagerObraSocial;
 import com.logica.ManagerPaciente;
 import com.logica.ManagerTurno;
 import com.objetos.Analisis;
 import com.objetos.ObraSocial;
 import com.objetos.Paciente;
+import com.objetos.Turno;
 import com.persistencia.DAOAnalisisSQL;
+import com.persistencia.DAOTurnoSQL;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JPanel;
@@ -36,6 +40,9 @@ public class Laboratorio extends javax.swing.JFrame {
     private static DefaultTableModel dataModelanalisisElegidos = new DefaultTableModel();
 //    private static List<Integer> listaClaves = ManagerTurno.armarListaClaves();
         
+    // Variables Panel: Generar Resultado
+    private static Set<String> analisisInforme = new HashSet<>();
+    private static DefaultTableModel dataModelanalisisInforme = new DefaultTableModel();
     
     // Variables Panel: Agregar Paciente
     private static Set<String> obrasSocialesElegidas = new HashSet<>();
@@ -74,6 +81,11 @@ public class Laboratorio extends javax.swing.JFrame {
         for (Analisis analisis : new DAOAnalisisSQL().getAll()){
             jComboCrearTurnoAnalisis.addItem(analisis.getNombre());
         }
+        // Panel: Generar Resultado
+        dataModelanalisisInforme.addColumn("Analisis");
+        dataModelanalisisInforme.addColumn("Valor Referencia");
+        dataModelanalisisInforme.addColumn("Valor Obtenido");
+        jTableInformeAnalisis.setModel(dataModelanalisisInforme);
         
         
         // Panel: Crear Paciente
@@ -153,10 +165,10 @@ public class Laboratorio extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableInformeAnalisis = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        jTextFieldBuscarTurno = new javax.swing.JTextField();
+        jButtonBuscarTurno = new javax.swing.JButton();
         jPanelAgregarPaciente = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jTabbedPanelCrearPaciente = new javax.swing.JTabbedPane();
@@ -758,8 +770,13 @@ public class Laboratorio extends javax.swing.JFrame {
         jLabel3.setText("Número de Orden de Servicio:");
 
         jButton3.setText("Guardar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableInformeAnalisis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -770,11 +787,16 @@ public class Laboratorio extends javax.swing.JFrame {
                 "Analisis", "Valor Referencia", "Valor Obtenido"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableInformeAnalisis);
 
         jButton4.setText("Imprimir");
 
-        jButton5.setText("Buscar");
+        jButtonBuscarTurno.setText("Buscar");
+        jButtonBuscarTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarTurnoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -792,9 +814,9 @@ public class Laboratorio extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jTextFieldBuscarTurno, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -805,8 +827,8 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(jTextFieldBuscarTurno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1611,6 +1633,23 @@ public class Laboratorio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldDniPacienteFocusLost
 
+    private void jButtonBuscarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarTurnoActionPerformed
+        dataModelanalisisInforme.getDataVector().clear();
+        boolean avance = ManagerInforme.existeTurno(jTextFieldBuscarTurno.getText());
+        if (!avance) return;
+        ManagerInforme.llenarTablaAnalisis(Integer.parseInt(jTextFieldBuscarTurno.getText()), dataModelanalisisInforme);
+        ManagerInforme.validarResultado(dataModelanalisisInforme);
+
+        
+    }//GEN-LAST:event_jButtonBuscarTurnoActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        boolean exito = ManagerInforme.validarResultado(dataModelanalisisInforme);
+        if (!exito) return;
+        
+        ManagerInforme.guardarInforme(jTextFieldBuscarTurno.getText(),dataModelanalisisInforme);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1655,9 +1694,9 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JTabbedPane crearTurnoPasosJTabbed;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonAgregarAnalisisATurno;
+    private javax.swing.JButton jButtonBuscarTurno;
     private javax.swing.JButton jButtonCrearPaciente;
     private javax.swing.JButton jButtonCrearPacienteAnterior;
     private javax.swing.JButton jButtonCrearPacienteSiguiente;
@@ -1740,11 +1779,11 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPanelCrearPaciente;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableAnalisisAgregarTurno;
+    private javax.swing.JTable jTableInformeAnalisis;
     private javax.swing.JTable jTableObrasSocialesAgregarPaciente;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldApellido;
+    private javax.swing.JTextField jTextFieldBuscarTurno;
     private javax.swing.JTextField jTextFieldCorreo;
     private javax.swing.JTextField jTextFieldDni;
     private javax.swing.JTextField jTextFieldDniPaciente;
