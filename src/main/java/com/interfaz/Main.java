@@ -94,6 +94,8 @@ public class Main extends javax.swing.JFrame {
         daoObraSocial.save(new ObraSocial("DOSEP"));
         daoObraSocial.save(new ObraSocial("DOSPU"));
         daoObraSocial.save(new ObraSocial("PAMI"));
+        daoObraSocial.save(new ObraSocial("PARTICULAR"));
+        
         
         System.out.println(daoObraSocial.getAll());
         

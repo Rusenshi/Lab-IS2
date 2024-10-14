@@ -7,6 +7,7 @@ com\interfaz\Main$12.class
 com\interfaz\ConsultarPaciente.class
 com\logica\ManagerObraSocial.class
 com\interfaz\Main.class
+com\interfaz\Laboratorio$13.class
 com\persistencia\DAOReactivoSQL.class
 com\persistencia\DAOStockSQL.class
 com\interfaz\Main$3.class
@@ -24,8 +25,10 @@ com\objetos\Analisis.class
 com\persistencia\DAOInformeSQL.class
 com\interfaz\Laboratorio$5.class
 com\interfaz\Main$7.class
+com\interfaz\Laboratorio$21.class
 com\interfaz\Main$11.class
 com\objetos\Informe.class
+com\interfaz\Laboratorio$19.class
 com\interfaz\MainFrame$1.class
 com\persistencia\DataBaseSingleton.class
 com\interfaz\Laboratorio$11.class
@@ -40,9 +43,11 @@ com\objetos\Paciente.class
 com\logica\ManagerPaciente.class
 com\interfaz\Laboratorio$18.class
 com\interfaz\Laboratorio$9.class
+com\interfaz\Laboratorio$15.class
 com\interfaz\Main$8.class
 com\persistencia\DAOPacienteSQL.class
 com\interfaz\Main$13.class
+com\interfaz\Laboratorio$20.class
 com\interfaz\Laboratorio$6.class
 com\interfaz\Main$2.class
 com\interfaz\Laboratorio$17.class

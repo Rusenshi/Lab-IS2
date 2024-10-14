@@ -34,7 +34,7 @@ public class Laboratorio extends javax.swing.JFrame {
     private static int turnosDisponibles = MAX_TURNOS; // Almacena los turnos disponibles para la fecha actual
     private static Set<String> analisisElegidos = new HashSet<>();
     private static DefaultTableModel dataModelanalisisElegidos = new DefaultTableModel();
-    private static List<Integer> listaClaves = ManagerTurno.armarListaClaves();
+//    private static List<Integer> listaClaves = ManagerTurno.armarListaClaves();
         
     
     // Variables Panel: Agregar Paciente
@@ -59,7 +59,6 @@ public class Laboratorio extends javax.swing.JFrame {
         
         
         
-        
         // Inicializacion de componentes de la interfaz
         // Panel: Dar Turno
         jButtonCrearTurnoAnterior.setVisible(false);
@@ -68,6 +67,7 @@ public class Laboratorio extends javax.swing.JFrame {
         for (ObraSocial os : ManagerObraSocial.obtenerObrasSocialesDisponibles()){
             jComboBoxObraSocialCrearPaciente.addItem(os.getNombre());
         }
+        jComboBoxObraSocialCrearPaciente.removeItem("PARTICULAR");
         
         // [TEMPORAL HASTA TENER EL MANAGER]
         jComboCrearTurnoAnalisis.removeAllItems();
@@ -325,6 +325,11 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jLabel2.setText("Obra Social: ");
 
+        jTextFieldDniPaciente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldDniPacienteFocusLost(evt);
+            }
+        });
         jTextFieldDniPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDniPacienteActionPerformed(evt);
@@ -348,6 +353,7 @@ public class Laboratorio extends javax.swing.JFrame {
         });
 
         jComboBoxObraSocialTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jComboBoxObraSocialTurno.setEnabled(false);
 
         jLabel4.setText("Nombre Medico:");
 
@@ -843,9 +849,20 @@ public class Laboratorio extends javax.swing.JFrame {
         jLabel13.setText("Sexo:");
         jLabel13.setPreferredSize(new java.awt.Dimension(200, 16));
 
+        jRadioButtonMujer.setSelected(true);
         jRadioButtonMujer.setText("Mujer");
+        jRadioButtonMujer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMujerActionPerformed(evt);
+            }
+        });
 
         jRadioButtonHombre.setText("Hombre");
+        jRadioButtonHombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonHombreActionPerformed(evt);
+            }
+        });
 
         jErrorCrearPacienteDni.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteDni.setForeground(new java.awt.Color(255, 51, 51));
@@ -1267,7 +1284,7 @@ public class Laboratorio extends javax.swing.JFrame {
                     break;
                 case 1:
                     // Validar Paso 2
-                    avance = turnosDisponibles > 0;
+                    avance = (turnosDisponibles > 0) && ManagerTurno.esDiaDeSemana(jCalendarPedirTurno.getDate());
                     break;
                 case 2:
                     // Validar Paso 3
@@ -1291,6 +1308,11 @@ public class Laboratorio extends javax.swing.JFrame {
                 Paciente p = ManagerPaciente.obtenerPaciente(jTextFieldDniPaciente.getText());
                 jLabelConfirmacionDni.setText("DNI: " + p.getDni());
                 jLabelConfirmacionObraSocial.setText("Obra Social: " + (String) jComboBoxObraSocialTurno.getSelectedItem());
+                if (jCheckBoxParticular.isSelected()){
+                    jLabelConfirmacionObraSocial.setText("Obra Social: PARTICULAR");
+                }
+                
+                
                 jLabelConfirmacionNombre.setText("Nombre: " + p.getNombre());
                 jLabelConfirmacionApellido.setText("Apellido: " + p.getApellido());
                 
@@ -1321,12 +1343,31 @@ public class Laboratorio extends javax.swing.JFrame {
         }
         else if (crearTurnoActualStep == 3){
             // Crear turno y guardarlo en la base de datos
+            String obraSocial = (String)jComboBoxObraSocialTurno.getSelectedItem();
+            if (jCheckBoxParticular.isSelected()){
+                obraSocial = "PARTICULAR";
+            }
+            
             ManagerTurno.guardarTurno(jTextFieldDniPaciente.getText(),
-                    (String)jComboBoxObraSocialTurno.getSelectedItem(),
+                    obraSocial,
                     jTextFieldDniPacienteMedico.getText(),
                     jTextFieldDniPacienteDiagnostico.getText(),
                     jCalendarPedirTurno,
                     analisisElegidos);
+            
+            // Limpiar Campos
+            // Pag 1
+            jTextFieldDniPaciente.setText("");
+            jTextFieldDniPacienteMedico.setText("");
+            jTextFieldDniPacienteDiagnostico.setText("");
+            
+            // Pag 3
+            analisisElegidos.clear();
+            dataModelanalisisElegidos.getDataVector().clear();
+            
+            // Resetear tabla
+            crearTurnoActualStep = 0;
+            crearTurnoPasosJTabbed.setSelectedIndex(crearTurnoActualStep);
         }
 //        System.out.println(crearTurnoActualStep);
     }//GEN-LAST:event_jButtonCrearTurnoSiguienteActionPerformed
@@ -1443,9 +1484,10 @@ public class Laboratorio extends javax.swing.JFrame {
             jTextFieldDomicilio.setText("");
             jTextFieldTelefono.setText("");
             jTextFieldCorreo.setText("");
-            jRadioButtonMujer.setSelected(false);
+            jRadioButtonMujer.setSelected(true);
             jRadioButtonHombre.setSelected(false);
             obrasSocialesElegidas.clear();
+            dataModelobrasSocialesElegidas.getDataVector().clear();
             crearPacienteActualStep = 0;
             jTabbedPanelCrearPaciente.setSelectedIndex(crearPacienteActualStep);
         }
@@ -1502,6 +1544,7 @@ public class Laboratorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCrearPacienteActionPerformed
 
     private void jTextFieldDniPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteActionPerformed
+        // Habilitar otros campos si existe el paciente
         if (jTextFieldDniPaciente.getText().equals("")) return;
 
         int dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
@@ -1535,6 +1578,38 @@ public class Laboratorio extends javax.swing.JFrame {
             System.out.println(analisisElegidos);
         }
     }//GEN-LAST:event_jButtonAgregarAnalisisATurnoActionPerformed
+
+    private void jRadioButtonMujerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMujerActionPerformed
+        if (!jRadioButtonMujer.isSelected()) jRadioButtonMujer.setSelected(true);
+        jRadioButtonHombre.setSelected(false);
+    }//GEN-LAST:event_jRadioButtonMujerActionPerformed
+
+    private void jRadioButtonHombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonHombreActionPerformed
+        if (!jRadioButtonHombre.isSelected()) jRadioButtonHombre.setSelected(true);
+        jRadioButtonMujer.setSelected(false);
+    }//GEN-LAST:event_jRadioButtonHombreActionPerformed
+
+    private void jTextFieldDniPacienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteFocusLost
+        // Habilitar otros campos si existe el paciente
+        if (jTextFieldDniPaciente.getText().equals("")) return;
+
+        int dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
+        if (ManagerPaciente.comprobarExistencia(dniPaciente)){
+            jButtonCrearPaciente.setEnabled(false);
+            jComboBoxObraSocialTurno.setEnabled(true);
+            jCheckBoxParticular.setEnabled(true);
+            ArrayList<ObraSocial> obrasSociales = ManagerPaciente.obtenerObrasSociales(dniPaciente);
+            jComboBoxObraSocialTurno.removeAllItems();
+            for(ObraSocial os : obrasSociales){
+                jComboBoxObraSocialTurno.addItem(os.getNombre());
+            }
+        }
+        else{
+            jButtonCrearPaciente.setEnabled(true);
+            jComboBoxObraSocialTurno.setEnabled(false);
+            jCheckBoxParticular.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTextFieldDniPacienteFocusLost
 
     /**
      * @param args the command line arguments

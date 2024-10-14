@@ -12,6 +12,7 @@ import com.persistencia.DAOTurnoSQL;
 import com.toedter.calendar.JCalendar;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -112,5 +113,15 @@ public class ManagerTurno {
             t.getAnalisis().add(daoAnalisis.get(analisisName).get());
         }
         daoTurno.save(t);
+    }
+
+    public static boolean esDiaDeSemana(java.util.Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+        
+        String nombreDia = format.format(date);
+        
+        
+        
+        return !nombreDia.equals("sábado") && !nombreDia.equals("domingo");
     }
 }
