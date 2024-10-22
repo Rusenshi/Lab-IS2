@@ -4,6 +4,7 @@
  */
 package com.logica;
 
+import com.objetos.Analisis;
 import com.objetos.Turno;
 import com.persistencia.DAOAnalisisSQL;
 import com.persistencia.DAOObraSocialSQL;
@@ -39,6 +40,9 @@ public class ManagerTurno {
         return nombre.matches ("\\w+[\\s+\\w+]*"); // Verifica solo texto
     }
     
+    public static List<Analisis> obtenerAnalisis(){
+        return daoAnalisis.getAll();
+    }
     
     // Generacion de claves unicas basadas en existencia
     public static List<Integer> armarListaClaves(){
@@ -115,6 +119,7 @@ public class ManagerTurno {
         for(String analisisName : set_analisisElegidos){
             t.getAnalisis().add(daoAnalisis.get(analisisName).get());
         }
+        
         daoTurno.save(t);
     }
 

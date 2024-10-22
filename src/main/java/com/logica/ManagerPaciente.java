@@ -122,6 +122,4 @@ public class ManagerPaciente {
         if (p.isPresent()) return p.get();
         return null;
     }
-    
-    
 }

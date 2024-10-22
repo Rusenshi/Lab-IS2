@@ -12,16 +12,10 @@ import com.logica.ManagerTurno;
 import com.objetos.Analisis;
 import com.objetos.ObraSocial;
 import com.objetos.Paciente;
-import com.objetos.Turno;
-import com.persistencia.DAOAnalisisSQL;
-import com.persistencia.DAOTurnoSQL;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -76,11 +70,12 @@ public class Laboratorio extends javax.swing.JFrame {
         }
         jComboBoxObraSocialCrearPaciente.removeItem("PARTICULAR");
         
-        // [TEMPORAL HASTA TENER EL MANAGER]
+        
         jComboCrearTurnoAnalisis.removeAllItems();
-        for (Analisis analisis : new DAOAnalisisSQL().getAll()){
+        for (Analisis analisis : ManagerTurno.obtenerAnalisis()){
             jComboCrearTurnoAnalisis.addItem(analisis.getNombre());
         }
+        
         // Panel: Generar Resultado
         dataModelanalisisInforme.addColumn("Analisis");
         dataModelanalisisInforme.addColumn("Valor Referencia");
@@ -163,7 +158,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelGenerarResultado = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButtonGuardarResultado = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableInformeAnalisis = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
@@ -769,10 +764,10 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jLabel3.setText("Número de Orden de Servicio:");
 
-        jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGuardarResultado.setText("Guardar");
+        jButtonGuardarResultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonGuardarResultadoActionPerformed(evt);
             }
         });
 
@@ -810,7 +805,7 @@ public class Laboratorio extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonGuardarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
@@ -833,7 +828,7 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonGuardarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -1306,7 +1301,7 @@ public class Laboratorio extends javax.swing.JFrame {
                     break;
                 case 1:
                     // Validar Paso 2
-                    avance = (turnosDisponibles > 0) && ManagerTurno.esDiaDeSemana(jCalendarPedirTurno.getDate());
+                    avance = (turnosDisponibles > 0);// && ManagerTurno.esDiaDeSemana(jCalendarPedirTurno.getDate());
                     break;
                 case 2:
                     // Validar Paso 3
@@ -1324,8 +1319,8 @@ public class Laboratorio extends javax.swing.JFrame {
             crearTurnoPasosJTabbed.setSelectedIndex(crearTurnoActualStep);
             jButtonCrearTurnoAnterior.setVisible(true);
             
+            // Rellenar mensaje de confirmación
             if (crearTurnoActualStep == 3){
-                // Rellenar mensaje de confirmación
                 // PACIENTE
                 Paciente p = ManagerPaciente.obtenerPaciente(jTextFieldDniPaciente.getText());
                 jLabelConfirmacionDni.setText("DNI: " + p.getDni());
@@ -1643,12 +1638,12 @@ public class Laboratorio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonBuscarTurnoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonGuardarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarResultadoActionPerformed
         boolean exito = ManagerInforme.validarResultado(dataModelanalisisInforme);
         if (!exito) return;
         
         ManagerInforme.guardarInforme(jTextFieldBuscarTurno.getText(),dataModelanalisisInforme);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonGuardarResultadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1692,7 +1687,6 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JPanel crearTurnoP3;
     private javax.swing.JPanel crearTurnoP4;
     private javax.swing.JTabbedPane crearTurnoPasosJTabbed;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonAgregarAnalisisATurno;
@@ -1702,6 +1696,7 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCrearPacienteSiguiente;
     private javax.swing.JButton jButtonCrearTurnoAnterior;
     private javax.swing.JButton jButtonCrearTurnoSiguiente;
+    private javax.swing.JButton jButtonGuardarResultado;
     private javax.swing.JButton jButtonLateralDarTurno;
     private javax.swing.JButton jButtonLateralDarTurno6;
     private javax.swing.JButton jButtonLateralDarTurno7;
