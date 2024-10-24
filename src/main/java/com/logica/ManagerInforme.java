@@ -90,6 +90,7 @@ public class ManagerInforme {
             Optional<Analisis> analisis = daoAnalisis.get(row.get(0).toString());
             float resultado = Float.parseFloat(row.get(2).toString());
             if (analisis.isPresent()){
+                // Llena tabla de hash
                 informe.getResultados().put(analisis.get(), resultado);
             }
         }

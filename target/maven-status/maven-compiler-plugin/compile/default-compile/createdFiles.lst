@@ -28,6 +28,7 @@ com\persistencia\DAOInformeSQL.class
 com\interfaz\Laboratorio$5.class
 com\interfaz\Main$7.class
 com\interfaz\Laboratorio$21.class
+com\interfaz\Laboratorio$24.class
 com\interfaz\Main$11.class
 com\objetos\Informe.class
 com\interfaz\Laboratorio$19.class

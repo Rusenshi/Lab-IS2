@@ -50,6 +50,7 @@ public class DAOInformeSQL implements Dao<Informe,Integer>{
                     }
                 }
                 
+                // Crea optional con el objeto encontrado
                 return Optional.ofNullable(inf); 
             }
             else{

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -103,10 +104,10 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanelBarraLateral = new javax.swing.JPanel();
         jButtonLateralDarTurno = new javax.swing.JButton();
-        jButtonLateralDarTurno6 = new javax.swing.JButton();
-        jButtonLateralDarTurno7 = new javax.swing.JButton();
-        jButtonLateralDarTurno8 = new javax.swing.JButton();
-        jButtonLateralDarTurno9 = new javax.swing.JButton();
+        jButtonLateralGenerarResultado = new javax.swing.JButton();
+        jButtonLateralAgregarPaciente = new javax.swing.JButton();
+        jButtonLateralAgregarAnalisis = new javax.swing.JButton();
+        jButtonLateralPedirReactivo = new javax.swing.JButton();
         jPanelBackground = new javax.swing.JPanel();
         jPanelDarTurno = new javax.swing.JPanel();
         crearTurnoJpanel = new javax.swing.JPanel();
@@ -156,6 +157,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jLabelConfirmacionAnalisisList = new javax.swing.JList<>();
         jLabelConfirmacionMedico = new javax.swing.JLabel();
         jLabelConfirmacionDiagnostico = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanelGenerarResultado = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -236,61 +238,61 @@ public class Laboratorio extends javax.swing.JFrame {
         });
         jPanelBarraLateral.add(jButtonLateralDarTurno);
 
-        jButtonLateralDarTurno6.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralDarTurno6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonLateralDarTurno6.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralDarTurno6.setText("Generar Resultado");
-        jButtonLateralDarTurno6.setBorderPainted(false);
-        jButtonLateralDarTurno6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButtonLateralDarTurno6.setPreferredSize(new java.awt.Dimension(200, 50));
-        jButtonLateralDarTurno6.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLateralGenerarResultado.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonLateralGenerarResultado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLateralGenerarResultado.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralGenerarResultado.setText("Generar Resultado");
+        jButtonLateralGenerarResultado.setBorderPainted(false);
+        jButtonLateralGenerarResultado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonLateralGenerarResultado.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButtonLateralGenerarResultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLateralDarTurno6ActionPerformed(evt);
+                jButtonLateralGenerarResultadoActionPerformed(evt);
             }
         });
-        jPanelBarraLateral.add(jButtonLateralDarTurno6);
+        jPanelBarraLateral.add(jButtonLateralGenerarResultado);
 
-        jButtonLateralDarTurno7.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralDarTurno7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonLateralDarTurno7.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralDarTurno7.setText("Agregar Paciente");
-        jButtonLateralDarTurno7.setBorderPainted(false);
-        jButtonLateralDarTurno7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButtonLateralDarTurno7.setPreferredSize(new java.awt.Dimension(200, 50));
-        jButtonLateralDarTurno7.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLateralAgregarPaciente.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonLateralAgregarPaciente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLateralAgregarPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralAgregarPaciente.setText("Agregar Paciente");
+        jButtonLateralAgregarPaciente.setBorderPainted(false);
+        jButtonLateralAgregarPaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonLateralAgregarPaciente.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButtonLateralAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLateralDarTurno7ActionPerformed(evt);
+                jButtonLateralAgregarPacienteActionPerformed(evt);
             }
         });
-        jPanelBarraLateral.add(jButtonLateralDarTurno7);
+        jPanelBarraLateral.add(jButtonLateralAgregarPaciente);
 
-        jButtonLateralDarTurno8.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralDarTurno8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonLateralDarTurno8.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralDarTurno8.setText("Agregar Analisis");
-        jButtonLateralDarTurno8.setBorderPainted(false);
-        jButtonLateralDarTurno8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButtonLateralDarTurno8.setPreferredSize(new java.awt.Dimension(200, 50));
-        jButtonLateralDarTurno8.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLateralAgregarAnalisis.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonLateralAgregarAnalisis.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLateralAgregarAnalisis.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralAgregarAnalisis.setText("Agregar Analisis");
+        jButtonLateralAgregarAnalisis.setBorderPainted(false);
+        jButtonLateralAgregarAnalisis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonLateralAgregarAnalisis.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButtonLateralAgregarAnalisis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLateralDarTurno8ActionPerformed(evt);
+                jButtonLateralAgregarAnalisisActionPerformed(evt);
             }
         });
-        jPanelBarraLateral.add(jButtonLateralDarTurno8);
+        jPanelBarraLateral.add(jButtonLateralAgregarAnalisis);
 
-        jButtonLateralDarTurno9.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralDarTurno9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonLateralDarTurno9.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralDarTurno9.setText("Pedir Reactivo");
-        jButtonLateralDarTurno9.setBorderPainted(false);
-        jButtonLateralDarTurno9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButtonLateralDarTurno9.setPreferredSize(new java.awt.Dimension(200, 50));
-        jButtonLateralDarTurno9.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLateralPedirReactivo.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonLateralPedirReactivo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLateralPedirReactivo.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralPedirReactivo.setText("Pedir Reactivo");
+        jButtonLateralPedirReactivo.setBorderPainted(false);
+        jButtonLateralPedirReactivo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonLateralPedirReactivo.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButtonLateralPedirReactivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLateralDarTurno9ActionPerformed(evt);
+                jButtonLateralPedirReactivoActionPerformed(evt);
             }
         });
-        jPanelBarraLateral.add(jButtonLateralDarTurno9);
+        jPanelBarraLateral.add(jButtonLateralPedirReactivo);
 
         getContentPane().add(jPanelBarraLateral);
 
@@ -730,6 +732,13 @@ public class Laboratorio extends javax.swing.JFrame {
 
         crearTurnoPasosJTabbed.addTab("Paso 4: Confirmación", crearTurnoP4);
 
+        jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout crearTurnoJpanelLayout = new javax.swing.GroupLayout(crearTurnoJpanel);
         crearTurnoJpanel.setLayout(crearTurnoJpanelLayout);
         crearTurnoJpanelLayout.setHorizontalGroup(
@@ -737,7 +746,10 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(crearTurnoJpanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(crearTurnoJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, crearTurnoJpanelLayout.createSequentialGroup()
+                    .addGroup(crearTurnoJpanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCrearTurnoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCrearTurnoSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -750,7 +762,8 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(crearTurnoJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCrearTurnoSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCrearTurnoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonCrearTurnoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1212,27 +1225,25 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelBackground.add(jPanelAgregarPaciente, "card4");
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Menu en Desarrollo");
+        jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanelEnConstruccionLayout = new javax.swing.GroupLayout(jPanelEnConstruccion);
         jPanelEnConstruccion.setLayout(jPanelEnConstruccionLayout);
         jPanelEnConstruccionLayout.setHorizontalGroup(
             jPanelEnConstruccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-            .addGroup(jPanelEnConstruccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelEnConstruccionLayout.createSequentialGroup()
-                    .addGap(0, 215, Short.MAX_VALUE)
-                    .addComponent(jLabel17)
-                    .addGap(0, 216, Short.MAX_VALUE)))
+            .addGroup(jPanelEnConstruccionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelEnConstruccionLayout.setVerticalGroup(
             jPanelEnConstruccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
-            .addGroup(jPanelEnConstruccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelEnConstruccionLayout.createSequentialGroup()
-                    .addGap(0, 228, Short.MAX_VALUE)
-                    .addComponent(jLabel17)
-                    .addGap(0, 227, Short.MAX_VALUE)))
+            .addGroup(jPanelEnConstruccionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanelBackground.add(jPanelEnConstruccion, "card5");
@@ -1242,6 +1253,7 @@ public class Laboratorio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Cambia entre las posibles ventanas del programa
     private void cambiarPanel(JPanel panel){
         JPanel[] panelesDisponibles = {jPanelGenerarResultado,jPanelAgregarPaciente,jPanelDarTurno,jPanelEnConstruccion};
         for(JPanel p : panelesDisponibles){
@@ -1251,29 +1263,44 @@ public class Laboratorio extends javax.swing.JFrame {
         
     }
     
+    // Cambia el color del boton seleccionado del panel lateral a uno mas oscuro
+    private void setHighlighted(JButton button){
+        JButton[] panelesDisponibles = {jButtonLateralDarTurno,jButtonLateralGenerarResultado,jButtonLateralAgregarPaciente,jButtonLateralAgregarAnalisis,jButtonLateralPedirReactivo};
+        for(JButton b : panelesDisponibles){
+            b.setBackground(new Color(102,153,255)); // Color Default
+        }
+        button.setBackground(new Color(90,140,240));
+        
+    }
+    
     
     private void jButtonLateralDarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralDarTurnoActionPerformed
+        setHighlighted(jButtonLateralDarTurno);
         cambiarPanel(jPanelDarTurno);
     }//GEN-LAST:event_jButtonLateralDarTurnoActionPerformed
 
-    private void jButtonLateralDarTurno6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralDarTurno6ActionPerformed
+    private void jButtonLateralGenerarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralGenerarResultadoActionPerformed
+        setHighlighted(jButtonLateralGenerarResultado);
         cambiarPanel(jPanelGenerarResultado);
-    }//GEN-LAST:event_jButtonLateralDarTurno6ActionPerformed
+    }//GEN-LAST:event_jButtonLateralGenerarResultadoActionPerformed
 
-    private void jButtonLateralDarTurno7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralDarTurno7ActionPerformed
+    private void jButtonLateralAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralAgregarPacienteActionPerformed
+        setHighlighted(jButtonLateralAgregarPaciente);
         cambiarPanel(jPanelAgregarPaciente);
-    }//GEN-LAST:event_jButtonLateralDarTurno7ActionPerformed
+    }//GEN-LAST:event_jButtonLateralAgregarPacienteActionPerformed
 
-    private void jButtonLateralDarTurno8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralDarTurno8ActionPerformed
+    private void jButtonLateralAgregarAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralAgregarAnalisisActionPerformed
+        setHighlighted(jButtonLateralAgregarAnalisis);
         cambiarPanel(jPanelEnConstruccion);
-    }//GEN-LAST:event_jButtonLateralDarTurno8ActionPerformed
+    }//GEN-LAST:event_jButtonLateralAgregarAnalisisActionPerformed
 
-    private void jButtonLateralDarTurno9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralDarTurno9ActionPerformed
+    private void jButtonLateralPedirReactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralPedirReactivoActionPerformed
+        setHighlighted(jButtonLateralPedirReactivo);
         cambiarPanel(jPanelEnConstruccion);
-    }//GEN-LAST:event_jButtonLateralDarTurno9ActionPerformed
+    }//GEN-LAST:event_jButtonLateralPedirReactivoActionPerformed
 
     private void jButtonCrearTurnoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearTurnoAnteriorActionPerformed
-        // TODO add your handling code here:
+        // Vuelve un paso en la etapa de crear turno
         if (crearTurnoActualStep > 0) {
             crearTurnoActualStep--;
             crearTurnoPasosJTabbed.setSelectedIndex(crearTurnoActualStep);
@@ -1287,12 +1314,37 @@ public class Laboratorio extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButtonCrearTurnoAnteriorActionPerformed
+    
+    // Reinicia el formulario de Crear Turno
+    private void vaciarCamposCrearTurno(){
+        // Limpiar Campos
+        // Pag 1
+        jTextFieldDniPaciente.setText("");
+        jTextFieldDniPacienteMedico.setText("");
+        jTextFieldDniPacienteDiagnostico.setText("");
+        jComboBoxObraSocialTurno.setEnabled(false);
+        jCheckBoxParticular.setSelected(false);
+        jCheckBoxParticular.setEnabled(false);
+        
 
+        // Pag 3
+        analisisElegidos.clear();
+        dataModelanalisisElegidos.getDataVector().clear();
+
+        // Resetear tabla
+        crearTurnoActualStep = 0;
+        crearTurnoPasosJTabbed.setSelectedIndex(crearTurnoActualStep);
+    }
+    
+    
     private void jButtonCrearTurnoSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearTurnoSiguienteActionPerformed
+        // Comportamiento boton siguiente Crear Turno
         if (crearTurnoActualStep < 3) {
             System.out.println("Pagina actual: " + crearTurnoActualStep);
             
             boolean avance = false;
+            
+            // Dependiendo de la etapa actual del formulario son los controles que permiten avanzar a la siguiente
             switch(crearTurnoActualStep){
                 case 0:
                     // Validar Paso 1
@@ -1373,24 +1425,14 @@ public class Laboratorio extends javax.swing.JFrame {
                     jCalendarPedirTurno,
                     analisisElegidos);
             
-            // Limpiar Campos
-            // Pag 1
-            jTextFieldDniPaciente.setText("");
-            jTextFieldDniPacienteMedico.setText("");
-            jTextFieldDniPacienteDiagnostico.setText("");
-            
-            // Pag 3
-            analisisElegidos.clear();
-            dataModelanalisisElegidos.getDataVector().clear();
-            
-            // Resetear tabla
-            crearTurnoActualStep = 0;
-            crearTurnoPasosJTabbed.setSelectedIndex(crearTurnoActualStep);
+            vaciarCamposCrearTurno();
+
         }
 //        System.out.println(crearTurnoActualStep);
     }//GEN-LAST:event_jButtonCrearTurnoSiguienteActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // Agrega las obras sociales al Cargar un Paciente
         String nombreObraSocialElegida = (String)jComboBoxObraSocialCrearPaciente.getSelectedItem();
 //        ObraSocial os = ManagerObraSocial.recuperarObraSocial();
         boolean obraSocialAgregada = obrasSocialesElegidas.add(nombreObraSocialElegida);
@@ -1400,7 +1442,26 @@ public class Laboratorio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    
+    private void vaciarCamposCrearPaciente(){
+        // Reinicia Formulatio de Crear Paciente
+        jTextFieldDni.setText("");
+        jTextFieldNombre.setText("");
+        jTextFieldApellido.setText("");
+        jTextFieldEdad.setText("");
+        jTextFieldDomicilio.setText("");
+        jTextFieldTelefono.setText("");
+        jTextFieldCorreo.setText("");
+        jRadioButtonMujer.setSelected(true);
+        jRadioButtonHombre.setSelected(false);
+        obrasSocialesElegidas.clear();
+        dataModelobrasSocialesElegidas.getDataVector().clear();
+        crearPacienteActualStep = 0;
+        jTabbedPanelCrearPaciente.setSelectedIndex(crearPacienteActualStep);
+    }
+    
     private void jButtonCrearPacienteSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearPacienteSiguienteActionPerformed
+        // Comportamiento boton siguiente Crear Paciente
         if (crearPacienteActualStep < 2) {
             // Realizar controles necesarios mientras avanza, y solo avanza si se cumple el requisito
             boolean avance = false;
@@ -1493,21 +1554,22 @@ public class Laboratorio extends javax.swing.JFrame {
                     obrasSocialesElegidas);
 
 
-            // Prepara para el siguiente
-            // Resetear campos
-            jTextFieldDni.setText("");
-            jTextFieldNombre.setText("");
-            jTextFieldApellido.setText("");
-            jTextFieldEdad.setText("");
-            jTextFieldDomicilio.setText("");
-            jTextFieldTelefono.setText("");
-            jTextFieldCorreo.setText("");
-            jRadioButtonMujer.setSelected(true);
-            jRadioButtonHombre.setSelected(false);
-            obrasSocialesElegidas.clear();
-            dataModelobrasSocialesElegidas.getDataVector().clear();
-            crearPacienteActualStep = 0;
-            jTabbedPanelCrearPaciente.setSelectedIndex(crearPacienteActualStep);
+            vaciarCamposCrearPaciente();
+//            // Prepara para el siguiente
+//            // Resetear campos
+//            jTextFieldDni.setText("");
+//            jTextFieldNombre.setText("");
+//            jTextFieldApellido.setText("");
+//            jTextFieldEdad.setText("");
+//            jTextFieldDomicilio.setText("");
+//            jTextFieldTelefono.setText("");
+//            jTextFieldCorreo.setText("");
+//            jRadioButtonMujer.setSelected(true);
+//            jRadioButtonHombre.setSelected(false);
+//            obrasSocialesElegidas.clear();
+//            dataModelobrasSocialesElegidas.getDataVector().clear();
+//            crearPacienteActualStep = 0;
+//            jTabbedPanelCrearPaciente.setSelectedIndex(crearPacienteActualStep);
         }
         
         
@@ -1525,11 +1587,13 @@ public class Laboratorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCrearPacienteAnteriorActionPerformed
 
     private void jCalendarPedirTurnoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendarPedirTurnoPropertyChange
+        // Armar la vista previa de los turnos disponibles en el calendario
         int dia = jCalendarPedirTurno.getDayChooser().getDay();
-        int mes = jCalendarPedirTurno.getMonthChooser().getMonth()+1;
+        int mes = jCalendarPedirTurno.getMonthChooser().getMonth()+1; // Los meses empiezan desde cero en JCalendar
         int año = jCalendarPedirTurno.getYearChooser().getYear();
-        String fecha = dia + "/"+mes +"/"+ año;
-        String fechaConsulta = año+"-"+mes+"-"+dia;
+        String fecha = dia + "/"+mes +"/"+ año;     // Para mostrar en pantalla
+        String fechaConsulta = año+"-"+mes+"-"+dia; // Para la consulta SQL
+        
         int cantidadTurnosExistentes = ManagerTurno.obtenerCantidadTurnosPorFecha(fechaConsulta);
         if (cantidadTurnosExistentes <= MAX_TURNOS)
             turnosDisponibles = MAX_TURNOS-cantidadTurnosExistentes;
@@ -1537,17 +1601,21 @@ public class Laboratorio extends javax.swing.JFrame {
         
         String turnosDisponiblesString = "TURNOS DISPONIBLES PARA LA FECHA " + fecha + ": " + turnosDisponibles;
 
+        // Determina el color del label dependiendo de la cantidad de turnos disponibles
         if (turnosDisponibles == 0){
             jLabelPedirTurnoDisponibles.setForeground(Color.red);
         }
         else{
             jLabelPedirTurnoDisponibles.setForeground(Color.black);
         }
+        
         jLabelPedirTurnoDisponibles.setText(turnosDisponiblesString);
         
     }//GEN-LAST:event_jCalendarPedirTurnoPropertyChange
 
     private void jCheckBoxParticularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxParticularActionPerformed
+        // Bloquea el combobox de obra social en caso de usar particular
+        // Nota: aca podemos agregar que si un paciente no tiene obra social, esta casilla se active automaticamente
         if (jCheckBoxParticular.isSelected()){
             jComboBoxObraSocialTurno.setEnabled(false);
         }
@@ -1564,12 +1632,14 @@ public class Laboratorio extends javax.swing.JFrame {
     private void jTextFieldDniPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteActionPerformed
         // Habilitar otros campos si existe el paciente
         if (jTextFieldDniPaciente.getText().equals("")) return;
-
+        
         int dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
         if (ManagerPaciente.comprobarExistencia(dniPaciente)){
             jButtonCrearPaciente.setEnabled(false);
             jComboBoxObraSocialTurno.setEnabled(true);
             jCheckBoxParticular.setEnabled(true);
+            
+            // Cargar obras sociales en combobox
             ArrayList<ObraSocial> obrasSociales = ManagerPaciente.obtenerObrasSociales(dniPaciente);
             jComboBoxObraSocialTurno.removeAllItems();
             for(ObraSocial os : obrasSociales){
@@ -1588,6 +1658,7 @@ public class Laboratorio extends javax.swing.JFrame {
     }//GEN-LAST:event_crearTurnoPasosJTabbedStateChanged
 
     private void jButtonAgregarAnalisisATurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAnalisisATurnoActionPerformed
+        // Comportamiento de Agregar analisis durante la creación de un turno
         String nombreAnalisisElegido = (String)jComboCrearTurnoAnalisis.getSelectedItem();
 //        ObraSocial os = ManagerObraSocial.recuperarObraSocial();
         boolean analisisAgregado = analisisElegidos.add(nombreAnalisisElegido);
@@ -1630,21 +1701,25 @@ public class Laboratorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldDniPacienteFocusLost
 
     private void jButtonBuscarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarTurnoActionPerformed
+        // Busca si hay un turno disponible
         dataModelanalisisInforme.getDataVector().clear();
         boolean avance = ManagerInforme.existeTurno(jTextFieldBuscarTurno.getText());
         if (!avance) return;
         ManagerInforme.llenarTablaAnalisis(Integer.parseInt(jTextFieldBuscarTurno.getText()), dataModelanalisisInforme);
         ManagerInforme.validarResultado(dataModelanalisisInforme);
-
-        
     }//GEN-LAST:event_jButtonBuscarTurnoActionPerformed
 
     private void jButtonGuardarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarResultadoActionPerformed
+        // Valida que todos los campos ingresados por el usuario sean validos (que sean en formato flotante)
         boolean exito = ManagerInforme.validarResultado(dataModelanalisisInforme);
         if (!exito) return;
         
         ManagerInforme.guardarInforme(jTextFieldBuscarTurno.getText(),dataModelanalisisInforme);
     }//GEN-LAST:event_jButtonGuardarResultadoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        vaciarCamposCrearTurno();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1688,6 +1763,7 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JPanel crearTurnoP3;
     private javax.swing.JPanel crearTurnoP4;
     private javax.swing.JTabbedPane crearTurnoPasosJTabbed;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonAgregarAnalisisATurno;
@@ -1698,11 +1774,11 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCrearTurnoAnterior;
     private javax.swing.JButton jButtonCrearTurnoSiguiente;
     private javax.swing.JButton jButtonGuardarResultado;
+    private javax.swing.JButton jButtonLateralAgregarAnalisis;
+    private javax.swing.JButton jButtonLateralAgregarPaciente;
     private javax.swing.JButton jButtonLateralDarTurno;
-    private javax.swing.JButton jButtonLateralDarTurno6;
-    private javax.swing.JButton jButtonLateralDarTurno7;
-    private javax.swing.JButton jButtonLateralDarTurno8;
-    private javax.swing.JButton jButtonLateralDarTurno9;
+    private javax.swing.JButton jButtonLateralGenerarResultado;
+    private javax.swing.JButton jButtonLateralPedirReactivo;
     private com.toedter.calendar.JCalendar jCalendarPedirTurno;
     private javax.swing.JCheckBox jCheckBoxParticular;
     private javax.swing.JComboBox<String> jComboBoxObraSocialCrearPaciente;
