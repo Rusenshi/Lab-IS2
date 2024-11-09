@@ -30,6 +30,7 @@ public class ManagerTurno {
     private static DAOPacienteSQL daoPaciente = new DAOPacienteSQL();
     private static DAOObraSocialSQL daoObraSocial = new DAOObraSocialSQL();
     private static DAOAnalisisSQL daoAnalisis = new DAOAnalisisSQL();
+    private static List<Turno> lastQueryTurnosByDNI;
     
     public static int obtenerCantidadTurnosPorFecha(String fecha){
         List<Turno> lista = daoTurno.getByDate(fecha);
@@ -130,4 +131,20 @@ public class ManagerTurno {
         
         return !nombreDia.equals("sábado") && !nombreDia.equals("domingo");
     }
+
+    public static List<String> obtenerTurnosPorDNI(int dni) {
+        lastQueryTurnosByDNI = daoTurno.getByDNI(dni);
+        List<String> turnosPorDNICombobox = new ArrayList<>();
+        for(Turno t : lastQueryTurnosByDNI){
+            String label = t.getFecha().toString() + ", Cant Analisis: "+t.getAnalisis().size();
+            turnosPorDNICombobox.add(label);
+        }
+        return turnosPorDNICombobox;
+    }
+
+    static List<Turno> obtenerListaTurnosPorDNI() {
+        return lastQueryTurnosByDNI;
+    }
+    
+    
 }

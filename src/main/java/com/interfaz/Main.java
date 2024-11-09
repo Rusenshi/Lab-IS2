@@ -130,6 +130,8 @@ public class Main extends javax.swing.JFrame {
         
         System.out.println(daoTurno.getAll());
         
+        System.out.println(daoTurno.getByDNI(43123871));
+        
         
 //        jLabelPacienteInexistente.setVisible(false);
     }

@@ -63,12 +63,12 @@ public class DAOInformeSQL implements Dao<Informe,Integer>{
             return Optional.empty();
         }
     }
-
+    
     @Override
     public List<Informe> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void save(Informe t) {
         try{

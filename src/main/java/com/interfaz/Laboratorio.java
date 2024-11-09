@@ -15,6 +15,7 @@ import com.objetos.Paciente;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JButton;
@@ -104,10 +105,12 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanelBarraLateral = new javax.swing.JPanel();
         jButtonLateralDarTurno = new javax.swing.JButton();
+        jButtonLateralPedirReactivo2 = new javax.swing.JButton();
         jButtonLateralGenerarResultado = new javax.swing.JButton();
         jButtonLateralAgregarPaciente = new javax.swing.JButton();
         jButtonLateralAgregarAnalisis = new javax.swing.JButton();
         jButtonLateralPedirReactivo = new javax.swing.JButton();
+        jButtonLateralPedirReactivo1 = new javax.swing.JButton();
         jPanelBackground = new javax.swing.JPanel();
         jPanelDarTurno = new javax.swing.JPanel();
         crearTurnoJpanel = new javax.swing.JPanel();
@@ -167,6 +170,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jTextFieldBuscarTurno = new javax.swing.JTextField();
         jButtonBuscarTurno = new javax.swing.JButton();
+        jComboBoxTurnosDNI = new javax.swing.JComboBox<>();
         jPanelAgregarPaciente = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jTabbedPanelCrearPaciente = new javax.swing.JTabbedPane();
@@ -225,8 +229,9 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelBarraLateral.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
 
         jButtonLateralDarTurno.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralDarTurno.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLateralDarTurno.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralDarTurno.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralDarTurno.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconTurno_miniatura.png")); // NOI18N
         jButtonLateralDarTurno.setText("Dar Turno");
         jButtonLateralDarTurno.setBorderPainted(false);
         jButtonLateralDarTurno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -238,10 +243,26 @@ public class Laboratorio extends javax.swing.JFrame {
         });
         jPanelBarraLateral.add(jButtonLateralDarTurno);
 
+        jButtonLateralPedirReactivo2.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonLateralPedirReactivo2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jButtonLateralPedirReactivo2.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralPedirReactivo2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
+        jButtonLateralPedirReactivo2.setText("Cancelar Turno");
+        jButtonLateralPedirReactivo2.setBorderPainted(false);
+        jButtonLateralPedirReactivo2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonLateralPedirReactivo2.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButtonLateralPedirReactivo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLateralPedirReactivo2ActionPerformed(evt);
+            }
+        });
+        jPanelBarraLateral.add(jButtonLateralPedirReactivo2);
+
         jButtonLateralGenerarResultado.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralGenerarResultado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLateralGenerarResultado.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralGenerarResultado.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralGenerarResultado.setText("Generar Resultado");
+        jButtonLateralGenerarResultado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconResultado_thumb.png")); // NOI18N
+        jButtonLateralGenerarResultado.setText("Cargar Resultado");
         jButtonLateralGenerarResultado.setBorderPainted(false);
         jButtonLateralGenerarResultado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonLateralGenerarResultado.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -253,8 +274,9 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelBarraLateral.add(jButtonLateralGenerarResultado);
 
         jButtonLateralAgregarPaciente.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralAgregarPaciente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLateralAgregarPaciente.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralAgregarPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralAgregarPaciente.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
         jButtonLateralAgregarPaciente.setText("Agregar Paciente");
         jButtonLateralAgregarPaciente.setBorderPainted(false);
         jButtonLateralAgregarPaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -267,8 +289,9 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelBarraLateral.add(jButtonLateralAgregarPaciente);
 
         jButtonLateralAgregarAnalisis.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralAgregarAnalisis.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLateralAgregarAnalisis.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralAgregarAnalisis.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralAgregarAnalisis.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
         jButtonLateralAgregarAnalisis.setText("Agregar Analisis");
         jButtonLateralAgregarAnalisis.setBorderPainted(false);
         jButtonLateralAgregarAnalisis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -281,9 +304,10 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelBarraLateral.add(jButtonLateralAgregarAnalisis);
 
         jButtonLateralPedirReactivo.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralPedirReactivo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonLateralPedirReactivo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralPedirReactivo.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralPedirReactivo.setText("Pedir Reactivo");
+        jButtonLateralPedirReactivo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
+        jButtonLateralPedirReactivo.setText("Buscar Analisis");
         jButtonLateralPedirReactivo.setBorderPainted(false);
         jButtonLateralPedirReactivo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonLateralPedirReactivo.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -293,6 +317,21 @@ public class Laboratorio extends javax.swing.JFrame {
             }
         });
         jPanelBarraLateral.add(jButtonLateralPedirReactivo);
+
+        jButtonLateralPedirReactivo1.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonLateralPedirReactivo1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jButtonLateralPedirReactivo1.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralPedirReactivo1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
+        jButtonLateralPedirReactivo1.setText("Ver Stock");
+        jButtonLateralPedirReactivo1.setBorderPainted(false);
+        jButtonLateralPedirReactivo1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonLateralPedirReactivo1.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButtonLateralPedirReactivo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLateralPedirReactivo1ActionPerformed(evt);
+            }
+        });
+        jPanelBarraLateral.add(jButtonLateralPedirReactivo1);
 
         getContentPane().add(jPanelBarraLateral);
 
@@ -776,7 +815,7 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setText("Número de Orden de Servicio:");
+        jLabel3.setText("DNI:");
 
         jButtonGuardarResultado.setText("Guardar");
         jButtonGuardarResultado.addActionListener(new java.awt.event.ActionListener() {
@@ -800,12 +839,21 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jButton4.setText("Imprimir");
 
-        jButtonBuscarTurno.setText("Buscar");
+        jTextFieldBuscarTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldBuscarTurnoActionPerformed(evt);
+            }
+        });
+
+        jButtonBuscarTurno.setText("Cargar");
+        jButtonBuscarTurno.setMinimumSize(new java.awt.Dimension(72, 41));
         jButtonBuscarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarTurnoActionPerformed(evt);
             }
         });
+
+        jComboBoxTurnosDNI.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -825,8 +873,9 @@ public class Laboratorio extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                             .addComponent(jTextFieldBuscarTurno, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jComboBoxTurnosDNI, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -835,11 +884,12 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jTextFieldBuscarTurno))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldBuscarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxTurnosDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1703,10 +1753,14 @@ public class Laboratorio extends javax.swing.JFrame {
     private void jButtonBuscarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarTurnoActionPerformed
         // Busca si hay un turno disponible
         dataModelanalisisInforme.getDataVector().clear();
-        boolean avance = ManagerInforme.existeTurno(jTextFieldBuscarTurno.getText());
-        if (!avance) return;
-        ManagerInforme.llenarTablaAnalisis(Integer.parseInt(jTextFieldBuscarTurno.getText()), dataModelanalisisInforme);
-        ManagerInforme.validarResultado(dataModelanalisisInforme);
+//        boolean avance = ManagerInforme.existeTurno(jTextFieldBuscarTurno.getText());
+//        if (!avance) return;
+//        ManagerInforme.llenarTablaAnalisis(Integer.parseInt(jTextFieldBuscarTurno.getText()), dataModelanalisisInforme);
+//        ManagerInforme.validarResultado(dataModelanalisisInforme);
+        if (jComboBoxTurnosDNI.isEnabled())
+            ManagerInforme.llenarTablaAnalisis(jComboBoxTurnosDNI.getSelectedIndex(), dataModelanalisisInforme);
+        
+        
     }//GEN-LAST:event_jButtonBuscarTurnoActionPerformed
 
     private void jButtonGuardarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarResultadoActionPerformed
@@ -1714,12 +1768,42 @@ public class Laboratorio extends javax.swing.JFrame {
         boolean exito = ManagerInforme.validarResultado(dataModelanalisisInforme);
         if (!exito) return;
         
-        ManagerInforme.guardarInforme(jTextFieldBuscarTurno.getText(),dataModelanalisisInforme);
+//        ManagerInforme.guardarInforme(jTextFieldBuscarTurno.getText(),dataModelanalisisInforme);
+        ManagerInforme.guardarInforme(dataModelanalisisInforme);
     }//GEN-LAST:event_jButtonGuardarResultadoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         vaciarCamposCrearTurno();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldBuscarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscarTurnoActionPerformed
+        try{
+            int dni = Integer.parseInt(jTextFieldBuscarTurno.getText());
+            List<String> turnosPorDNI = ManagerTurno.obtenerTurnosPorDNI(dni);
+            jComboBoxTurnosDNI.setEnabled(true);
+            if (turnosPorDNI.isEmpty()){
+                jComboBoxTurnosDNI.setEnabled(false);
+                return;
+            }
+            jComboBoxTurnosDNI.removeAllItems();
+            for (String s : turnosPorDNI){
+                jComboBoxTurnosDNI.addItem(s);
+            }
+            
+        }
+        catch(NumberFormatException e){
+            jComboBoxTurnosDNI.setEnabled(false);
+            System.out.println("ERROR: DNI INVALIDO");
+        }
+    }//GEN-LAST:event_jTextFieldBuscarTurnoActionPerformed
+
+    private void jButtonLateralPedirReactivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralPedirReactivo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLateralPedirReactivo1ActionPerformed
+
+    private void jButtonLateralPedirReactivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralPedirReactivo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLateralPedirReactivo2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1779,10 +1863,13 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonLateralDarTurno;
     private javax.swing.JButton jButtonLateralGenerarResultado;
     private javax.swing.JButton jButtonLateralPedirReactivo;
+    private javax.swing.JButton jButtonLateralPedirReactivo1;
+    private javax.swing.JButton jButtonLateralPedirReactivo2;
     private com.toedter.calendar.JCalendar jCalendarPedirTurno;
     private javax.swing.JCheckBox jCheckBoxParticular;
     private javax.swing.JComboBox<String> jComboBoxObraSocialCrearPaciente;
     private javax.swing.JComboBox<String> jComboBoxObraSocialTurno;
+    private javax.swing.JComboBox<String> jComboBoxTurnosDNI;
     private javax.swing.JComboBox<String> jComboCrearTurnoAnalisis;
     private javax.swing.JLabel jErrorCrearPacienteApellido;
     private javax.swing.JLabel jErrorCrearPacienteCorreo;
