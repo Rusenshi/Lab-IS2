@@ -120,8 +120,16 @@ public class ManagerInforme {
 //        daoInforme.save(informe);
 //    }
     public static void guardarInforme(DefaultTableModel tabla){
-        int nroOrdenServicio = ManagerTurno.obtenerListaTurnosPorDNI().get(indexTurnoCargado).getNroOrdenServicio();
+        int nroOrdenServicio = 0;
+        if (indexTurnoCargado == -1) return; // No se ha cargado los turnos de un paciente
+        try{
+            nroOrdenServicio = ManagerTurno.obtenerListaTurnosPorDNI().get(indexTurnoCargado).getNroOrdenServicio();
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("ERROR INTERNO: El combobox y la lista de turno por dni no coinciden en indices, saliendo...");
+            return;
+        }
         Informe informe = new Informe(nroOrdenServicio);
+        
         
         Vector<Vector> data = tabla.getDataVector();
         for(Vector row : data){
@@ -136,6 +144,9 @@ public class ManagerInforme {
         System.out.println(informe);
         
         daoInforme.save(informe);
+        indexTurnoCargado=-1;
+        daoTurno.delete(nroOrdenServicio);
+        tabla.getDataVector().clear();
     }
     
     

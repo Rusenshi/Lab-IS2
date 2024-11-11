@@ -43,9 +43,11 @@ com\persistencia\DAOObraSocialSQL.class
 com\objetos\Paciente.class
 com\logica\ManagerPaciente.class
 com\interfaz\Laboratorio$18.class
+com\interfaz\Laboratorio$28.class
 com\interfaz\Laboratorio$9.class
 com\interfaz\Laboratorio$15.class
 com\interfaz\Laboratorio$25.class
+com\interfaz\Laboratorio$30.class
 com\interfaz\Main$8.class
 com\persistencia\DAOPacienteSQL.class
 com\interfaz\Laboratorio$20.class
@@ -57,6 +59,7 @@ com\persistencia\DAOAnalisisSQL.class
 com\interfaz\Main$6.class
 com\objetos\Tecnico.class
 com\persistencia\Dao.class
+com\interfaz\Laboratorio$29.class
 com\interfaz\Main$16.class
 com\interfaz\Laboratorio$14.class
 com\objetos\Stock.class

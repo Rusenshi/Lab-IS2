@@ -37,5 +37,7 @@ public class Reactivo {
     public String toString() {
         return "Reactivo{" + "nombre=" + nombre + ", cantidadRecipiente=" + cantidadRecipiente + '}';
     }
+
+    
     
 }

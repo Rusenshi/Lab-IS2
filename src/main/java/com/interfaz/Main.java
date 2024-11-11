@@ -47,33 +47,39 @@ public class Main extends javax.swing.JFrame {
 
         // Cargar Reactivos de Prueba
         DAOReactivoSQL daoReactivo = new DAOReactivoSQL();
+        Reactivo react1 = new Reactivo("T12",123);
+        daoReactivo.save(react1);
         
-        daoReactivo.save(new Reactivo("T12",123));
-        daoReactivo.save(new Reactivo("T125",123));
-        daoReactivo.save(new Reactivo("E12",123));
-        daoReactivo.save(new Reactivo("F1255",123));
+        Reactivo react2 = new Reactivo("T125",123);
+        daoReactivo.save(react2);
+        
+        Reactivo react3 = new Reactivo("E12",123);
+        daoReactivo.save(react3);
+        
+        Reactivo react4 = new Reactivo("F1255",123);
+        daoReactivo.save(react4);
 
         System.out.println(daoReactivo.getAll());
         
         // Cargar Analisis
         DAOAnalisisSQL daoAnalisis = new DAOAnalisisSQL();
         
-        Analisis analisis1 = new Analisis("T3",3.5f,"Metodo 1",2500);
-        analisis1.getReactivosUsados().add(new Reactivo("T12",70));
-        analisis1.getReactivosUsados().add(new Reactivo("T125",80));
-        analisis1.getReactivosUsados().add(new Reactivo("E12",20));
+        Analisis analisis1 = new Analisis("T3","3.5f","Metodo 1",2500);
+        analisis1.getReactivosUsados().put(react1, 30.0f);
+        analisis1.getReactivosUsados().put(react2, 20.0f);
+        analisis1.getReactivosUsados().put(react3, 10.0f);
         daoAnalisis.save(analisis1);
         
-        Analisis analisis2 = new Analisis("Glucemia",3.5f,"Metodo 2",2500);
-        analisis2.getReactivosUsados().add(new Reactivo("T125",70));
-        analisis2.getReactivosUsados().add(new Reactivo("E12",20));
+        Analisis analisis2 = new Analisis("Glucemia","3.5f","Metodo 2",2500);
+        analisis2.getReactivosUsados().put(react3, 40.0f);
+        analisis2.getReactivosUsados().put(react3, 10.0f);
         daoAnalisis.save(analisis2);
         
-        Analisis analisis3 = new Analisis("AlgoMas",3.5f,"Metodo 3",2500);
-        analisis3.getReactivosUsados().add(new Reactivo("E12",70));
-        analisis3.getReactivosUsados().add(new Reactivo("F1255",80));
-        analisis3.getReactivosUsados().add(new Reactivo("T125",20));
-        analisis3.getReactivosUsados().add(new Reactivo("T12",20));
+        Analisis analisis3 = new Analisis("AlgoMas","3.5f","Metodo 3",2500);
+        analisis3.getReactivosUsados().put(react3, 12.6f);
+        analisis3.getReactivosUsados().put(react3, 30.3f);
+        analisis3.getReactivosUsados().put(react3, 80.87f);
+        analisis3.getReactivosUsados().put(react3, 10.32f);
         daoAnalisis.save(analisis3);
         
         System.out.println(daoAnalisis.getAll());

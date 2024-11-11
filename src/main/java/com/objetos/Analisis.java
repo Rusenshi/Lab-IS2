@@ -5,6 +5,7 @@
 package com.objetos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -13,18 +14,18 @@ import java.util.ArrayList;
 public class Analisis {
     private String nombre;
 //    private Turno turno;
-    private float valorReferencia;
+    private String valorReferencia;
     private String metodoUsado;
     private float monto;
-    private ArrayList<Reactivo> reactivosUsados;
+    private HashMap<Reactivo,Float> reactivosUsados;
 
-    public Analisis(String nombre, float valorReferencia, String metodoUsado, float monto) {
+    public Analisis(String nombre, String valorReferencia, String metodoUsado, float monto) {
         this.nombre = nombre;
 //        this.turno = turno;
         this.valorReferencia = valorReferencia;
         this.metodoUsado = metodoUsado;
         this.monto = monto;
-        this.reactivosUsados = new ArrayList<Reactivo>();
+        this.reactivosUsados = new HashMap<Reactivo,Float>();
     }
 
     public String getNombre() {
@@ -43,13 +44,15 @@ public class Analisis {
 //        this.turno = turno;
 //    }
 
-    public float getValorReferencia() {
+    public String getValorReferencia() {
         return valorReferencia;
     }
 
-    public void setValorReferencia(float valorReferencia) {
+    public void setValorReferencia(String valorReferencia) {
         this.valorReferencia = valorReferencia;
     }
+
+
 
     public String getMetodoUsado() {
         return metodoUsado;
@@ -59,11 +62,11 @@ public class Analisis {
         this.metodoUsado = metodoUsado;
     }
 
-    public ArrayList<Reactivo> getReactivosUsados() {
+    public HashMap<Reactivo, Float> getReactivosUsados() {
         return reactivosUsados;
     }
 
-    public void setReactivosUsados(ArrayList<Reactivo> reactivosUsados) {
+    public void setReactivosUsados(HashMap<Reactivo, Float> reactivosUsados) {
         this.reactivosUsados = reactivosUsados;
     }
 
@@ -79,6 +82,8 @@ public class Analisis {
     public String toString() {
         return "Analisis{" + "nombre=" + nombre + ", valorReferencia=" + valorReferencia + ", metodoUsado=" + metodoUsado + ", monto=" + monto + ", reactivosUsados=" + reactivosUsados + '}';
     }
+
+    
     
     
 }

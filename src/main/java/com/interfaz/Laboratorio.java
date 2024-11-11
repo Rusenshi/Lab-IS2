@@ -39,7 +39,17 @@ public class Laboratorio extends javax.swing.JFrame {
         
     // Variables Panel: Generar Resultado
     private static Set<String> analisisInforme = new HashSet<>();
-    private static DefaultTableModel dataModelanalisisInforme = new DefaultTableModel();
+    private static DefaultTableModel dataModelanalisisInforme = new DefaultTableModel(){
+
+            boolean[] canEdit = new boolean[]{
+                    false,false,true
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+};
     
     // Variables Panel: Agregar Paciente
     private static Set<String> obrasSocialesElegidas = new HashSet<>();
@@ -103,14 +113,16 @@ public class Laboratorio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollBar1 = new javax.swing.JScrollBar();
         jPanelBarraLateral = new javax.swing.JPanel();
         jButtonLateralDarTurno = new javax.swing.JButton();
-        jButtonLateralPedirReactivo2 = new javax.swing.JButton();
+        jButtonLateralCancelarTurno = new javax.swing.JButton();
         jButtonLateralGenerarResultado = new javax.swing.JButton();
         jButtonLateralAgregarPaciente = new javax.swing.JButton();
         jButtonLateralAgregarAnalisis = new javax.swing.JButton();
-        jButtonLateralPedirReactivo = new javax.swing.JButton();
-        jButtonLateralPedirReactivo1 = new javax.swing.JButton();
+        jButtonLateralBuscarAnalisis = new javax.swing.JButton();
+        jButtonLateralConsultarStockReactivo = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         jPanelBackground = new javax.swing.JPanel();
         jPanelDarTurno = new javax.swing.JPanel();
         crearTurnoJpanel = new javax.swing.JPanel();
@@ -214,6 +226,48 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonCrearPacienteAnterior = new javax.swing.JButton();
         jPanelEnConstruccion = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
+        jPanelAgregarAnalisis = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jTabbedPanelAgregarPaciente = new javax.swing.JTabbedPane();
+        jPanelAgregarAnalisisDatosBase = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jPanelAgregarPacienteP4 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jComboBoxObraSocialCrearPaciente1 = new javax.swing.JComboBox<>();
+        jButton7 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableObrasSocialesAgregarPaciente1 = new javax.swing.JTable();
+        jErrorCrearPacienteObraSocial1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jPanelConsultarAnalisis = new javax.swing.JPanel();
+        crearTurnoP5 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jButtonAgregarAnalisisATurno1 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableAnalisisAgregarTurno1 = new javax.swing.JTable();
+        jTextField5 = new javax.swing.JTextField();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jPanelCancelarTurno = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton5 = new javax.swing.JButton();
+        jPanelConsultarStock = new javax.swing.JPanel();
+        jPanelPedirReactivos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 480));
@@ -243,20 +297,20 @@ public class Laboratorio extends javax.swing.JFrame {
         });
         jPanelBarraLateral.add(jButtonLateralDarTurno);
 
-        jButtonLateralPedirReactivo2.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralPedirReactivo2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButtonLateralPedirReactivo2.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralPedirReactivo2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
-        jButtonLateralPedirReactivo2.setText("Cancelar Turno");
-        jButtonLateralPedirReactivo2.setBorderPainted(false);
-        jButtonLateralPedirReactivo2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButtonLateralPedirReactivo2.setPreferredSize(new java.awt.Dimension(200, 50));
-        jButtonLateralPedirReactivo2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLateralCancelarTurno.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonLateralCancelarTurno.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jButtonLateralCancelarTurno.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralCancelarTurno.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconCancelarTurno.png")); // NOI18N
+        jButtonLateralCancelarTurno.setText("Cancelar Turno");
+        jButtonLateralCancelarTurno.setBorderPainted(false);
+        jButtonLateralCancelarTurno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonLateralCancelarTurno.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButtonLateralCancelarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLateralPedirReactivo2ActionPerformed(evt);
+                jButtonLateralCancelarTurnoActionPerformed(evt);
             }
         });
-        jPanelBarraLateral.add(jButtonLateralPedirReactivo2);
+        jPanelBarraLateral.add(jButtonLateralCancelarTurno);
 
         jButtonLateralGenerarResultado.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralGenerarResultado.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -276,7 +330,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonLateralAgregarPaciente.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralAgregarPaciente.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralAgregarPaciente.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralAgregarPaciente.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
+        jButtonLateralAgregarPaciente.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconPaciente.png")); // NOI18N
         jButtonLateralAgregarPaciente.setText("Agregar Paciente");
         jButtonLateralAgregarPaciente.setBorderPainted(false);
         jButtonLateralAgregarPaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -291,7 +345,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonLateralAgregarAnalisis.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralAgregarAnalisis.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralAgregarAnalisis.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralAgregarAnalisis.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
+        jButtonLateralAgregarAnalisis.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconAnalisis.png")); // NOI18N
         jButtonLateralAgregarAnalisis.setText("Agregar Analisis");
         jButtonLateralAgregarAnalisis.setBorderPainted(false);
         jButtonLateralAgregarAnalisis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -303,35 +357,38 @@ public class Laboratorio extends javax.swing.JFrame {
         });
         jPanelBarraLateral.add(jButtonLateralAgregarAnalisis);
 
-        jButtonLateralPedirReactivo.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralPedirReactivo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButtonLateralPedirReactivo.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralPedirReactivo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
-        jButtonLateralPedirReactivo.setText("Buscar Analisis");
-        jButtonLateralPedirReactivo.setBorderPainted(false);
-        jButtonLateralPedirReactivo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButtonLateralPedirReactivo.setPreferredSize(new java.awt.Dimension(200, 50));
-        jButtonLateralPedirReactivo.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLateralBuscarAnalisis.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonLateralBuscarAnalisis.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jButtonLateralBuscarAnalisis.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralBuscarAnalisis.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconAnalisis.png")); // NOI18N
+        jButtonLateralBuscarAnalisis.setText("Buscar Analisis");
+        jButtonLateralBuscarAnalisis.setBorderPainted(false);
+        jButtonLateralBuscarAnalisis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonLateralBuscarAnalisis.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButtonLateralBuscarAnalisis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLateralPedirReactivoActionPerformed(evt);
+                jButtonLateralBuscarAnalisisActionPerformed(evt);
             }
         });
-        jPanelBarraLateral.add(jButtonLateralPedirReactivo);
+        jPanelBarraLateral.add(jButtonLateralBuscarAnalisis);
 
-        jButtonLateralPedirReactivo1.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonLateralPedirReactivo1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButtonLateralPedirReactivo1.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralPedirReactivo1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\icon_placeholder.png")); // NOI18N
-        jButtonLateralPedirReactivo1.setText("Ver Stock");
-        jButtonLateralPedirReactivo1.setBorderPainted(false);
-        jButtonLateralPedirReactivo1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButtonLateralPedirReactivo1.setPreferredSize(new java.awt.Dimension(200, 50));
-        jButtonLateralPedirReactivo1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLateralConsultarStockReactivo.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonLateralConsultarStockReactivo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jButtonLateralConsultarStockReactivo.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLateralConsultarStockReactivo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconStock.png")); // NOI18N
+        jButtonLateralConsultarStockReactivo.setText("Ver Stock");
+        jButtonLateralConsultarStockReactivo.setBorderPainted(false);
+        jButtonLateralConsultarStockReactivo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonLateralConsultarStockReactivo.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButtonLateralConsultarStockReactivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLateralPedirReactivo1ActionPerformed(evt);
+                jButtonLateralConsultarStockReactivoActionPerformed(evt);
             }
         });
-        jPanelBarraLateral.add(jButtonLateralPedirReactivo1);
+        jPanelBarraLateral.add(jButtonLateralConsultarStockReactivo);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\logoLab.png")); // NOI18N
+        jPanelBarraLateral.add(jLabel7);
 
         getContentPane().add(jPanelBarraLateral);
 
@@ -489,7 +546,7 @@ public class Laboratorio extends javax.swing.JFrame {
                     .addComponent(jLabel20))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldDniPacienteDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout crearTurnoP1Layout = new javax.swing.GroupLayout(crearTurnoP1);
@@ -497,9 +554,9 @@ public class Laboratorio extends javax.swing.JFrame {
         crearTurnoP1Layout.setHorizontalGroup(
             crearTurnoP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(crearTurnoP1Layout.createSequentialGroup()
-                .addGap(165, 165, 165)
+                .addGap(178, 178, 178)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
         crearTurnoP1Layout.setVerticalGroup(
             crearTurnoP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -557,7 +614,7 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(crearTurnoP2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         crearTurnoPasosJTabbed.addTab("Paso 2: Elegir Fecha", crearTurnoP2);
@@ -618,7 +675,7 @@ public class Laboratorio extends javax.swing.JFrame {
                     .addComponent(jButtonAgregarAnalisisATurno, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                     .addComponent(jComboCrearTurnoAnalisis))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -732,7 +789,7 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelConfirmacionDiagnostico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -797,7 +854,8 @@ public class Laboratorio extends javax.swing.JFrame {
         crearTurnoJpanelLayout.setVerticalGroup(
             crearTurnoJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(crearTurnoJpanelLayout.createSequentialGroup()
-                .addComponent(crearTurnoPasosJTabbed)
+                .addContainerGap()
+                .addComponent(crearTurnoPasosJTabbed, javax.swing.GroupLayout.PREFERRED_SIZE, 422, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(crearTurnoJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCrearTurnoSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -886,7 +944,7 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldBuscarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(jComboBoxTurnosDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
@@ -1250,7 +1308,7 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPanelCrearPaciente)
+                    .addComponent(jTabbedPanelCrearPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonCrearPacienteAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1263,9 +1321,9 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPanelCrearPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCrearPacienteAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(jButtonCrearPacienteAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jButtonCrearPacienteSiguiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1298,6 +1356,375 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanelBackground.add(jPanelEnConstruccion, "card5");
 
+        jPanelAgregarAnalisis.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelAgregarAnalisis.setLayout(new javax.swing.BoxLayout(jPanelAgregarAnalisis, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPanelAgregarPaciente.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanelAgregarAnalisisDatosBase.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel21.setText("Nombre:");
+
+        jLabel22.setText("Valor Referencia:");
+
+        jLabel23.setText("Metodo Usado:");
+
+        jLabel24.setText("Monto:");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel22)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanelAgregarAnalisisDatosBaseLayout = new javax.swing.GroupLayout(jPanelAgregarAnalisisDatosBase);
+        jPanelAgregarAnalisisDatosBase.setLayout(jPanelAgregarAnalisisDatosBaseLayout);
+        jPanelAgregarAnalisisDatosBaseLayout.setHorizontalGroup(
+            jPanelAgregarAnalisisDatosBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAgregarAnalisisDatosBaseLayout.createSequentialGroup()
+                .addContainerGap(190, Short.MAX_VALUE)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(186, 186, 186))
+        );
+        jPanelAgregarAnalisisDatosBaseLayout.setVerticalGroup(
+            jPanelAgregarAnalisisDatosBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAgregarAnalisisDatosBaseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+
+        jTabbedPanelAgregarPaciente.addTab("Paso 1: Datos", jPanelAgregarAnalisisDatosBase);
+
+        jPanelAgregarPacienteP4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel25.setText("Reactivos:");
+
+        jComboBoxObraSocialCrearPaciente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButton7.setText("Agregar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jTableObrasSocialesAgregarPaciente1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Reactivos"
+            }
+        ));
+        jTableObrasSocialesAgregarPaciente1.setEnabled(false);
+        jScrollPane5.setViewportView(jTableObrasSocialesAgregarPaciente1);
+
+        jErrorCrearPacienteObraSocial1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jErrorCrearPacienteObraSocial1.setForeground(new java.awt.Color(255, 51, 51));
+        jErrorCrearPacienteObraSocial1.setText("REPETIDO");
+
+        javax.swing.GroupLayout jPanelAgregarPacienteP4Layout = new javax.swing.GroupLayout(jPanelAgregarPacienteP4);
+        jPanelAgregarPacienteP4.setLayout(jPanelAgregarPacienteP4Layout);
+        jPanelAgregarPacienteP4Layout.setHorizontalGroup(
+            jPanelAgregarPacienteP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAgregarPacienteP4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelAgregarPacienteP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                    .addGroup(jPanelAgregarPacienteP4Layout.createSequentialGroup()
+                        .addGroup(jPanelAgregarPacienteP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelAgregarPacienteP4Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jErrorCrearPacienteObraSocial1))
+                            .addComponent(jComboBoxObraSocialCrearPaciente1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton7)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelAgregarPacienteP4Layout.setVerticalGroup(
+            jPanelAgregarPacienteP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAgregarPacienteP4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelAgregarPacienteP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(jErrorCrearPacienteObraSocial1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelAgregarPacienteP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(jComboBoxObraSocialCrearPaciente1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPanelAgregarPaciente.addTab("Paso 2: Reactivos", jPanelAgregarPacienteP4);
+
+        jButton2.setText("Siguiente");
+
+        jButton3.setText("Anterior");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPanelAgregarPaciente))
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPanelAgregarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanelAgregarAnalisis.add(jPanel10);
+
+        jPanelBackground.add(jPanelAgregarAnalisis, "card6");
+
+        jPanelConsultarAnalisis.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelConsultarAnalisis.setLayout(new javax.swing.BoxLayout(jPanelConsultarAnalisis, javax.swing.BoxLayout.LINE_AXIS));
+
+        crearTurnoP5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButtonAgregarAnalisisATurno1.setText("Buscar");
+        jButtonAgregarAnalisisATurno1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarAnalisisATurno1ActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setText("Nombre Analisis:");
+
+        jTableAnalisisAgregarTurno1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "Cantidad a usar"
+            }
+        ));
+        jTableAnalisisAgregarTurno1.setEnabled(false);
+        jScrollPane6.setViewportView(jTableAnalisisAgregarTurno1);
+
+        jLabel27.setText("Valor Referencia:");
+
+        jLabel28.setText("Monto: ");
+
+        jLabel29.setText("Metodo Usado:");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField6)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel28)
+                            .addComponent(jLabel29))
+                        .addGap(0, 171, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel27)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel28)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonAgregarAnalisisATurno1)))
+                        .addContainerGap(328, Short.MAX_VALUE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonAgregarAnalisisATurno1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(jTextField5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout crearTurnoP5Layout = new javax.swing.GroupLayout(crearTurnoP5);
+        crearTurnoP5.setLayout(crearTurnoP5Layout);
+        crearTurnoP5Layout.setHorizontalGroup(
+            crearTurnoP5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crearTurnoP5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        crearTurnoP5Layout.setVerticalGroup(
+            crearTurnoP5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crearTurnoP5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanelConsultarAnalisis.add(crearTurnoP5);
+
+        jPanelBackground.add(jPanelConsultarAnalisis, "card7");
+
+        jPanelCancelarTurno.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelCancelarTurno.setLayout(new javax.swing.BoxLayout(jPanelCancelarTurno, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+
+        jCalendar1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A." }));
+
+        jButton5.setText("Cancelar");
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 588, Short.MAX_VALUE)
+                    .addComponent(jCalendar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanelCancelarTurno.add(jPanel14);
+
+        jPanelBackground.add(jPanelCancelarTurno, "card8");
+
+        javax.swing.GroupLayout jPanelConsultarStockLayout = new javax.swing.GroupLayout(jPanelConsultarStock);
+        jPanelConsultarStock.setLayout(jPanelConsultarStockLayout);
+        jPanelConsultarStockLayout.setHorizontalGroup(
+            jPanelConsultarStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+        jPanelConsultarStockLayout.setVerticalGroup(
+            jPanelConsultarStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+        );
+
+        jPanelBackground.add(jPanelConsultarStock, "card9");
+
+        javax.swing.GroupLayout jPanelPedirReactivosLayout = new javax.swing.GroupLayout(jPanelPedirReactivos);
+        jPanelPedirReactivos.setLayout(jPanelPedirReactivosLayout);
+        jPanelPedirReactivosLayout.setHorizontalGroup(
+            jPanelPedirReactivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+        jPanelPedirReactivosLayout.setVerticalGroup(
+            jPanelPedirReactivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+        );
+
+        jPanelBackground.add(jPanelPedirReactivos, "card10");
+
         getContentPane().add(jPanelBackground);
 
         pack();
@@ -1305,7 +1732,7 @@ public class Laboratorio extends javax.swing.JFrame {
 
     // Cambia entre las posibles ventanas del programa
     private void cambiarPanel(JPanel panel){
-        JPanel[] panelesDisponibles = {jPanelGenerarResultado,jPanelAgregarPaciente,jPanelDarTurno,jPanelEnConstruccion};
+        JPanel[] panelesDisponibles = {jPanelGenerarResultado,jPanelAgregarPaciente,jPanelDarTurno,jPanelEnConstruccion,jPanelAgregarAnalisis,jPanelConsultarAnalisis,jPanelCancelarTurno,jPanelConsultarStock,jPanelPedirReactivos};
         for(JPanel p : panelesDisponibles){
             p.setVisible(false);
         }
@@ -1315,7 +1742,7 @@ public class Laboratorio extends javax.swing.JFrame {
     
     // Cambia el color del boton seleccionado del panel lateral a uno mas oscuro
     private void setHighlighted(JButton button){
-        JButton[] panelesDisponibles = {jButtonLateralDarTurno,jButtonLateralGenerarResultado,jButtonLateralAgregarPaciente,jButtonLateralAgregarAnalisis,jButtonLateralPedirReactivo};
+        JButton[] panelesDisponibles = {jButtonLateralDarTurno,jButtonLateralGenerarResultado,jButtonLateralAgregarPaciente,jButtonLateralAgregarAnalisis,jButtonLateralBuscarAnalisis,jButtonLateralCancelarTurno,jButtonLateralConsultarStockReactivo};
         for(JButton b : panelesDisponibles){
             b.setBackground(new Color(102,153,255)); // Color Default
         }
@@ -1341,13 +1768,13 @@ public class Laboratorio extends javax.swing.JFrame {
 
     private void jButtonLateralAgregarAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralAgregarAnalisisActionPerformed
         setHighlighted(jButtonLateralAgregarAnalisis);
-        cambiarPanel(jPanelEnConstruccion);
+        cambiarPanel(jPanelAgregarAnalisis);
     }//GEN-LAST:event_jButtonLateralAgregarAnalisisActionPerformed
 
-    private void jButtonLateralPedirReactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralPedirReactivoActionPerformed
-        setHighlighted(jButtonLateralPedirReactivo);
-        cambiarPanel(jPanelEnConstruccion);
-    }//GEN-LAST:event_jButtonLateralPedirReactivoActionPerformed
+    private void jButtonLateralBuscarAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralBuscarAnalisisActionPerformed
+        setHighlighted(jButtonLateralBuscarAnalisis);
+        cambiarPanel(jPanelConsultarAnalisis);
+    }//GEN-LAST:event_jButtonLateralBuscarAnalisisActionPerformed
 
     private void jButtonCrearTurnoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearTurnoAnteriorActionPerformed
         // Vuelve un paso en la etapa de crear turno
@@ -1770,6 +2197,12 @@ public class Laboratorio extends javax.swing.JFrame {
         
 //        ManagerInforme.guardarInforme(jTextFieldBuscarTurno.getText(),dataModelanalisisInforme);
         ManagerInforme.guardarInforme(dataModelanalisisInforme);
+        
+        // Limpiar Campos
+        jTextFieldBuscarTurno.setText("");
+        jComboBoxTurnosDNI.removeAllItems();
+        jComboBoxTurnosDNI.setEnabled(false);
+        dataModelanalisisInforme.fireTableDataChanged();// Actualiza la tabla tras su vaciado
     }//GEN-LAST:event_jButtonGuardarResultadoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1797,13 +2230,24 @@ public class Laboratorio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldBuscarTurnoActionPerformed
 
-    private void jButtonLateralPedirReactivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralPedirReactivo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonLateralPedirReactivo1ActionPerformed
+    private void jButtonLateralConsultarStockReactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralConsultarStockReactivoActionPerformed
+        setHighlighted(jButtonLateralConsultarStockReactivo);
+        cambiarPanel(jPanelEnConstruccion);
+    }//GEN-LAST:event_jButtonLateralConsultarStockReactivoActionPerformed
 
-    private void jButtonLateralPedirReactivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralPedirReactivo2ActionPerformed
+    private void jButtonLateralCancelarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLateralCancelarTurnoActionPerformed
+        setHighlighted(jButtonLateralCancelarTurno);
+        cambiarPanel(jPanelCancelarTurno);
+        
+    }//GEN-LAST:event_jButtonLateralCancelarTurnoActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonLateralPedirReactivo2ActionPerformed
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButtonAgregarAnalisisATurno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAnalisisATurno1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAgregarAnalisisATurno1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1846,11 +2290,17 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JPanel crearTurnoP2;
     private javax.swing.JPanel crearTurnoP3;
     private javax.swing.JPanel crearTurnoP4;
+    private javax.swing.JPanel crearTurnoP5;
     private javax.swing.JTabbedPane crearTurnoPasosJTabbed;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButtonAgregarAnalisisATurno;
+    private javax.swing.JButton jButtonAgregarAnalisisATurno1;
     private javax.swing.JButton jButtonBuscarTurno;
     private javax.swing.JButton jButtonCrearPaciente;
     private javax.swing.JButton jButtonCrearPacienteAnterior;
@@ -1860,14 +2310,17 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGuardarResultado;
     private javax.swing.JButton jButtonLateralAgregarAnalisis;
     private javax.swing.JButton jButtonLateralAgregarPaciente;
+    private javax.swing.JButton jButtonLateralBuscarAnalisis;
+    private javax.swing.JButton jButtonLateralCancelarTurno;
+    private javax.swing.JButton jButtonLateralConsultarStockReactivo;
     private javax.swing.JButton jButtonLateralDarTurno;
     private javax.swing.JButton jButtonLateralGenerarResultado;
-    private javax.swing.JButton jButtonLateralPedirReactivo;
-    private javax.swing.JButton jButtonLateralPedirReactivo1;
-    private javax.swing.JButton jButtonLateralPedirReactivo2;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private com.toedter.calendar.JCalendar jCalendarPedirTurno;
     private javax.swing.JCheckBox jCheckBoxParticular;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxObraSocialCrearPaciente;
+    private javax.swing.JComboBox<String> jComboBoxObraSocialCrearPaciente1;
     private javax.swing.JComboBox<String> jComboBoxObraSocialTurno;
     private javax.swing.JComboBox<String> jComboBoxTurnosDNI;
     private javax.swing.JComboBox<String> jComboCrearTurnoAnalisis;
@@ -1878,6 +2331,7 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JLabel jErrorCrearPacienteEdad;
     private javax.swing.JLabel jErrorCrearPacienteNombre;
     private javax.swing.JLabel jErrorCrearPacienteObraSocial;
+    private javax.swing.JLabel jErrorCrearPacienteObraSocial1;
     private javax.swing.JLabel jErrorCrearPacienteSexo;
     private javax.swing.JLabel jErrorCrearPacienteTelefono;
     private javax.swing.JLabel jLabel1;
@@ -1893,10 +2347,20 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jLabelConfirmacionAnalisisList;
@@ -1912,6 +2376,11 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCrearTurnoConfirmacion2;
     private javax.swing.JLabel jLabelPedirTurnoDisponibles;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1920,27 +2389,46 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelAgregarAnalisis;
+    private javax.swing.JPanel jPanelAgregarAnalisisDatosBase;
     private javax.swing.JPanel jPanelAgregarPaciente;
     private javax.swing.JPanel jPanelAgregarPacienteP1;
     private javax.swing.JPanel jPanelAgregarPacienteP2;
     private javax.swing.JPanel jPanelAgregarPacienteP3;
+    private javax.swing.JPanel jPanelAgregarPacienteP4;
     private javax.swing.JPanel jPanelBackground;
     private javax.swing.JPanel jPanelBarraLateral;
+    private javax.swing.JPanel jPanelCancelarTurno;
+    private javax.swing.JPanel jPanelConsultarAnalisis;
+    private javax.swing.JPanel jPanelConsultarStock;
     private javax.swing.JPanel jPanelDarTurno;
     private javax.swing.JPanel jPanelEnConstruccion;
     private javax.swing.JPanel jPanelGenerarResultado;
+    private javax.swing.JPanel jPanelPedirReactivos;
     private javax.swing.JRadioButton jRadioButtonHombre;
     private javax.swing.JRadioButton jRadioButtonMujer;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTabbedPane jTabbedPanelAgregarPaciente;
     private javax.swing.JTabbedPane jTabbedPanelCrearPaciente;
     private javax.swing.JTable jTableAnalisisAgregarTurno;
+    private javax.swing.JTable jTableAnalisisAgregarTurno1;
     private javax.swing.JTable jTableInformeAnalisis;
     private javax.swing.JTable jTableObrasSocialesAgregarPaciente;
+    private javax.swing.JTable jTableObrasSocialesAgregarPaciente1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldBuscarTurno;
     private javax.swing.JTextField jTextFieldCorreo;

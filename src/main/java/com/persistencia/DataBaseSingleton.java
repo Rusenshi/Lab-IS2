@@ -18,7 +18,7 @@ import java.sql.Statement;
 public class DataBaseSingleton {
     // Valores para la conexión a la base de datos (su nombre, URL, Usuario y Contraseña)
     // Nota: crear una base de datos en pgadmin con el nombre de DB_NAME para poder conectarse
-    private static final String DB_NAME = "lab-is2";
+    private static final String DB_NAME = "lab-is2-2";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/" + DB_NAME;
     private static final String DB_USER = "postgres"; // Revisar estos nombres, son diferentes en mi pc
     private static final String DB_PWD = "admin";

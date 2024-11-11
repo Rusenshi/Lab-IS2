@@ -33,7 +33,7 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
             // res tiene el cursor por defecto en -1, si res.next retorna true, significa que hay un elemento en la lista, y por ende es el buscado
             if (res.next()){
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
-                Analisis analisis = new Analisis(res.getString(1),res.getFloat(2),res.getString(3),res.getFloat(4));
+                Analisis analisis = new Analisis(res.getString(1),res.getString(2),res.getString(3),res.getFloat(4));
                 //Paciente p = new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8));
                 
                 // Obtener los reactivos vinculados a este analisis
@@ -47,8 +47,10 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
                 while(resAnalisis.next()){
 //                    p.getObrasSociales().add(new ObraSocial(resOS.getString(2)));
                     Optional <Reactivo> r = daoReactivo.get(resAnalisis.getString(1));
+                    float cantidadUsada = resAnalisis.getFloat(3);
                     if (r.isPresent()){
-                        analisis.getReactivosUsados().add(r.get());
+//                        analisis.getReactivosUsados().add(r.get());
+                        analisis.getReactivosUsados().put(r.get(), cantidadUsada);
                     }
                 }
                 
@@ -80,7 +82,7 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
             // Recorrer resultado de la consulta y convertirlo en una lista
             while(res.next()){
                 // Obtiene los campos de cada columna de la base de datos y crea el objeto.
-                Analisis a = new Analisis(res.getString(1),res.getFloat(2),res.getString(3),res.getFloat(4));
+                Analisis a = new Analisis(res.getString(1),res.getString(2),res.getString(3),res.getFloat(4));
                 
                 // Obtener los reactivos vinculados a este analisis
                 PreparedStatement stmAnalisis = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM ANALISIS_USA_REACTIVO WHERE activo=1 AND Analisis_nombre =?");
@@ -92,10 +94,28 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
                 while(resAnalisis.next()){
 //                    p.getObrasSociales().add(new ObraSocial(resOS.getString(2)));
                     Optional <Reactivo> r = daoReactivo.get(resAnalisis.getString(1));
+                    float cantidadUsada = resAnalisis.getFloat(3);
                     if (r.isPresent()){
-                        a.getReactivosUsados().add(r.get());
+                        a.getReactivosUsados().put(r.get(), cantidadUsada);
                     }
                 }
+                
+                
+                /*
+                while(resAnalisis.next()){
+//                    p.getObrasSociales().add(new ObraSocial(resOS.getString(2)));
+                    Optional <Reactivo> r = daoReactivo.get(resAnalisis.getString(1));
+                    float cantidadUsada = resAnalisis.getFloat(3);
+                    if (r.isPresent()){
+//                        analisis.getReactivosUsados().add(r.get());
+                        analisis.getReactivosUsados().put(r.get(), cantidadUsada);
+                    }
+                }
+                */
+                
+                
+                
+                
                 
                 
                 analisis.add(a);
@@ -117,18 +137,20 @@ public class DAOAnalisisSQL implements Dao<Analisis,String>{
             // Nota: Activo es la variable para el eliminado logico
             PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("INSERT INTO ANALISIS VALUES (?,?,?,?,1);");
             stm.setString(1, t.getNombre());
-            stm.setFloat(2, t.getValorReferencia());
+            stm.setString(2, t.getValorReferencia());
             stm.setString(3, t.getMetodoUsado());
             stm.setFloat(4, t.getMonto());
             
             stm.execute();
             
             // Itera sobre la lista de obras sociales del paciente
-            for(Reactivo r : t.getReactivosUsados()){
+            for(Reactivo r : t.getReactivosUsados().keySet()){
                 // Prepara Insercion en la tabla que relaciona un paciente con una obra social (Paciente_tiene_obraSocial)
-                PreparedStatement stmReact = DataBaseSingleton.getInstance().getConnection().prepareStatement("INSERT INTO ANALISIS_USA_REACTIVO VALUES (?,?,1);");
+                PreparedStatement stmReact = DataBaseSingleton.getInstance().getConnection().prepareStatement("INSERT INTO ANALISIS_USA_REACTIVO VALUES (?,?,?,1);");
                 stmReact.setString(2, t.getNombre());
                 stmReact.setString(1, r.getNombre());
+                stmReact.setFloat(3, t.getReactivosUsados().get(r)); // Obtiene la cantidad usada en la tabla de hash
+                
                 stmReact.execute();
             }
         }

@@ -33,7 +33,9 @@ public class ManagerTurno {
     private static List<Turno> lastQueryTurnosByDNI;
     
     public static int obtenerCantidadTurnosPorFecha(String fecha){
-        List<Turno> lista = daoTurno.getByDate(fecha);
+//        List<Turno> lista = daoTurno.getByDate(fecha);
+        List<Turno> lista = daoTurno.getByDateWithHistory(fecha);
+        
         return lista.size();
     }
     
