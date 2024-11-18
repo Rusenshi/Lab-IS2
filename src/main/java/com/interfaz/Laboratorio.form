@@ -69,7 +69,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ideapad Gaming 3\Desktop\Universidad\IS2\TPM LABORATORIO\Lab-IS2\Lab-IS2\src\main\java\com\graficos\iconTurno_miniatura.png"/>
+              <Image iconType="3" name="/graficosIconos/iconTurno_miniatura.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Dar Turno"/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -94,7 +94,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ideapad Gaming 3\Desktop\Universidad\IS2\TPM LABORATORIO\Lab-IS2\Lab-IS2\src\main\java\com\graficos\iconCancelarTurno.png"/>
+              <Image iconType="3" name="/graficosIconos/iconCancelarTurno.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelar Turno"/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -119,7 +119,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ideapad Gaming 3\Desktop\Universidad\IS2\TPM LABORATORIO\Lab-IS2\Lab-IS2\src\main\java\com\graficos\iconResultado_thumb.png"/>
+              <Image iconType="3" name="/graficosIconos/iconResultado_thumb.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cargar Resultado"/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -144,7 +144,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ideapad Gaming 3\Desktop\Universidad\IS2\TPM LABORATORIO\Lab-IS2\Lab-IS2\src\main\java\com\graficos\iconPaciente.png"/>
+              <Image iconType="3" name="/graficosIconos/iconPaciente.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Agregar Paciente"/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -169,7 +169,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ideapad Gaming 3\Desktop\Universidad\IS2\TPM LABORATORIO\Lab-IS2\Lab-IS2\src\main\java\com\graficos\iconAnalisis.png"/>
+              <Image iconType="3" name="/graficosIconos/iconAnalisis.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Agregar Analisis"/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -194,7 +194,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ideapad Gaming 3\Desktop\Universidad\IS2\TPM LABORATORIO\Lab-IS2\Lab-IS2\src\main\java\com\graficos\iconAnalisis.png"/>
+              <Image iconType="3" name="/graficosIconos/iconAnalisis.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Buscar Analisis"/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -219,7 +219,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ideapad Gaming 3\Desktop\Universidad\IS2\TPM LABORATORIO\Lab-IS2\Lab-IS2\src\main\java\com\graficos\iconStock.png"/>
+              <Image iconType="3" name="/graficosIconos/iconStock.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ver Stock"/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -235,7 +235,7 @@
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ideapad Gaming 3\Desktop\Universidad\IS2\TPM LABORATORIO\Lab-IS2\Lab-IS2\src\main\java\com\graficos\logoLab.png"/>
+              <Image iconType="3" name="/graficosIconos/logoLab.png"/>
             </Property>
           </Properties>
         </Component>

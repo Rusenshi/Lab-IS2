@@ -343,7 +343,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonLateralDarTurno.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralDarTurno.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralDarTurno.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralDarTurno.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconTurno_miniatura.png")); // NOI18N
+        jButtonLateralDarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficosIconos/iconTurno_miniatura.png"))); // NOI18N
         jButtonLateralDarTurno.setText("Dar Turno");
         jButtonLateralDarTurno.setBorderPainted(false);
         jButtonLateralDarTurno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -358,7 +358,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonLateralCancelarTurno.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralCancelarTurno.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralCancelarTurno.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralCancelarTurno.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconCancelarTurno.png")); // NOI18N
+        jButtonLateralCancelarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficosIconos/iconCancelarTurno.png"))); // NOI18N
         jButtonLateralCancelarTurno.setText("Cancelar Turno");
         jButtonLateralCancelarTurno.setBorderPainted(false);
         jButtonLateralCancelarTurno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -373,7 +373,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonLateralGenerarResultado.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralGenerarResultado.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralGenerarResultado.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralGenerarResultado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconResultado_thumb.png")); // NOI18N
+        jButtonLateralGenerarResultado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficosIconos/iconResultado_thumb.png"))); // NOI18N
         jButtonLateralGenerarResultado.setText("Cargar Resultado");
         jButtonLateralGenerarResultado.setBorderPainted(false);
         jButtonLateralGenerarResultado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -388,7 +388,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonLateralAgregarPaciente.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralAgregarPaciente.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralAgregarPaciente.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralAgregarPaciente.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconPaciente.png")); // NOI18N
+        jButtonLateralAgregarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficosIconos/iconPaciente.png"))); // NOI18N
         jButtonLateralAgregarPaciente.setText("Agregar Paciente");
         jButtonLateralAgregarPaciente.setBorderPainted(false);
         jButtonLateralAgregarPaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -403,7 +403,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonLateralAgregarAnalisis.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralAgregarAnalisis.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralAgregarAnalisis.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralAgregarAnalisis.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconAnalisis.png")); // NOI18N
+        jButtonLateralAgregarAnalisis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficosIconos/iconAnalisis.png"))); // NOI18N
         jButtonLateralAgregarAnalisis.setText("Agregar Analisis");
         jButtonLateralAgregarAnalisis.setBorderPainted(false);
         jButtonLateralAgregarAnalisis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -418,7 +418,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonLateralBuscarAnalisis.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralBuscarAnalisis.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralBuscarAnalisis.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralBuscarAnalisis.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconAnalisis.png")); // NOI18N
+        jButtonLateralBuscarAnalisis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficosIconos/iconAnalisis.png"))); // NOI18N
         jButtonLateralBuscarAnalisis.setText("Buscar Analisis");
         jButtonLateralBuscarAnalisis.setBorderPainted(false);
         jButtonLateralBuscarAnalisis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -433,7 +433,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonLateralConsultarStockReactivo.setBackground(new java.awt.Color(102, 153, 255));
         jButtonLateralConsultarStockReactivo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButtonLateralConsultarStockReactivo.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLateralConsultarStockReactivo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\iconStock.png")); // NOI18N
+        jButtonLateralConsultarStockReactivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficosIconos/iconStock.png"))); // NOI18N
         jButtonLateralConsultarStockReactivo.setText("Ver Stock");
         jButtonLateralConsultarStockReactivo.setBorderPainted(false);
         jButtonLateralConsultarStockReactivo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -445,7 +445,7 @@ public class Laboratorio extends javax.swing.JFrame {
         });
         jPanelBarraLateral.add(jButtonLateralConsultarStockReactivo);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ideapad Gaming 3\\Desktop\\Universidad\\IS2\\TPM LABORATORIO\\Lab-IS2\\Lab-IS2\\src\\main\\java\\com\\graficos\\logoLab.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficosIconos/logoLab.png"))); // NOI18N
         jPanelBarraLateral.add(jLabel7);
 
         getContentPane().add(jPanelBarraLateral);
