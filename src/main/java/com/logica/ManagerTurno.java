@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -31,12 +32,60 @@ public class ManagerTurno {
     private static DAOObraSocialSQL daoObraSocial = new DAOObraSocialSQL();
     private static DAOAnalisisSQL daoAnalisis = new DAOAnalisisSQL();
     private static List<Turno> lastQueryTurnosByDNI;
+    private static List<Turno> lastQueryCancelarTurno;
+    
     
     public static int obtenerCantidadTurnosPorFecha(String fecha){
 //        List<Turno> lista = daoTurno.getByDate(fecha);
         List<Turno> lista = daoTurno.getByDateWithHistory(fecha);
         
         return lista.size();
+    }
+    
+    // Para mostrar al usuario
+    public static void filtrarPorDniOFechaCancelarTurno(JComboBox comboboxCancelarTurno, JCalendar calendario,int dni){
+        // Rellenar ComboBox de Turnos a cancelar
+        comboboxCancelarTurno.removeAllItems();
+        
+        int dia = calendario.getDayChooser().getDay();
+        int mes = calendario.getMonthChooser().getMonth()+1; // Los meses empiezan desde cero en JCalendar
+        int año = calendario.getYearChooser().getYear();
+//        String fecha = dia + "/"+mes +"/"+ año;     // Para mostrar en pantalla
+        String fecha = año+"-"+mes+"-"+dia; // Para la consulta SQL
+        
+        
+
+        // Para asociacion de la tabla
+        if (dni == -1){
+            lastQueryCancelarTurno = daoTurno.getByDate(fecha);
+        }
+        else{
+            lastQueryCancelarTurno = daoTurno.getByDateAndDNI(fecha, dni);
+        }
+        
+        
+        for(Turno t : lastQueryCancelarTurno){
+            String label = "("+t.getPaciente().getDni() +") "+ t.getPaciente().getApellido() +", "+ t.getPaciente().getNombre()+". " + t.getFecha().toString();
+            comboboxCancelarTurno.addItem(label);
+        }
+    }
+    
+    // Para realizar la cancelacion
+    public static Turno obtenerTurnoDesdeComboboxCancelarTurno(int index){
+        try{
+            return lastQueryCancelarTurno.get(index);
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("ERROR INTERNO: ASOCIACION FALLIDA");
+            return null;
+        }
+    }
+    
+    
+    public static List<Turno> obtenerTurnosPorFecha(String fecha){
+        List<Turno> lista = daoTurno.getByDate(fecha);
+        
+        return lista;
     }
     
     public static boolean validarSoloTexto(String nombre){
@@ -144,9 +193,12 @@ public class ManagerTurno {
         return turnosPorDNICombobox;
     }
 
-    static List<Turno> obtenerListaTurnosPorDNI() {
+    public static List<Turno> obtenerListaTurnosPorDNI() {
         return lastQueryTurnosByDNI;
     }
     
+    public static void eliminarTurno(Turno t){
+        daoTurno.delete(t.getNroOrdenServicio());
+    }
     
 }

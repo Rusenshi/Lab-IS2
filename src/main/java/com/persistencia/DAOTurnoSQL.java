@@ -9,6 +9,7 @@ import com.objetos.ObraSocial;
 import com.objetos.Paciente;
 import com.objetos.Reactivo;
 import com.objetos.Turno;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -360,6 +361,78 @@ public class DAOTurnoSQL implements Dao<Turno,Integer>{
         
         return turnos;
     }
+    
+    public List<Turno> getByDateAndDNI(String fecha, int dni){
+        // Crea lista temporal para recorrer resultset
+        List<Turno> turnos = new ArrayList<>();
+        
+        try{
+            // Preparar Consulta
+            // Nota: Activo es la variable para el eliminado logico
+            PreparedStatement stm = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM TURNO WHERE activo=1 AND Paciente_dni=? AND fecha=?");
+            stm.setInt(1, dni);
+            stm.setDate(2, Date.valueOf(fecha));
+            
+            ResultSet res = stm.executeQuery();
+            
+            // Para la creacion del objeto paciente
+            DAOPacienteSQL daoPaciente = new DAOPacienteSQL();
+            DAOAnalisisSQL daoAnalisis = new DAOAnalisisSQL();
+            // Recorrer resultado de la consulta y convertirlo en una lista
+            while(res.next()){
+                // Obtiene los campos de cada columna de la base de datos y crea el objeto.
+//                Paciente p = new Paciente(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getInt(5),res.getString(6),res.getString(7),res.getString(8));
+                Turno t = new Turno();
+                t.setNroOrdenServicio(res.getInt(1));
+                t.setFecha(res.getDate(2));
+                t.setNombreMedico(res.getString(3));
+                t.setDiagnostico(res.getString(4));
+                
+                
+                // Obtener paciente y vincularlo con el objeto a retornar
+                Optional<Paciente> p = daoPaciente.get(res.getInt(5));
+                if (p.isPresent()){
+                    t.setPaciente(p.get());
+                }
+                
+                // Obtener obra social elegida
+                DAOObraSocialSQL daoObraSocial = new DAOObraSocialSQL();
+                Optional<ObraSocial> os = daoObraSocial.get(res.getString(6));
+                if (os.isPresent()){
+                    t.setObraSocial(os.get());
+                }
+
+                // Obtener las obras sociales vinculadas a este paciente
+//                PreparedStatement stmOS = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM PACIENTE_TIENE_OBRASOCIAL WHERE activo=1 AND Paciente_dni =?");
+//                stmOS.setInt(1, p.getDni());
+//                ResultSet resOS = stmOS.executeQuery();   
+//                while(resOS.next()){
+//                    p.getObrasSociales().add(new ObraSocial(resOS.getString(2)));
+//                }
+                
+                // Agregar todos los analisis vinculados al turno que aparecen en la tabla "Turno_tiene_Analisis"
+                PreparedStatement stmAnalisis = DataBaseSingleton.getInstance().getConnection().prepareStatement("SELECT * FROM TURNO_TIENE_ANALISIS WHERE activo=1 AND Turno_nroOrdenServicio=?");
+                stmAnalisis.setInt(1, t.getNroOrdenServicio());
+                ResultSet resAnalisis = stmAnalisis.executeQuery();  
+                
+                while(resAnalisis.next()){
+                    // Hace uso del Dao de Analisis para recuperar el Analisis completo (consultando la tabla "Analisis_usa_Reactivo")
+                    Optional <Analisis> a = daoAnalisis.get(resAnalisis.getString(2));
+                    if (a.isPresent()){
+                        t.getAnalisis().add(a.get());
+                    }
+                }
+                turnos.add(t);
+            }
+        }
+        catch(SQLException e){
+            System.out.println("Error al obtener por fecha");
+            System.out.println(e.toString());
+        }
+        
+        return turnos;
+    }
+    
     
     @Override
     public void save(Turno t) {

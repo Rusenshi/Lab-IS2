@@ -5,13 +5,17 @@
 package com.interfaz;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.logica.ManagerAnalisis;
 import com.logica.ManagerInforme;
 import com.logica.ManagerObraSocial;
 import com.logica.ManagerPaciente;
+import com.logica.ManagerReactivo;
 import com.logica.ManagerTurno;
 import com.objetos.Analisis;
 import com.objetos.ObraSocial;
 import com.objetos.Paciente;
+import com.objetos.Reactivo;
+import com.objetos.Turno;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,6 +44,25 @@ public class Laboratorio extends javax.swing.JFrame {
     // Variables Panel: Generar Resultado
     private static Set<String> analisisInforme = new HashSet<>();
     private static DefaultTableModel dataModelanalisisInforme = new DefaultTableModel(){
+            // Sobreescritura del metodo isCellEditable para anular la edición de alguna columna
+            boolean[] canEdit = new boolean[]{
+                    false,false,true
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+    };
+    
+    // Variables Panel: Agregar Paciente
+    private static Set<String> obrasSocialesElegidas = new HashSet<>();
+    private static DefaultTableModel dataModelobrasSocialesElegidas = new DefaultTableModel();
+    private static int crearPacienteActualStep = 0;
+    
+    // Variables Panel: Generar Resultado
+    private static Set<String> reactivosAnalisis = new HashSet<>();
+    private static DefaultTableModel dataModelReactivosAnalisis = new DefaultTableModel(){
 
             boolean[] canEdit = new boolean[]{
                     false,false,true
@@ -49,12 +72,10 @@ public class Laboratorio extends javax.swing.JFrame {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
             }
-};
+    };
+    private static int crearAnalisisActualStep = 0;
     
-    // Variables Panel: Agregar Paciente
-    private static Set<String> obrasSocialesElegidas = new HashSet<>();
-    private static DefaultTableModel dataModelobrasSocialesElegidas = new DefaultTableModel();
-    private static int crearPacienteActualStep = 0;
+    
     
     /**
      * Creates new form Laboratorio
@@ -102,6 +123,23 @@ public class Laboratorio extends javax.swing.JFrame {
         
         jTableObrasSocialesAgregarPaciente.setModel(dataModelobrasSocialesElegidas);
         jTableAnalisisAgregarTurno.setModel(dataModelanalisisElegidos);
+        
+        // Panel: Consultar Analisis
+        for(Analisis analisis : ManagerAnalisis.obtenerTodosLosAnalisis()){
+            jComboBoxConsultarAnalisis.addItem(analisis.getNombre());
+        }
+        
+        // Panel: Agregar Analisis
+        dataModelReactivosAnalisis.addColumn("Nombre");
+        dataModelReactivosAnalisis.addColumn("Capacidad");
+        dataModelReactivosAnalisis.addColumn("Cantidad a usar");
+        jTableAgregarPacienteReactivos.setModel(dataModelReactivosAnalisis);
+        
+        jComboBoxCrearAnalisisReactivos.removeAllItems();
+        for(String nombre : ManagerReactivo.obtenerListaNombresReactivos()){
+            jComboBoxCrearAnalisisReactivos.addItem(nombre);
+        }
+        jButtonCrearAnalisisAnterior.setVisible(false);
     }
 
     /**
@@ -155,6 +193,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jComboCrearTurnoAnalisis = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAnalisisAgregarTurno = new javax.swing.JTable();
+        jButtonEliminarAnalisisATurno = new javax.swing.JButton();
         crearTurnoP4 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -222,52 +261,71 @@ public class Laboratorio extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableObrasSocialesAgregarPaciente = new javax.swing.JTable();
         jErrorCrearPacienteObraSocial = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jButtonCrearPacienteSiguiente = new javax.swing.JButton();
         jButtonCrearPacienteAnterior = new javax.swing.JButton();
         jPanelEnConstruccion = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jPanelAgregarAnalisis = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jTabbedPanelAgregarPaciente = new javax.swing.JTabbedPane();
+        jTabbedPanelAgregarAnalisis = new javax.swing.JTabbedPane();
         jPanelAgregarAnalisisDatosBase = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldCrearAnalisisNombre = new javax.swing.JTextField();
+        jTextFieldCrearAnalisisValorReferencia = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldCrearAnalisisMetodoUsado = new javax.swing.JTextField();
+        jTextFieldCrearAnalisisMonto = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jPanelAgregarPacienteP4 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
-        jComboBoxObraSocialCrearPaciente1 = new javax.swing.JComboBox<>();
-        jButton7 = new javax.swing.JButton();
+        jComboBoxCrearAnalisisReactivos = new javax.swing.JComboBox<>();
+        jButtonAgregarAnalisisAgregarReactivo = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTableObrasSocialesAgregarPaciente1 = new javax.swing.JTable();
+        jTableAgregarPacienteReactivos = new javax.swing.JTable();
         jErrorCrearPacienteObraSocial1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonAgregarAnalisisEliminarReactivo = new javax.swing.JButton();
+        jButtonCrearAnalisisSiguiente = new javax.swing.JButton();
+        jButtonCrearAnalisisAnterior = new javax.swing.JButton();
         jPanelConsultarAnalisis = new javax.swing.JPanel();
         crearTurnoP5 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
-        jButtonAgregarAnalisisATurno1 = new javax.swing.JButton();
+        jButtonBuscarAnalisis = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTableAnalisisAgregarTurno1 = new javax.swing.JTable();
-        jTextField5 = new javax.swing.JTextField();
+        jTableBuscarAnalisisReactivos = new javax.swing.JTable();
+        jTextFieldNombreConsultarAnalisis = new javax.swing.JTextField();
         jPanel12 = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jLabelBuscarAnalisisValorReferencia = new javax.swing.JLabel();
+        jLabelBuscarAnalisisMonto = new javax.swing.JLabel();
+        jLabelBuscarAnalisisMetodoUsado = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jComboBoxConsultarAnalisis = new javax.swing.JComboBox<>();
         jPanelCancelarTurno = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCalendarCancelarTurno = new com.toedter.calendar.JCalendar();
+        jComboBoxCancelarTurno = new javax.swing.JComboBox<>();
         jButton5 = new javax.swing.JButton();
+        jTextFieldDniCancelarTurno = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
         jPanelConsultarStock = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jButton10 = new javax.swing.JButton();
         jPanelPedirReactivos = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jButtonAgregarAnalisisATurno2 = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        jComboCrearTurnoAnalisis1 = new javax.swing.JComboBox<>();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTableAnalisisAgregarTurno2 = new javax.swing.JTable();
+        jLabel31 = new javax.swing.JLabel();
+        jComboCrearTurnoAnalisis2 = new javax.swing.JComboBox<>();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 480));
@@ -277,7 +335,7 @@ public class Laboratorio extends javax.swing.JFrame {
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanelBarraLateral.setBackground(new java.awt.Color(102, 153, 255));
-        jPanelBarraLateral.setMaximumSize(new java.awt.Dimension(200, 480));
+        jPanelBarraLateral.setMaximumSize(new java.awt.Dimension(200, 4096));
         jPanelBarraLateral.setMinimumSize(new java.awt.Dimension(200, 480));
         jPanelBarraLateral.setPreferredSize(new java.awt.Dimension(200, 480));
         jPanelBarraLateral.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
@@ -648,6 +706,13 @@ public class Laboratorio extends javax.swing.JFrame {
         jTableAnalisisAgregarTurno.setEnabled(false);
         jScrollPane1.setViewportView(jTableAnalisisAgregarTurno);
 
+        jButtonEliminarAnalisisATurno.setText("Eliminar");
+        jButtonEliminarAnalisisATurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarAnalisisATurnoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -662,8 +727,10 @@ public class Laboratorio extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jComboCrearTurnoAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonAgregarAnalisisATurno)))
-                        .addContainerGap(316, Short.MAX_VALUE))))
+                                .addComponent(jButtonAgregarAnalisisATurno)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonEliminarAnalisisATurno)))
+                        .addContainerGap(224, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -671,9 +738,12 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonAgregarAnalisisATurno, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(jComboCrearTurnoAnalisis))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButtonAgregarAnalisisATurno, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jComboCrearTurnoAnalisis)
+                    .addComponent(jButtonEliminarAnalisisATurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1249,6 +1319,13 @@ public class Laboratorio extends javax.swing.JFrame {
         jErrorCrearPacienteObraSocial.setForeground(new java.awt.Color(255, 51, 51));
         jErrorCrearPacienteObraSocial.setText("REPETIDO");
 
+        jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAgregarPacienteP3Layout = new javax.swing.GroupLayout(jPanelAgregarPacienteP3);
         jPanelAgregarPacienteP3.setLayout(jPanelAgregarPacienteP3Layout);
         jPanelAgregarPacienteP3Layout.setHorizontalGroup(
@@ -1266,6 +1343,8 @@ public class Laboratorio extends javax.swing.JFrame {
                             .addComponent(jComboBoxObraSocialCrearPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1277,9 +1356,12 @@ public class Laboratorio extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jErrorCrearPacienteObraSocial))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAgregarPacienteP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jComboBoxObraSocialCrearPaciente))
+                .addGroup(jPanelAgregarPacienteP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAgregarPacienteP3Layout.createSequentialGroup()
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jComboBoxObraSocialCrearPaciente)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1308,7 +1390,7 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPanelCrearPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                    .addComponent(jTabbedPanelCrearPaciente)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonCrearPacienteAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1361,7 +1443,8 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPanelAgregarPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPanelAgregarAnalisis.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPanelAgregarAnalisis.setEnabled(false);
 
         jPanelAgregarAnalisisDatosBase.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1382,12 +1465,12 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel21)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCrearAnalisisValorReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCrearAnalisisMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCrearAnalisisMetodoUsado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCrearAnalisisNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -1396,19 +1479,19 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldCrearAnalisisNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldCrearAnalisisValorReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldCrearAnalisisMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldCrearAnalisisMetodoUsado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1424,27 +1507,25 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelAgregarAnalisisDatosBaseLayout.setVerticalGroup(
             jPanelAgregarAnalisisDatosBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAgregarAnalisisDatosBaseLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(32, 32, 32)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jTabbedPanelAgregarPaciente.addTab("Paso 1: Datos", jPanelAgregarAnalisisDatosBase);
+        jTabbedPanelAgregarAnalisis.addTab("Paso 1: Datos", jPanelAgregarAnalisisDatosBase);
 
         jPanelAgregarPacienteP4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel25.setText("Reactivos:");
 
-        jComboBoxObraSocialCrearPaciente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton7.setText("Agregar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregarAnalisisAgregarReactivo.setText("Agregar");
+        jButtonAgregarAnalisisAgregarReactivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButtonAgregarAnalisisAgregarReactivoActionPerformed(evt);
             }
         });
 
-        jTableObrasSocialesAgregarPaciente1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAgregarPacienteReactivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -1455,12 +1536,18 @@ public class Laboratorio extends javax.swing.JFrame {
                 "Reactivos"
             }
         ));
-        jTableObrasSocialesAgregarPaciente1.setEnabled(false);
-        jScrollPane5.setViewportView(jTableObrasSocialesAgregarPaciente1);
+        jScrollPane5.setViewportView(jTableAgregarPacienteReactivos);
 
         jErrorCrearPacienteObraSocial1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteObraSocial1.setForeground(new java.awt.Color(255, 51, 51));
         jErrorCrearPacienteObraSocial1.setText("REPETIDO");
+
+        jButtonAgregarAnalisisEliminarReactivo.setText("Eliminar");
+        jButtonAgregarAnalisisEliminarReactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarAnalisisEliminarReactivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelAgregarPacienteP4Layout = new javax.swing.GroupLayout(jPanelAgregarPacienteP4);
         jPanelAgregarPacienteP4.setLayout(jPanelAgregarPacienteP4Layout);
@@ -1476,9 +1563,11 @@ public class Laboratorio extends javax.swing.JFrame {
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jErrorCrearPacienteObraSocial1))
-                            .addComponent(jComboBoxObraSocialCrearPaciente1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxCrearAnalisisReactivos, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton7)
+                        .addComponent(jButtonAgregarAnalisisAgregarReactivo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonAgregarAnalisisEliminarReactivo)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1491,18 +1580,29 @@ public class Laboratorio extends javax.swing.JFrame {
                     .addComponent(jErrorCrearPacienteObraSocial1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAgregarPacienteP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jComboBoxObraSocialCrearPaciente1))
+                    .addComponent(jButtonAgregarAnalisisEliminarReactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxCrearAnalisisReactivos)
+                    .addComponent(jButtonAgregarAnalisisAgregarReactivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPanelAgregarPaciente.addTab("Paso 2: Reactivos", jPanelAgregarPacienteP4);
+        jTabbedPanelAgregarAnalisis.addTab("Paso 2: Reactivos", jPanelAgregarPacienteP4);
 
-        jButton2.setText("Siguiente");
+        jButtonCrearAnalisisSiguiente.setText("Siguiente");
+        jButtonCrearAnalisisSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearAnalisisSiguienteActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Anterior");
+        jButtonCrearAnalisisAnterior.setText("Anterior");
+        jButtonCrearAnalisisAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearAnalisisAnteriorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1513,21 +1613,21 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCrearAnalisisAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTabbedPanelAgregarPaciente))
+                        .addComponent(jButtonCrearAnalisisSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPanelAgregarAnalisis))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPanelAgregarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPanelAgregarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonCrearAnalisisAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCrearAnalisisSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1542,34 +1642,55 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButtonAgregarAnalisisATurno1.setText("Buscar");
-        jButtonAgregarAnalisisATurno1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarAnalisis.setText("Buscar");
+        jButtonBuscarAnalisis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAgregarAnalisisATurno1ActionPerformed(evt);
+                jButtonBuscarAnalisisActionPerformed(evt);
             }
         });
 
         jLabel26.setText("Nombre Analisis:");
 
-        jTableAnalisisAgregarTurno1.setModel(new javax.swing.table.DefaultTableModel(
+        jScrollPane6.setEnabled(false);
+
+        jTableBuscarAnalisisReactivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nombre", "Cantidad a usar"
+                "Nombre", "Capacidad", "Cantidad a usar"
             }
-        ));
-        jTableAnalisisAgregarTurno1.setEnabled(false);
-        jScrollPane6.setViewportView(jTableAnalisisAgregarTurno1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+            };
 
-        jLabel27.setText("Valor Referencia:");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTableBuscarAnalisisReactivos.setEnabled(false);
+        jScrollPane6.setViewportView(jTableBuscarAnalisisReactivos);
 
-        jLabel28.setText("Monto: ");
+        jTextFieldNombreConsultarAnalisis.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldNombreConsultarAnalisisFocusLost(evt);
+            }
+        });
+        jTextFieldNombreConsultarAnalisis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreConsultarAnalisisActionPerformed(evt);
+            }
+        });
 
-        jLabel29.setText("Metodo Usado:");
+        jLabelBuscarAnalisisValorReferencia.setText("Valor Referencia:");
+
+        jLabelBuscarAnalisisMonto.setText("Monto: ");
+
+        jLabelBuscarAnalisisMetodoUsado.setText("Metodo Usado:");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -1578,28 +1699,24 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField6)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel27)
-                            .addComponent(jLabel28)
-                            .addComponent(jLabel29))
-                        .addGap(0, 171, Short.MAX_VALUE)))
+                    .addComponent(jLabelBuscarAnalisisValorReferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelBuscarAnalisisMonto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelBuscarAnalisisMetodoUsado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel27)
+                .addComponent(jLabelBuscarAnalisisValorReferencia)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel28)
+                .addComponent(jLabelBuscarAnalisisMonto)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel29)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelBuscarAnalisisMetodoUsado)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel35.setText("Reactivos Usados:");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1608,18 +1725,19 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel26)
-                            .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonAgregarAnalisisATurno1)))
-                        .addContainerGap(328, Short.MAX_VALUE))
+                        .addComponent(jLabel26)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldNombreConsultarAnalisis)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jComboBoxConsultarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonBuscarAnalisis)))
+                .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1627,13 +1745,16 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonAgregarAnalisisATurno1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(jTextField5))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNombreConsultarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscarAnalisis, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(jComboBoxConsultarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1663,11 +1784,33 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
-        jCalendar1.setBackground(new java.awt.Color(255, 255, 255));
+        jCalendarCancelarTurno.setBackground(new java.awt.Color(255, 255, 255));
+        jCalendarCancelarTurno.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCalendarCancelarTurnoPropertyChange(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A." }));
+        jComboBoxCancelarTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A.", "DNI: 43123871 Nombre: Julian, Jeremias A." }));
 
         jButton5.setText("Cancelar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jTextFieldDniCancelarTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDniCancelarTurnoActionPerformed(evt);
+            }
+        });
+
+        jLabel32.setText("Filtrar por DNI de Paciente:");
+
+        jLabel33.setText("Turno a Eliminar:");
+
+        jLabel34.setText("Buscar por Fecha:");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -1676,21 +1819,40 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 588, Short.MAX_VALUE)
-                    .addComponent(jCalendar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCalendarCancelarTurno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jTextFieldDniCancelarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxCancelarTurno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addComponent(jLabel32)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel33))
+                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel34)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addComponent(jCalendarCancelarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel33))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldDniCancelarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxCancelarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1699,29 +1861,131 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanelBackground.add(jPanelCancelarTurno, "card8");
 
-        javax.swing.GroupLayout jPanelConsultarStockLayout = new javax.swing.GroupLayout(jPanelConsultarStock);
-        jPanelConsultarStock.setLayout(jPanelConsultarStockLayout);
-        jPanelConsultarStockLayout.setHorizontalGroup(
-            jPanelConsultarStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+        jPanelConsultarStock.setLayout(new javax.swing.BoxLayout(jPanelConsultarStock, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton10.setText("Pedir Nuevos Reactivos");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(441, Short.MAX_VALUE)
+                .addComponent(jButton10)
+                .addContainerGap())
         );
-        jPanelConsultarStockLayout.setVerticalGroup(
-            jPanelConsultarStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(434, Short.MAX_VALUE)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        jPanelConsultarStock.add(jPanel16);
 
         jPanelBackground.add(jPanelConsultarStock, "card9");
 
-        javax.swing.GroupLayout jPanelPedirReactivosLayout = new javax.swing.GroupLayout(jPanelPedirReactivos);
-        jPanelPedirReactivos.setLayout(jPanelPedirReactivosLayout);
-        jPanelPedirReactivosLayout.setHorizontalGroup(
-            jPanelPedirReactivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+        jPanelPedirReactivos.setLayout(new javax.swing.BoxLayout(jPanelPedirReactivos, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButtonAgregarAnalisisATurno2.setText("Agregar");
+        jButtonAgregarAnalisisATurno2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarAnalisisATurno2ActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setText("Reactivo:");
+
+        jComboCrearTurnoAnalisis1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTableAnalisisAgregarTurno2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTableAnalisisAgregarTurno2.setEnabled(false);
+        jScrollPane7.setViewportView(jTableAnalisisAgregarTurno2);
+
+        jLabel31.setText("Cantidad:");
+
+        jComboCrearTurnoAnalisis2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "50", "100", "500", "1000", "2500", "5000" }));
+
+        jButton8.setText("Aceptar");
+
+        jButton9.setText("Volver a Stock");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboCrearTurnoAnalisis1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel30))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel15Layout.createSequentialGroup()
+                                        .addComponent(jComboCrearTurnoAnalisis2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonAgregarAnalisisATurno2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel31))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                                .addComponent(jButton9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton8)))
+                        .addContainerGap())))
         );
-        jPanelPedirReactivosLayout.setVerticalGroup(
-            jPanelPedirReactivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(jLabel31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonAgregarAnalisisATurno2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboCrearTurnoAnalisis1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboCrearTurnoAnalisis2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        jPanelPedirReactivos.add(jPanel15);
 
         jPanelBackground.add(jPanelPedirReactivos, "card10");
 
@@ -2241,13 +2505,341 @@ public class Laboratorio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonLateralCancelarTurnoActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void jButtonAgregarAnalisisAgregarReactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAnalisisAgregarReactivoActionPerformed
+        String nombreReactivoElegido = (String)jComboBoxCrearAnalisisReactivos.getSelectedItem();
+        
+        boolean reactivoAgregado = reactivosAnalisis.add(nombreReactivoElegido);
+        if (reactivoAgregado){
+            Reactivo r = ManagerReactivo.obtenerPorNombre(nombreReactivoElegido);
+            dataModelReactivosAnalisis.addRow(new Object[]{r.getNombre(),r.getCantidadRecipiente(),0.0f});
+            System.out.println(reactivosAnalisis);
+        }      
+        
+        
+        
+        
+    }//GEN-LAST:event_jButtonAgregarAnalisisAgregarReactivoActionPerformed
 
-    private void jButtonAgregarAnalisisATurno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAnalisisATurno1ActionPerformed
+    private void jButtonBuscarAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAnalisisActionPerformed
+        Analisis analisisElegido = ManagerAnalisis.buscarPorNombre(jComboBoxConsultarAnalisis.getSelectedItem().toString());
+        if (analisisElegido == null){
+            System.out.println("ERROR INTERNO: ANALISIS NO ENCONTRADO");
+            return;
+        }
+        System.out.println(analisisElegido); // DEBUG
+        
+        // Actualizar etiquetas
+        jLabelBuscarAnalisisValorReferencia.setText("Valor Referencia: " + analisisElegido.getValorReferencia());
+        jLabelBuscarAnalisisMonto.setText("Monto: "+ String.format("$%.2f", analisisElegido.getMonto()));
+        jLabelBuscarAnalisisMetodoUsado.setText("Metodo Usado: " + analisisElegido.getMetodoUsado());
+        
+        // Rellenar tabla de reactivos
+        DefaultTableModel model = (DefaultTableModel) jTableBuscarAnalisisReactivos.getModel();
+        model.getDataVector().clear();
+        for(Reactivo r : analisisElegido.getReactivosUsados().keySet()){
+            Object[] fila = {r.getNombre(),r.getCantidadRecipiente(),analisisElegido.getReactivosUsados().get(r)};
+            model.addRow(fila);
+        }
+        
+    }//GEN-LAST:event_jButtonBuscarAnalisisActionPerformed
+
+    private void jButtonAgregarAnalisisATurno2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAnalisisATurno2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAgregarAnalisisATurno1ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarAnalisisATurno2ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        cambiarPanel(jPanelPedirReactivos);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        cambiarPanel(jPanelConsultarStock);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jCalendarCancelarTurnoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendarCancelarTurnoPropertyChange
+//        // Rellenar ComboBox de Turnos a cancelar
+//        jComboBoxCancelarTurno.removeAllItems();
+//        
+//        
+//        // Armar la vista previa de los turnos disponibles en el calendario
+//        int dia = jCalendarCancelarTurno.getDayChooser().getDay();
+//        int mes = jCalendarCancelarTurno.getMonthChooser().getMonth()+1; // Los meses empiezan desde cero en JCalendar
+//        int año = jCalendarCancelarTurno.getYearChooser().getYear();
+////        String fecha = dia + "/"+mes +"/"+ año;     // Para mostrar en pantalla
+//        String fechaConsulta = año+"-"+mes+"-"+dia; // Para la consulta SQL
+        
+        int dni = -1;
+        try{
+            dni = Integer.parseInt(jTextFieldDniCancelarTurno.getText());
+        }catch (NumberFormatException e){
+//            System.out.println("ERROR: NUMERO INVALIDO O CAMPO VACIO");
+        }
+        
+        ManagerTurno.filtrarPorDniOFechaCancelarTurno(jComboBoxCancelarTurno, jCalendarCancelarTurno, dni);
+    }//GEN-LAST:event_jCalendarCancelarTurnoPropertyChange
+
+    private void jTextFieldDniCancelarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniCancelarTurnoActionPerformed
+        // Rellenar ComboBox de Turnos a cancelar
+//        jComboBoxCancelarTurno.removeAllItems();
+
+        // Armar la vista previa de los turnos disponibles en el calendario
+//        int dia = jCalendarCancelarTurno.getDayChooser().getDay();
+//        int mes = jCalendarCancelarTurno.getMonthChooser().getMonth()+1; // Los meses empiezan desde cero en JCalendar
+//        int año = jCalendarCancelarTurno.getYearChooser().getYear();
+////        String fecha = dia + "/"+mes +"/"+ año;     // Para mostrar en pantalla
+//        String fechaConsulta = año+"-"+mes+"-"+dia; // Para la consulta SQL
+//        
+        int dni = -1;
+        try{
+            dni = Integer.parseInt(jTextFieldDniCancelarTurno.getText());
+        }catch (NumberFormatException e){
+            System.out.println("ERROR: NUMERO INVALIDO");
+        }
+        
+        ManagerTurno.filtrarPorDniOFechaCancelarTurno(jComboBoxCancelarTurno, jCalendarCancelarTurno, dni);
+    }//GEN-LAST:event_jTextFieldDniCancelarTurnoActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Turno turnoEliminar = ManagerTurno.obtenerTurnoDesdeComboboxCancelarTurno(jComboBoxCancelarTurno.getSelectedIndex());
+        if (turnoEliminar == null) {    
+            System.out.println("ERROR: NO HAY TURNO DISPONIBLE");
+            return;
+        }
+        ManagerTurno.eliminarTurno(turnoEliminar);
+        jComboBoxCancelarTurno.removeAllItems();
+        jTextFieldDniCancelarTurno.setText("");
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextFieldNombreConsultarAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreConsultarAnalisisActionPerformed
+        // Refrescar elementos
+        jComboBoxConsultarAnalisis.removeAllItems();
+        
+        // Obtener nombre del analisis a buscar
+        String nombreAnalisis = jTextFieldNombreConsultarAnalisis.getText();
+        if (nombreAnalisis == null) nombreAnalisis = "";
+        
+        // Agregar elementos filtrados a Combobox
+        for(Analisis analisis : ManagerAnalisis.filtrarPorNombre(nombreAnalisis)){
+            jComboBoxConsultarAnalisis.addItem(analisis.getNombre());
+        }
+        
+        // Comprobar si el conjunto de analisis a elegir está vacio
+        boolean permitirCampo = jComboBoxConsultarAnalisis.getItemCount() > 0;
+        jButtonBuscarAnalisis.setEnabled(permitirCampo);
+        jComboBoxConsultarAnalisis.setEnabled(permitirCampo);
+    }//GEN-LAST:event_jTextFieldNombreConsultarAnalisisActionPerformed
+
+    private void jButtonAgregarAnalisisEliminarReactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAnalisisEliminarReactivoActionPerformed
+        String nombreReactivoElegido = (String)jComboBoxCrearAnalisisReactivos.getSelectedItem();
+        boolean reactivoAgregado = reactivosAnalisis.remove(nombreReactivoElegido);
+        if (reactivoAgregado){
+            for(int i = 0; i < dataModelReactivosAnalisis.getRowCount(); i++){
+                if(dataModelReactivosAnalisis.getValueAt(i, 0).equals(nombreReactivoElegido)){
+                    dataModelReactivosAnalisis.removeRow(i);
+                    break;
+                }
+            }
+            System.out.println(reactivosAnalisis);
+        }
+        
+    }//GEN-LAST:event_jButtonAgregarAnalisisEliminarReactivoActionPerformed
+
+    private void jButtonCrearAnalisisSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearAnalisisSiguienteActionPerformed
+        // Comportamiento boton siguiente Crear Analisis
+        System.out.println("Pagina actual: " + crearAnalisisActualStep);
+        boolean avance = false;
+        switch(crearAnalisisActualStep){
+            case 0:
+                avance = ManagerAnalisis.validarNombreAnalisis(jTextFieldCrearAnalisisNombre.getText()) && 
+                        ManagerAnalisis.validarSoloTexto(jTextFieldCrearAnalisisValorReferencia.getText()) &&
+                        ManagerAnalisis.validarFlotante(jTextFieldCrearAnalisisMonto.getText()) &&
+                                ManagerAnalisis.validarSoloTexto(jTextFieldCrearAnalisisMetodoUsado.getText());
+                System.out.println("Campos validados: "+avance);
+                if (!avance) {
+                    // Configurar etiquetas de fallo
+                    return;
+                }
+                crearAnalisisActualStep++;
+                jTabbedPanelAgregarAnalisis.setSelectedIndex(crearAnalisisActualStep);
+                jButtonCrearAnalisisAnterior.setVisible(true);
+                
+                break;
+            case 1:
+                avance = !reactivosAnalisis.isEmpty() && ManagerAnalisis.validarTablaReactivos((DefaultTableModel)jTableAgregarPacienteReactivos.getModel());
+                System.out.println("Campos validados: "+avance);
+                if (!avance) {
+                    // Configurar etiquetas de fallo
+                    return;
+                }
+                
+                // Guardar
+                // Obtener campos de textfields y tabla
+                String nombre = jTextFieldCrearAnalisisNombre.getText();
+                String valor = jTextFieldCrearAnalisisValorReferencia.getText();
+                String monto = jTextFieldCrearAnalisisMonto.getText();
+                String metodo = jTextFieldCrearAnalisisMetodoUsado.getText();
+                DefaultTableModel tabla = (DefaultTableModel)jTableAgregarPacienteReactivos.getModel();
+                ManagerAnalisis.guardarAnalisis(nombre,valor,monto,metodo,tabla);
+                
+                // Actualizar Combobox de analisis
+                jComboBoxConsultarAnalisis.removeAllItems();
+                for(Analisis analisis : ManagerAnalisis.obtenerTodosLosAnalisis()){
+                    jComboBoxConsultarAnalisis.addItem(analisis.getNombre());
+                }
+                
+                break;
+        }
+        
+        
+        
+//        if (crearAnalisisActualStep < 3) {
+//            System.out.println("Pagina actual: " + crearAnalisisActualStep);
+//            
+//            boolean avance = false;
+//            
+//            // Dependiendo de la etapa actual del formulario son los controles que permiten avanzar a la siguiente
+//            switch(crearAnalisisActualStep){
+//                case 0:
+//                    // Validar Paso 1
+//                    avance = ManagerPaciente.validarDni(jTextFieldDniPaciente.getText()) && ManagerPaciente.comprobarExistencia(Integer.parseInt(jTextFieldDniPaciente.getText()))
+//                            && ManagerTurno.validarSoloTexto(jTextFieldDniPacienteMedico.getText())
+//                            && ManagerTurno.validarSoloTexto(jTextFieldDniPacienteDiagnostico.getText());
+//                    break;
+//                case 1:
+//                    // Validar Paso 2
+//                    avance = (turnosDisponibles > 0);// && ManagerTurno.esDiaDeSemana(jCalendarPedirTurno.getDate());
+//                    break;
+//                case 2:
+//                    // Validar Paso 3
+//                    avance = !analisisElegidos.isEmpty();
+//                    System.out.println(analisisElegidos);
+//                    break;
+//            }
+//            
+//            System.out.println(avance);
+//            
+//            // Verifica si se validaron los turnos, sino no avanza
+//            if (!avance) return;
+//            
+//            crearAnalisisActualStep++;
+//            crearTurnoPasosJTabbed.setSelectedIndex(crearAnalisisActualStep);
+//            jButtonCrearTurnoAnterior.setVisible(true);
+//            
+//            // Rellenar mensaje de confirmación
+//            if (crearAnalisisActualStep == 3){
+//                // PACIENTE
+//                Paciente p = ManagerPaciente.obtenerPaciente(jTextFieldDniPaciente.getText());
+//                jLabelConfirmacionDni.setText("DNI: " + p.getDni());
+//                jLabelConfirmacionObraSocial.setText("Obra Social: " + (String) jComboBoxObraSocialTurno.getSelectedItem());
+//                if (jCheckBoxParticular.isSelected()){
+//                    jLabelConfirmacionObraSocial.setText("Obra Social: PARTICULAR");
+//                }
+//                
+//                
+//                jLabelConfirmacionNombre.setText("Nombre: " + p.getNombre());
+//                jLabelConfirmacionApellido.setText("Apellido: " + p.getApellido());
+//                
+//                // FECHA
+//                int dia = jCalendarPedirTurno.getDayChooser().getDay();
+//                int mes = jCalendarPedirTurno.getMonthChooser().getMonth()+1;
+//                int año = jCalendarPedirTurno.getYearChooser().getYear();
+//                String fecha = dia + "/"+mes +"/"+ año;
+//                jLabelConfirmacionFecha.setText("Fecha: " + fecha);
+//                
+//                // LISTA ANALISIS
+//                jLabelConfirmacionMedico.setText("Medico: " + jTextFieldDniPacienteMedico.getText());
+//                jLabelConfirmacionDiagnostico.setText("Diagnostico: " + jTextFieldDniPacienteDiagnostico.getText());
+//                
+//                Vector<String> listData = new Vector<>();
+//                for(String analisis : analisisElegidos){
+//                    listData.add(analisis);
+//                }
+//                
+//                jLabelConfirmacionAnalisisList.setListData(listData);
+//                
+//                jButtonCrearTurnoSiguiente.setText("Crear");
+//            }
+//            else{
+//                jButtonCrearTurnoSiguiente.setText("Siguiente");
+//            }
+//            
+//        }
+//        else if (crearAnalisisActualStep == 3){
+//            // Crear turno y guardarlo en la base de datos
+//            String obraSocial = (String)jComboBoxObraSocialTurno.getSelectedItem();
+//            if (jCheckBoxParticular.isSelected()){
+//                obraSocial = "PARTICULAR";
+//            }
+//            
+//            ManagerTurno.guardarTurno(jTextFieldDniPaciente.getText(),
+//                    obraSocial,
+//                    jTextFieldDniPacienteMedico.getText(),
+//                    jTextFieldDniPacienteDiagnostico.getText(),
+//                    jCalendarPedirTurno,
+//                    analisisElegidos);
+//            
+//            vaciarCamposCrearTurno();
+//
+//        }
+//        System.out.println(crearTurnoActualStep);
+    }//GEN-LAST:event_jButtonCrearAnalisisSiguienteActionPerformed
+
+    private void jTextFieldNombreConsultarAnalisisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNombreConsultarAnalisisFocusLost
+        // Refrescar elementos
+        jComboBoxConsultarAnalisis.removeAllItems();
+        
+        // Obtener nombre del analisis a buscar
+        String nombreAnalisis = jTextFieldNombreConsultarAnalisis.getText();
+        if (nombreAnalisis == null) nombreAnalisis = "";
+        
+        // Agregar elementos filtrados a Combobox
+        for(Analisis analisis : ManagerAnalisis.filtrarPorNombre(nombreAnalisis)){
+            jComboBoxConsultarAnalisis.addItem(analisis.getNombre());
+        }
+        
+        // Comprobar si el conjunto de analisis a elegir está vacio
+        boolean permitirCampo = jComboBoxConsultarAnalisis.getItemCount() > 0;
+        jButtonBuscarAnalisis.setEnabled(permitirCampo);
+        jComboBoxConsultarAnalisis.setEnabled(permitirCampo);
+    }//GEN-LAST:event_jTextFieldNombreConsultarAnalisisFocusLost
+
+    private void jButtonCrearAnalisisAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearAnalisisAnteriorActionPerformed
+        System.out.println("Pagina actual: " + crearAnalisisActualStep);
+        switch(crearAnalisisActualStep){
+            case 1:
+                crearAnalisisActualStep--;
+                jTabbedPanelAgregarAnalisis.setSelectedIndex(crearAnalisisActualStep);
+                jButtonCrearAnalisisAnterior.setVisible(false);
+                break;
+        }
+    }//GEN-LAST:event_jButtonCrearAnalisisAnteriorActionPerformed
+
+    private void jButtonEliminarAnalisisATurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarAnalisisATurnoActionPerformed
+        String nombreAnalisisElegido = (String)jComboCrearTurnoAnalisis.getSelectedItem();
+        boolean analisisAgregado = analisisElegidos.remove(nombreAnalisisElegido);
+        if (analisisAgregado){
+            for(int i = 0; i < dataModelanalisisElegidos.getRowCount(); i++){
+                if(dataModelanalisisElegidos.getValueAt(i, 0).equals(nombreAnalisisElegido)){
+                    dataModelanalisisElegidos.removeRow(i);
+                    break;
+                }
+            }
+            System.out.println(analisisElegidos);
+        }
+    }//GEN-LAST:event_jButtonEliminarAnalisisATurnoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String nombreAnalisisElegido = (String)jComboBoxObraSocialCrearPaciente.getSelectedItem();
+        boolean analisisAgregado = obrasSocialesElegidas.remove(nombreAnalisisElegido);
+        if (analisisAgregado){
+            for(int i = 0; i < dataModelobrasSocialesElegidas.getRowCount(); i++){
+                if(dataModelobrasSocialesElegidas.getValueAt(i, 0).equals(nombreAnalisisElegido)){
+                    dataModelobrasSocialesElegidas.removeRow(i);
+                    break;
+                }
+            }
+            System.out.println(obrasSocialesElegidas);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2293,20 +2885,27 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JPanel crearTurnoP5;
     private javax.swing.JTabbedPane crearTurnoPasosJTabbed;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonAgregarAnalisisATurno;
-    private javax.swing.JButton jButtonAgregarAnalisisATurno1;
+    private javax.swing.JButton jButtonAgregarAnalisisATurno2;
+    private javax.swing.JButton jButtonAgregarAnalisisAgregarReactivo;
+    private javax.swing.JButton jButtonAgregarAnalisisEliminarReactivo;
+    private javax.swing.JButton jButtonBuscarAnalisis;
     private javax.swing.JButton jButtonBuscarTurno;
+    private javax.swing.JButton jButtonCrearAnalisisAnterior;
+    private javax.swing.JButton jButtonCrearAnalisisSiguiente;
     private javax.swing.JButton jButtonCrearPaciente;
     private javax.swing.JButton jButtonCrearPacienteAnterior;
     private javax.swing.JButton jButtonCrearPacienteSiguiente;
     private javax.swing.JButton jButtonCrearTurnoAnterior;
     private javax.swing.JButton jButtonCrearTurnoSiguiente;
+    private javax.swing.JButton jButtonEliminarAnalisisATurno;
     private javax.swing.JButton jButtonGuardarResultado;
     private javax.swing.JButton jButtonLateralAgregarAnalisis;
     private javax.swing.JButton jButtonLateralAgregarPaciente;
@@ -2315,15 +2914,18 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonLateralConsultarStockReactivo;
     private javax.swing.JButton jButtonLateralDarTurno;
     private javax.swing.JButton jButtonLateralGenerarResultado;
-    private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JCalendar jCalendarCancelarTurno;
     private com.toedter.calendar.JCalendar jCalendarPedirTurno;
     private javax.swing.JCheckBox jCheckBoxParticular;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxCancelarTurno;
+    private javax.swing.JComboBox<String> jComboBoxConsultarAnalisis;
+    private javax.swing.JComboBox<String> jComboBoxCrearAnalisisReactivos;
     private javax.swing.JComboBox<String> jComboBoxObraSocialCrearPaciente;
-    private javax.swing.JComboBox<String> jComboBoxObraSocialCrearPaciente1;
     private javax.swing.JComboBox<String> jComboBoxObraSocialTurno;
     private javax.swing.JComboBox<String> jComboBoxTurnosDNI;
     private javax.swing.JComboBox<String> jComboCrearTurnoAnalisis;
+    private javax.swing.JComboBox<String> jComboCrearTurnoAnalisis1;
+    private javax.swing.JComboBox<String> jComboCrearTurnoAnalisis2;
     private javax.swing.JLabel jErrorCrearPacienteApellido;
     private javax.swing.JLabel jErrorCrearPacienteCorreo;
     private javax.swing.JLabel jErrorCrearPacienteDni;
@@ -2353,16 +2955,22 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelBuscarAnalisisMetodoUsado;
+    private javax.swing.JLabel jLabelBuscarAnalisisMonto;
+    private javax.swing.JLabel jLabelBuscarAnalisisValorReferencia;
     private javax.swing.JList<String> jLabelConfirmacionAnalisisList;
     private javax.swing.JLabel jLabelConfirmacionApellido;
     private javax.swing.JLabel jLabelConfirmacionDiagnostico;
@@ -2381,6 +2989,8 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2414,31 +3024,33 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTabbedPane jTabbedPanelAgregarPaciente;
+    private javax.swing.JTabbedPane jTabbedPanelAgregarAnalisis;
     private javax.swing.JTabbedPane jTabbedPanelCrearPaciente;
+    private javax.swing.JTable jTableAgregarPacienteReactivos;
     private javax.swing.JTable jTableAnalisisAgregarTurno;
-    private javax.swing.JTable jTableAnalisisAgregarTurno1;
+    private javax.swing.JTable jTableAnalisisAgregarTurno2;
+    private javax.swing.JTable jTableBuscarAnalisisReactivos;
     private javax.swing.JTable jTableInformeAnalisis;
     private javax.swing.JTable jTableObrasSocialesAgregarPaciente;
-    private javax.swing.JTable jTableObrasSocialesAgregarPaciente1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldBuscarTurno;
     private javax.swing.JTextField jTextFieldCorreo;
+    private javax.swing.JTextField jTextFieldCrearAnalisisMetodoUsado;
+    private javax.swing.JTextField jTextFieldCrearAnalisisMonto;
+    private javax.swing.JTextField jTextFieldCrearAnalisisNombre;
+    private javax.swing.JTextField jTextFieldCrearAnalisisValorReferencia;
     private javax.swing.JTextField jTextFieldDni;
+    private javax.swing.JTextField jTextFieldDniCancelarTurno;
     private javax.swing.JTextField jTextFieldDniPaciente;
     private javax.swing.JTextField jTextFieldDniPacienteDiagnostico;
     private javax.swing.JTextField jTextFieldDniPacienteMedico;
     private javax.swing.JTextField jTextFieldDomicilio;
     private javax.swing.JTextField jTextFieldEdad;
     private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldNombreConsultarAnalisis;
     private javax.swing.JTextField jTextFieldTelefono;
     // End of variables declaration//GEN-END:variables
 }
