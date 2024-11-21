@@ -112,28 +112,29 @@ public class ManagerTurno {
         return lista;
     }
     
-    public static int createUniqueKey(List<Integer> listaClaves){
-        int nextFree = 0;
-        int claveAnterior = 0;
-        
-        for(int clave : listaClaves){
-            int dif = clave-claveAnterior;
-            System.out.println("dif: " + dif);
-            
-            if (dif > 1){
-                nextFree = clave+1;
-                listaClaves.add(nextFree);
-                Collections.sort(listaClaves);
-                break;
-            }
-            
-            claveAnterior = clave;
-        }
-        
-        System.out.println("lista: " + listaClaves);
-        System.out.println("nextFree: " + nextFree);
-        return nextFree;
-    }
+//    public static int createUniqueKey(List<Integer> listaClaves){
+//        int nextFree = 0;
+//        int claveAnterior = 0;
+//        
+//        for(int clave : listaClaves){
+//            int dif = clave-claveAnterior;
+//            System.out.println("dif: " + dif);
+//            
+//            if (dif > 1){
+//                nextFree = clave+1;
+//                listaClaves.add(nextFree);
+//                Collections.sort(listaClaves);
+//                break;
+//            }
+//            
+//            claveAnterior = clave;
+//        }
+//        
+//        System.out.println("lista: " + listaClaves);
+//        System.out.println("nextFree: " + nextFree);
+//        return nextFree;
+//    }
+    
     public static int hashNroOrdenServicio(String dateFormatted){
         int cantidadTurnos = obtenerCantidadTurnosPorFecha(dateFormatted);
 //        String cantidadTurnosString;
@@ -175,13 +176,13 @@ public class ManagerTurno {
         daoTurno.save(t);
     }
 
-    public static boolean esDiaDeSemana(java.util.Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("EEEE");
-        
-        String nombreDia = format.format(date);
-        
-        return !nombreDia.equals("sábado") && !nombreDia.equals("domingo");
-    }
+//    public static boolean esDiaDeSemana(java.util.Date date) {
+//        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+//        
+//        String nombreDia = format.format(date);
+//        
+//        return !nombreDia.equals("sábado") && !nombreDia.equals("domingo");
+//    }
 
     public static List<String> obtenerTurnosPorDNI(int dni) {
         lastQueryTurnosByDNI = daoTurno.getByDNI(dni);
