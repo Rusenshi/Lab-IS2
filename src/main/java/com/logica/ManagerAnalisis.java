@@ -54,6 +54,12 @@ public class ManagerAnalisis {
         return nombre.matches ("\\w+[\\s+\\w+]*"); // Verifica solo texto
     }
     
+    
+    public static boolean validarValorReferencia(String nombre){
+        return nombre.matches ("\\[\\d+ a \\d+ \\w+/\\w+\\]"); // Verifica solo texto
+    }
+    
+    
     public static boolean validarFlotante(String monto){
         try{
             Float.parseFloat(monto);
@@ -61,6 +67,10 @@ public class ManagerAnalisis {
         }catch(NumberFormatException e){
             return false;
         }
+    }
+    
+    public static boolean comprobarExistenciaAnalisis(String nombre){
+        return daoAnalisis.get(nombre).isPresent();
     }
     
     public static boolean validarNombreAnalisis(String nombre){

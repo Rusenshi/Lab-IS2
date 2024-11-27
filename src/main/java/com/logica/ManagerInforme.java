@@ -48,7 +48,7 @@ public class ManagerInforme {
 //            }
 //        }
 //    }
-    public static void llenarTablaAnalisis(int turnoIndex, DefaultTableModel tablal){
+    public static int llenarTablaAnalisis(int turnoIndex, DefaultTableModel tablal){
         indexTurnoCargado = turnoIndex;
         Turno t = ManagerTurno.obtenerListaTurnosPorDNI().get(turnoIndex);
         // Rellenar tablas con los analisis
@@ -66,6 +66,7 @@ public class ManagerInforme {
 //                tablal.addRow(row);
 //            }
 //        }
+        return t.getNroOrdenServicio();
     }
     
 //    public static boolean validarNumero(String numero){

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -179,9 +180,9 @@ public class Laboratorio extends javax.swing.JFrame {
         jTextFieldDniPacienteMedico = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldDniPacienteDiagnostico = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        errCrearTurnoDni = new javax.swing.JLabel();
+        errCrearTurnoMedico = new javax.swing.JLabel();
+        errCrearTurnoDiagnostico = new javax.swing.JLabel();
         crearTurnoP2 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jCalendarPedirTurno = new com.toedter.calendar.JCalendar();
@@ -218,10 +219,11 @@ public class Laboratorio extends javax.swing.JFrame {
         jButtonGuardarResultado = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableInformeAnalisis = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
         jTextFieldBuscarTurno = new javax.swing.JTextField();
         jButtonBuscarTurno = new javax.swing.JButton();
         jComboBoxTurnosDNI = new javax.swing.JComboBox<>();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabelCargarResultadoTurnoCargado = new javax.swing.JLabel();
         jPanelAgregarPaciente = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jTabbedPanelCrearPaciente = new javax.swing.JTabbedPane();
@@ -489,6 +491,7 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jLabel2.setText("Obra Social: ");
 
+        jTextFieldDniPaciente.setToolTipText("Ingrese solo numeros. Si el paciente no existe, se habilitará la pestaña \"Crear\"");
         jTextFieldDniPaciente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextFieldDniPacienteFocusLost(evt);
@@ -521,19 +524,20 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jLabel4.setText("Nombre Medico:");
 
+        jTextFieldDniPacienteMedico.setToolTipText("Solo texto");
+
         jLabel5.setText("Diagnostico:");
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel18.setText("EL PACIENTE NO EXISTE");
+        jTextFieldDniPacienteDiagnostico.setToolTipText("Solo texto");
 
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel19.setText("CAMPO OBLGIATORIO");
+        errCrearTurnoDni.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        errCrearTurnoDni.setForeground(new java.awt.Color(255, 51, 51));
 
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel20.setText("CAMPO OBLGIATORIO");
+        errCrearTurnoMedico.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        errCrearTurnoMedico.setForeground(new java.awt.Color(255, 51, 51));
+
+        errCrearTurnoDiagnostico.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        errCrearTurnoDiagnostico.setForeground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -559,7 +563,7 @@ public class Laboratorio extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel18))
+                                .addComponent(errCrearTurnoDni))
                             .addComponent(jTextFieldDniPacienteDiagnostico)
                             .addComponent(jTextFieldDniPacienteMedico, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -568,11 +572,11 @@ public class Laboratorio extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel19))
+                                .addComponent(errCrearTurnoMedico))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel20)))
+                                .addComponent(errCrearTurnoDiagnostico)))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -581,7 +585,7 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel18))
+                    .addComponent(errCrearTurnoDni))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonCrearPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -595,16 +599,16 @@ public class Laboratorio extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel19))
+                    .addComponent(errCrearTurnoMedico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldDniPacienteMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldDniPacienteMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel20))
+                    .addComponent(errCrearTurnoDiagnostico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldDniPacienteDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout crearTurnoP1Layout = new javax.swing.GroupLayout(crearTurnoP1);
@@ -682,6 +686,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jButtonAgregarAnalisisATurno.setText("Agregar");
+        jButtonAgregarAnalisisATurno.setToolTipText("Solo puede agregar un Analisis");
         jButtonAgregarAnalisisATurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAgregarAnalisisATurnoActionPerformed(evt);
@@ -899,6 +904,7 @@ public class Laboratorio extends javax.swing.JFrame {
         crearTurnoPasosJTabbed.addTab("Paso 4: Confirmación", crearTurnoP4);
 
         jButton1.setText("Cancelar");
+        jButton1.setToolTipText("Permite vaciar todos los campos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -943,7 +949,7 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setText("DNI:");
+        jLabel3.setText("Buscar por DNI:");
 
         jButtonGuardarResultado.setText("Guardar");
         jButtonGuardarResultado.addActionListener(new java.awt.event.ActionListener() {
@@ -965,8 +971,7 @@ public class Laboratorio extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableInformeAnalisis);
 
-        jButton4.setText("Imprimir");
-
+        jTextFieldBuscarTurno.setToolTipText("Solo Numeros. Pulse Enter para cargar los turnos de este paciente.");
         jTextFieldBuscarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldBuscarTurnoActionPerformed(evt);
@@ -974,6 +979,7 @@ public class Laboratorio extends javax.swing.JFrame {
         });
 
         jButtonBuscarTurno.setText("Cargar");
+        jButtonBuscarTurno.setEnabled(false);
         jButtonBuscarTurno.setMinimumSize(new java.awt.Dimension(72, 41));
         jButtonBuscarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -983,6 +989,8 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jComboBoxTurnosDNI.setEnabled(false);
 
+        jLabelCargarResultadoTurnoCargado.setText("Turno Cargado: ");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -990,11 +998,10 @@ public class Laboratorio extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jButtonGuardarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1003,7 +1010,10 @@ public class Laboratorio extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jComboBoxTurnosDNI, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabelCargarResultadoTurnoCargado, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -1017,11 +1027,13 @@ public class Laboratorio extends javax.swing.JFrame {
                     .addComponent(jButtonBuscarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(jComboBoxTurnosDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonGuardarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelCargarResultadoTurnoCargado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonGuardarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1055,6 +1067,8 @@ public class Laboratorio extends javax.swing.JFrame {
         jLabel12.setText("Edad:");
         jLabel12.setPreferredSize(new java.awt.Dimension(200, 16));
 
+        jTextFieldEdad.setToolTipText("Solo números entre 1 y 120");
+
         jLabel13.setText("Sexo:");
         jLabel13.setPreferredSize(new java.awt.Dimension(200, 16));
 
@@ -1075,23 +1089,18 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jErrorCrearPacienteDni.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteDni.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteDni.setText("DNI INVALIDO");
 
         jErrorCrearPacienteNombre.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteNombre.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteNombre.setText("NOMBRE INVALIDO");
 
         jErrorCrearPacienteApellido.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteApellido.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteApellido.setText("APELLIDO INVALIDO");
 
         jErrorCrearPacienteEdad.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteEdad.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteEdad.setText("EDAD INVALIDA");
 
         jErrorCrearPacienteSexo.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteSexo.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteSexo.setText("ELIJA UNA OPCIÓN");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1178,10 +1187,10 @@ public class Laboratorio extends javax.swing.JFrame {
         jPanelAgregarPacienteP1.setLayout(jPanelAgregarPacienteP1Layout);
         jPanelAgregarPacienteP1Layout.setHorizontalGroup(
             jPanelAgregarPacienteP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAgregarPacienteP1Layout.createSequentialGroup()
-                .addContainerGap(162, Short.MAX_VALUE)
+            .addGroup(jPanelAgregarPacienteP1Layout.createSequentialGroup()
+                .addGap(186, 186, 186)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         jPanelAgregarPacienteP1Layout.setVerticalGroup(
             jPanelAgregarPacienteP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1200,6 +1209,8 @@ public class Laboratorio extends javax.swing.JFrame {
         jLabel14.setText("Domicilio:");
         jLabel14.setPreferredSize(new java.awt.Dimension(200, 16));
 
+        jTextFieldDomicilio.setToolTipText("Formato: <Nombre de Calle> <Número>");
+
         jLabel15.setText("Telefono:");
         jLabel15.setPreferredSize(new java.awt.Dimension(200, 16));
 
@@ -1208,15 +1219,12 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jErrorCrearPacienteDomicilio.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteDomicilio.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteDomicilio.setText("DOMICILIO INVALIDO");
 
         jErrorCrearPacienteTelefono.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteTelefono.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteTelefono.setText("TELEFONO INVALIDO");
 
         jErrorCrearPacienteCorreo.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteCorreo.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteCorreo.setText("CORREO INVALIDO");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -1227,8 +1235,9 @@ public class Laboratorio extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addComponent(jErrorCrearPacienteDomicilio))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jErrorCrearPacienteDomicilio)
+                        .addGap(11, 11, 11))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1236,13 +1245,15 @@ public class Laboratorio extends javax.swing.JFrame {
                             .addComponent(jTextFieldTelefono)
                             .addComponent(jTextFieldCorreo)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jErrorCrearPacienteTelefono))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jErrorCrearPacienteCorreo)))))
+                                .addComponent(jErrorCrearPacienteCorreo)
+                                .addGap(12, 12, 12))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                                .addComponent(jErrorCrearPacienteTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)))))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -1317,7 +1328,6 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jErrorCrearPacienteObraSocial.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteObraSocial.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteObraSocial.setText("REPETIDO");
 
         jButton2.setText("Eliminar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -1448,7 +1458,11 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jPanelAgregarAnalisisDatosBase.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel21.setText("Nombre:");
+
+        jTextFieldCrearAnalisisValorReferencia.setToolTipText("Formato: [<numero> a <numero> <unidad/unidad>]");
 
         jLabel22.setText("Valor Referencia:");
 
@@ -1540,7 +1554,6 @@ public class Laboratorio extends javax.swing.JFrame {
 
         jErrorCrearPacienteObraSocial1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jErrorCrearPacienteObraSocial1.setForeground(new java.awt.Color(255, 51, 51));
-        jErrorCrearPacienteObraSocial1.setText("REPETIDO");
 
         jButtonAgregarAnalisisEliminarReactivo.setText("Eliminar");
         jButtonAgregarAnalisisEliminarReactivo.addActionListener(new java.awt.event.ActionListener() {
@@ -1649,7 +1662,7 @@ public class Laboratorio extends javax.swing.JFrame {
             }
         });
 
-        jLabel26.setText("Nombre Analisis:");
+        jLabel26.setText("Filtrar por Nombre de Analisis:");
 
         jScrollPane6.setEnabled(false);
 
@@ -1675,6 +1688,7 @@ public class Laboratorio extends javax.swing.JFrame {
         jTableBuscarAnalisisReactivos.setEnabled(false);
         jScrollPane6.setViewportView(jTableBuscarAnalisisReactivos);
 
+        jTextFieldNombreConsultarAnalisis.setToolTipText("Pulsa Enter para filtrar");
         jTextFieldNombreConsultarAnalisis.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextFieldNombreConsultarAnalisisFocusLost(evt);
@@ -2080,41 +2094,55 @@ public class Laboratorio extends javax.swing.JFrame {
     
     private void jButtonCrearTurnoSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearTurnoSiguienteActionPerformed
         // Comportamiento boton siguiente Crear Turno
-        if (crearTurnoActualStep < 3) {
-            System.out.println("Pagina actual: " + crearTurnoActualStep);
-            
-            boolean avance = false;
-            
-            // Dependiendo de la etapa actual del formulario son los controles que permiten avanzar a la siguiente
-            switch(crearTurnoActualStep){
-                case 0:
-                    // Validar Paso 1
-                    avance = ManagerPaciente.validarDni(jTextFieldDniPaciente.getText()) && ManagerPaciente.comprobarExistencia(Integer.parseInt(jTextFieldDniPaciente.getText()))
+        boolean avance = false;
+        System.out.println("Pagina actual: " + crearTurnoActualStep);
+        
+        switch(crearTurnoActualStep){
+            case 0:
+                avance = ManagerPaciente.validarDni(jTextFieldDniPaciente.getText()) && ManagerPaciente.comprobarExistencia(Integer.parseInt(jTextFieldDniPaciente.getText()))
                             && ManagerTurno.validarSoloTexto(jTextFieldDniPacienteMedico.getText())
                             && ManagerTurno.validarSoloTexto(jTextFieldDniPacienteDiagnostico.getText());
-                    break;
-                case 1:
-                    // Validar Paso 2
-                    avance = (turnosDisponibles > 0);// && ManagerTurno.esDiaDeSemana(jCalendarPedirTurno.getDate());
-                    break;
-                case 2:
-                    // Validar Paso 3
-                    avance = !analisisElegidos.isEmpty();
-                    System.out.println(analisisElegidos);
-                    break;
-            }
-            
-            System.out.println(avance);
-            
-            // Verifica si se validaron los turnos, sino no avanza
-            if (!avance) return;
-            
-            crearTurnoActualStep++;
-            crearTurnoPasosJTabbed.setSelectedIndex(crearTurnoActualStep);
-            jButtonCrearTurnoAnterior.setVisible(true);
-            
-            // Rellenar mensaje de confirmación
-            if (crearTurnoActualStep == 3){
+                if (!avance) {
+                    // Configurar Mensaje de error
+                    String msjError = "ERROR EN LOS SIGUIENTES CAMPOS:";
+                    if (!ManagerPaciente.validarDni(jTextFieldDniPaciente.getText()) || !ManagerPaciente.comprobarExistencia(Integer.parseInt(jTextFieldDniPaciente.getText())))
+                        msjError += "\n-DNI";
+                    if (!ManagerTurno.validarSoloTexto(jTextFieldDniPacienteMedico.getText()))
+                        msjError += "\n-Nombre Medico";
+                    if (!ManagerTurno.validarSoloTexto(jTextFieldDniPacienteDiagnostico.getText()))
+                        msjError += "\n-Diagnostico";
+                    JOptionPane.showMessageDialog(null,msjError);
+
+                    return;
+                }
+
+                crearTurnoActualStep++;
+                jButtonCrearTurnoAnterior.setVisible(true);
+                break;
+            case 1:
+                avance = (turnosDisponibles > 0);
+                if (!avance) {
+                    // Configurar Mensaje de error
+                    String msjError = "ERROR: NO QUEDAN MAS TURNOS DISPONIBLES";
+                    JOptionPane.showMessageDialog(null,msjError);
+                    return;
+                }
+
+                crearTurnoActualStep++;
+                break;
+            case 2:
+                avance = !analisisElegidos.isEmpty();
+                System.out.println(analisisElegidos);
+                if (!avance) {
+                    // Configurar Mensaje de error
+                    String msjError = "ERROR: INGRESE AL MENOS UN ANALISIS";
+                    JOptionPane.showMessageDialog(null,msjError);
+                    return;
+                }
+
+                crearTurnoActualStep++;
+                
+                // Preparar pestaña de confirmación
                 // PACIENTE
                 Paciente p = ManagerPaciente.obtenerPaciente(jTextFieldDniPaciente.getText());
                 jLabelConfirmacionDni.setText("DNI: " + p.getDni());
@@ -2122,7 +2150,6 @@ public class Laboratorio extends javax.swing.JFrame {
                 if (jCheckBoxParticular.isSelected()){
                     jLabelConfirmacionObraSocial.setText("Obra Social: PARTICULAR");
                 }
-                
                 
                 jLabelConfirmacionNombre.setText("Nombre: " + p.getNombre());
                 jLabelConfirmacionApellido.setText("Apellido: " + p.getApellido());
@@ -2146,30 +2173,32 @@ public class Laboratorio extends javax.swing.JFrame {
                 jLabelConfirmacionAnalisisList.setListData(listData);
                 
                 jButtonCrearTurnoSiguiente.setText("Crear");
-            }
-            else{
-                jButtonCrearTurnoSiguiente.setText("Siguiente");
-            }
-            
-        }
-        else if (crearTurnoActualStep == 3){
-            // Crear turno y guardarlo en la base de datos
-            String obraSocial = (String)jComboBoxObraSocialTurno.getSelectedItem();
-            if (jCheckBoxParticular.isSelected()){
-                obraSocial = "PARTICULAR";
-            }
-            
-            ManagerTurno.guardarTurno(jTextFieldDniPaciente.getText(),
-                    obraSocial,
-                    jTextFieldDniPacienteMedico.getText(),
-                    jTextFieldDniPacienteDiagnostico.getText(),
-                    jCalendarPedirTurno,
-                    analisisElegidos);
-            
-            vaciarCamposCrearTurno();
+                break;
+            case 3:
+                // Crear turno y guardarlo en la base de datos
+                String obraSocial = (String)jComboBoxObraSocialTurno.getSelectedItem();
+                if (jCheckBoxParticular.isSelected()){
+                    obraSocial = "PARTICULAR";
+                }
 
+                ManagerTurno.guardarTurno(jTextFieldDniPaciente.getText(),
+                        obraSocial,
+                        jTextFieldDniPacienteMedico.getText(),
+                        jTextFieldDniPacienteDiagnostico.getText(),
+                        jCalendarPedirTurno,
+                        analisisElegidos);
+
+                vaciarCamposCrearTurno();
+                
+                // Notificar al Usuario
+                String msjError = "TURNO CREADO CON EXITO";
+                JOptionPane.showMessageDialog(null,msjError);
+                
+                break;
+            
         }
-//        System.out.println(crearTurnoActualStep);
+        System.out.println("Pagina siguiente: " + crearTurnoActualStep);
+        crearTurnoPasosJTabbed.setSelectedIndex(crearTurnoActualStep);
     }//GEN-LAST:event_jButtonCrearTurnoSiguienteActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -2215,39 +2244,26 @@ public class Laboratorio extends javax.swing.JFrame {
                             && ManagerPaciente.validarNombre(jTextFieldApellido.getText())
                             && ManagerPaciente.validarEdad(jTextFieldEdad.getText());
                     
-                    // Control de etiquetas de error (EN DESARROLLO)
+                    // Notificar Errores
                     if (!avance){
-                        // Label dni
-//                        try{
-//                            if (ManagerPaciente.comprobarExistencia(Integer.parseInt(jTextFieldDni.getText()))) jErrorCrearPacienteDni.setText("DNI YA EXISTENTE");
-//                        }
-//                        catch (NumberFormatException e){
-//                            System.out.println(e);
-//                        }
-//                        if (!ManagerPaciente.validarDni(jTextFieldDni.getText())) jErrorCrearPacienteDni.setText("DNI INVALIDO");
-//                        if (jTextFieldDni.getText().equals("")) jErrorCrearPacienteDni.setText("CAMPO OBLIGATORIO");
-//                        
-//                        // Label nombre
-//                        if (!ManagerPaciente.validarNombre(jTextFieldNombre.getText())) jErrorCrearPacienteNombre.setText("NOMBRE INVALIDO");
-//                        if (jTextFieldNombre.getText().equals("")) jErrorCrearPacienteNombre.setText("CAMPO OBLIGATORIO");
-//                        
-//                        // Label apellido
-//                        if (!ManagerPaciente.validarNombre(jTextFieldApellido.getText())) jErrorCrearPacienteApellido.setText("APELLIDO INVALIDO");
-//                        if (jTextFieldApellido.getText().equals("")) jErrorCrearPacienteApellido.setText("CAMPO OBLIGATORIO");
-//                        
-//                        // Label edad
-//                        if (!ManagerPaciente.validarEdad(jTextFieldApellido.getText())) jErrorCrearPacienteEdad.setText("EDAD INVALIDA");
-//                        if (jTextFieldEdad.getText().equals("")) jErrorCrearPacienteEdad.setText("CAMPO OBLIGATORIO");
+                        // Configurar Mensaje de error
+                        String msjError = "ERROR EN LOS SIGUIENTES CAMPOS:";
                         
+                        if (!ManagerPaciente.validarDni(jTextFieldDni.getText())){
+                            msjError += "\n-DNI";
+                        }
+                        else if (ManagerPaciente.comprobarExistencia(Integer.parseInt(jTextFieldDni.getText())))
+                                msjError += "\n-DNI: El Paciente ya existe";
+                        
+                        if (!ManagerPaciente.validarNombre(jTextFieldNombre.getText()))
+                            msjError += "\n-Nombre";
+                        if (!ManagerPaciente.validarNombre(jTextFieldApellido.getText()))
+                            msjError += "\n-Apellido";
+                        if (!ManagerPaciente.validarEdad(jTextFieldEdad.getText()))
+                            msjError += "\n-Edad";
+                        JOptionPane.showMessageDialog(null,msjError);
                     }
-                    else{
-                        // Vacia los labels de error
-                        jErrorCrearPacienteDni.setText("");
-                        jErrorCrearPacienteNombre.setText("");
-                        jErrorCrearPacienteApellido.setText("");
-                        jErrorCrearPacienteEdad.setText("");
-                        jErrorCrearPacienteSexo.setText("");
-                    }
+
                     
                     break;
                 case 1:
@@ -2255,6 +2271,20 @@ public class Laboratorio extends javax.swing.JFrame {
                     avance = ManagerPaciente.validarDomicilio(jTextFieldDomicilio.getText())
                             && ManagerPaciente.validarTelefono(jTextFieldTelefono.getText())
                             && ManagerPaciente.validarCorreoElectronico(jTextFieldCorreo.getText());
+                    
+                    // Notificar errores
+                    if (!avance){
+                        // Configurar Mensaje de error
+                        String msjError = "ERROR EN LOS SIGUIENTES CAMPOS:";
+                        
+                        if (!ManagerPaciente.validarDomicilio(jTextFieldDomicilio.getText()))
+                            msjError += "\n-Domicilio";
+                        if (!ManagerPaciente.validarTelefono(jTextFieldTelefono.getText()))
+                            msjError += "\n-Telefono";
+                        if (!ManagerPaciente.validarCorreoElectronico(jTextFieldCorreo.getText()))
+                            msjError += "\n-Correo Electronico";
+                        JOptionPane.showMessageDialog(null,msjError);
+                    }
                     break;
             }
             
@@ -2311,6 +2341,11 @@ public class Laboratorio extends javax.swing.JFrame {
 //            dataModelobrasSocialesElegidas.getDataVector().clear();
 //            crearPacienteActualStep = 0;
 //            jTabbedPanelCrearPaciente.setSelectedIndex(crearPacienteActualStep);
+            // Notificar al usuario
+            String msjError = "PACIENTE AGREGADO CON EXITO";
+            JOptionPane.showMessageDialog(null,msjError);
+
+
         }
         
         
@@ -2345,9 +2380,11 @@ public class Laboratorio extends javax.swing.JFrame {
         // Determina el color del label dependiendo de la cantidad de turnos disponibles
         if (turnosDisponibles == 0){
             jLabelPedirTurnoDisponibles.setForeground(Color.red);
+            jButtonCrearTurnoSiguiente.setEnabled(false);
         }
         else{
             jLabelPedirTurnoDisponibles.setForeground(Color.black);
+            jButtonCrearTurnoSiguiente.setEnabled(true);
         }
         
         jLabelPedirTurnoDisponibles.setText(turnosDisponiblesString);
@@ -2367,24 +2404,41 @@ public class Laboratorio extends javax.swing.JFrame {
 
     private void jButtonCrearPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearPacienteActionPerformed
         cambiarPanel(jPanelAgregarPaciente);
+        setHighlighted(jButtonLateralAgregarPaciente);
         jTextFieldDni.setText(jTextFieldDniPaciente.getText());
     }//GEN-LAST:event_jButtonCrearPacienteActionPerformed
 
     private void jTextFieldDniPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteActionPerformed
         // Habilitar otros campos si existe el paciente
-        if (jTextFieldDniPaciente.getText().equals("")) return;
+//        if (jTextFieldDniPaciente.getText().equals("")) return;
+//        int dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
+        int dniPaciente = -1;
+        try{
+            dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
+        }catch(NumberFormatException e){
+            System.out.println("ERROR: NUMERO INVALIDO");
+            return;
+        }
         
-        int dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
+        
         if (ManagerPaciente.comprobarExistencia(dniPaciente)){
             jButtonCrearPaciente.setEnabled(false);
             jComboBoxObraSocialTurno.setEnabled(true);
             jCheckBoxParticular.setEnabled(true);
+            jCheckBoxParticular.setSelected(false);
             
             // Cargar obras sociales en combobox
             ArrayList<ObraSocial> obrasSociales = ManagerPaciente.obtenerObrasSociales(dniPaciente);
             jComboBoxObraSocialTurno.removeAllItems();
             for(ObraSocial os : obrasSociales){
                 jComboBoxObraSocialTurno.addItem(os.getNombre());
+            }
+            
+            // En caso de no tener obras sociales, marcar pestaña de particular
+            if (obrasSociales.isEmpty()){
+                jComboBoxObraSocialTurno.setEnabled(false);
+                jCheckBoxParticular.setEnabled(false);
+                jCheckBoxParticular.setSelected(true);
             }
         }
         else{
@@ -2421,18 +2475,36 @@ public class Laboratorio extends javax.swing.JFrame {
 
     private void jTextFieldDniPacienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDniPacienteFocusLost
         // Habilitar otros campos si existe el paciente
-        if (jTextFieldDniPaciente.getText().equals("")) return;
+//        if (jTextFieldDniPaciente.getText().equals("")) return;
 
-        int dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
+//        int dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
+
+        int dniPaciente = -1;
+        try{
+            dniPaciente = Integer.parseInt(jTextFieldDniPaciente.getText());
+        }catch(NumberFormatException e){
+            System.out.println("ERROR: NUMERO INVALIDO");
+            return;
+        }
+
         if (ManagerPaciente.comprobarExistencia(dniPaciente)){
             jButtonCrearPaciente.setEnabled(false);
             jComboBoxObraSocialTurno.setEnabled(true);
             jCheckBoxParticular.setEnabled(true);
+            jCheckBoxParticular.setSelected(false);
             ArrayList<ObraSocial> obrasSociales = ManagerPaciente.obtenerObrasSociales(dniPaciente);
             jComboBoxObraSocialTurno.removeAllItems();
             for(ObraSocial os : obrasSociales){
                 jComboBoxObraSocialTurno.addItem(os.getNombre());
             }
+            
+            // En caso de no tener obras sociales, marcar pestaña de particular
+            if (obrasSociales.isEmpty()){
+                jComboBoxObraSocialTurno.setEnabled(false);
+                jCheckBoxParticular.setEnabled(false);
+                jCheckBoxParticular.setSelected(true);
+            }
+            
         }
         else{
             jButtonCrearPaciente.setEnabled(true);
@@ -2448,8 +2520,10 @@ public class Laboratorio extends javax.swing.JFrame {
 //        if (!avance) return;
 //        ManagerInforme.llenarTablaAnalisis(Integer.parseInt(jTextFieldBuscarTurno.getText()), dataModelanalisisInforme);
 //        ManagerInforme.validarResultado(dataModelanalisisInforme);
-        if (jComboBoxTurnosDNI.isEnabled())
-            ManagerInforme.llenarTablaAnalisis(jComboBoxTurnosDNI.getSelectedIndex(), dataModelanalisisInforme);
+        if (jComboBoxTurnosDNI.isEnabled()){
+            int nroTurno = ManagerInforme.llenarTablaAnalisis(jComboBoxTurnosDNI.getSelectedIndex(), dataModelanalisisInforme);
+            jLabelCargarResultadoTurnoCargado.setText("Turno Cargado: " + nroTurno);
+        }
         
         
     }//GEN-LAST:event_jButtonBuscarTurnoActionPerformed
@@ -2457,16 +2531,26 @@ public class Laboratorio extends javax.swing.JFrame {
     private void jButtonGuardarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarResultadoActionPerformed
         // Valida que todos los campos ingresados por el usuario sean validos (que sean en formato flotante)
         boolean exito = ManagerInforme.validarResultado(dataModelanalisisInforme);
-        if (!exito) return;
+        if (!exito) {
+            String msjError = "ERROR: EL FORMATO DE LOS RESULTADOS NO ES CORRECTO\nSOLO SE ADMITEN NUMEROS";
+            JOptionPane.showMessageDialog(null,msjError);
+            return;
+        }
         
 //        ManagerInforme.guardarInforme(jTextFieldBuscarTurno.getText(),dataModelanalisisInforme);
         ManagerInforme.guardarInforme(dataModelanalisisInforme);
         
         // Limpiar Campos
+        jLabelCargarResultadoTurnoCargado.setText("Turno Cargado: ");
         jTextFieldBuscarTurno.setText("");
         jComboBoxTurnosDNI.removeAllItems();
         jComboBoxTurnosDNI.setEnabled(false);
+        jButtonBuscarTurno.setEnabled(false);
         dataModelanalisisInforme.fireTableDataChanged();// Actualiza la tabla tras su vaciado
+        
+        String msjError = "INFORME GUARDADO CON EXITO";
+        JOptionPane.showMessageDialog(null,msjError);
+        
     }//GEN-LAST:event_jButtonGuardarResultadoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -2478,8 +2562,10 @@ public class Laboratorio extends javax.swing.JFrame {
             int dni = Integer.parseInt(jTextFieldBuscarTurno.getText());
             List<String> turnosPorDNI = ManagerTurno.obtenerTurnosPorDNI(dni);
             jComboBoxTurnosDNI.setEnabled(true);
+            jButtonBuscarTurno.setEnabled(true);
             if (turnosPorDNI.isEmpty()){
                 jComboBoxTurnosDNI.setEnabled(false);
+                jButtonBuscarTurno.setEnabled(false);
                 return;
             }
             jComboBoxTurnosDNI.removeAllItems();
@@ -2490,6 +2576,7 @@ public class Laboratorio extends javax.swing.JFrame {
         }
         catch(NumberFormatException e){
             jComboBoxTurnosDNI.setEnabled(false);
+            jButtonBuscarTurno.setEnabled(false);
             System.out.println("ERROR: DNI INVALIDO");
         }
     }//GEN-LAST:event_jTextFieldBuscarTurnoActionPerformed
@@ -2650,12 +2737,26 @@ public class Laboratorio extends javax.swing.JFrame {
         switch(crearAnalisisActualStep){
             case 0:
                 avance = ManagerAnalisis.validarNombreAnalisis(jTextFieldCrearAnalisisNombre.getText()) && 
-                        ManagerAnalisis.validarSoloTexto(jTextFieldCrearAnalisisValorReferencia.getText()) &&
+                        ManagerAnalisis.validarValorReferencia(jTextFieldCrearAnalisisValorReferencia.getText()) &&
                         ManagerAnalisis.validarFlotante(jTextFieldCrearAnalisisMonto.getText()) &&
                                 ManagerAnalisis.validarSoloTexto(jTextFieldCrearAnalisisMetodoUsado.getText());
                 System.out.println("Campos validados: "+avance);
                 if (!avance) {
-                    // Configurar etiquetas de fallo
+                    // Configurar Mensaje de error
+                    String msjError = "ERROR EN LOS SIGUIENTES CAMPOS:";
+                    if (ManagerAnalisis.comprobarExistenciaAnalisis(jTextFieldCrearAnalisisNombre.getText()))
+                        msjError += "\n-Nombre: El Analisis ya existe";
+                    else if (!ManagerAnalisis.validarNombreAnalisis(jTextFieldCrearAnalisisNombre.getText()))
+                        msjError += "\n-Nombre";
+                    
+                    if (!ManagerAnalisis.validarValorReferencia(jTextFieldCrearAnalisisValorReferencia.getText()))
+                        msjError += "\n-Valor Referencia";
+                    if (!ManagerAnalisis.validarFlotante(jTextFieldCrearAnalisisMonto.getText()))
+                        msjError += "\n-Monto";
+                    if (!ManagerAnalisis.validarSoloTexto(jTextFieldCrearAnalisisMetodoUsado.getText()))
+                        msjError += "\n-Metodo Usado";
+                    JOptionPane.showMessageDialog(null,msjError);
+                    
                     return;
                 }
                 crearAnalisisActualStep++;
@@ -2667,7 +2768,14 @@ public class Laboratorio extends javax.swing.JFrame {
                 avance = !reactivosAnalisis.isEmpty() && ManagerAnalisis.validarTablaReactivos((DefaultTableModel)jTableAgregarPacienteReactivos.getModel());
                 System.out.println("Campos validados: "+avance);
                 if (!avance) {
-                    // Configurar etiquetas de fallo
+                    // Configurar Mensaje de error
+                    String msjError = "ERROR: INGRESE AL MENOS UN REACTIVO";
+                    if (!ManagerAnalisis.validarTablaReactivos((DefaultTableModel)jTableAgregarPacienteReactivos.getModel()))
+                        msjError = "ERROR: EL FORMATO DE LOS NUMEROS NO ES VALIDO";
+                    if (reactivosAnalisis.isEmpty())
+                        msjError = "ERROR: INGRESE AL MENOS UN REACTIVO";
+                    
+                    JOptionPane.showMessageDialog(null,msjError);
                     return;
                 }
                 
@@ -2685,6 +2793,21 @@ public class Laboratorio extends javax.swing.JFrame {
                 for(Analisis analisis : ManagerAnalisis.obtenerTodosLosAnalisis()){
                     jComboBoxConsultarAnalisis.addItem(analisis.getNombre());
                 }
+                
+                // Vaciar campos
+                crearAnalisisActualStep=0;
+                jTabbedPanelAgregarAnalisis.setSelectedIndex(crearAnalisisActualStep);
+                jButtonCrearAnalisisAnterior.setVisible(false);
+                jTextFieldCrearAnalisisNombre.setText("");
+                jTextFieldCrearAnalisisValorReferencia.setText("");
+                jTextFieldCrearAnalisisMonto.setText("");
+                jTextFieldCrearAnalisisMetodoUsado.setText("");
+                dataModelReactivosAnalisis.getDataVector().clear();
+                reactivosAnalisis.clear();
+                
+                // Notificar al Usuario
+                String msjError = "ANALISIS AGREGADO CON EXITO";
+                JOptionPane.showMessageDialog(null,msjError);
                 
                 break;
         }
@@ -2791,10 +2914,12 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JPanel crearTurnoP4;
     private javax.swing.JPanel crearTurnoP5;
     private javax.swing.JTabbedPane crearTurnoPasosJTabbed;
+    private javax.swing.JLabel errCrearTurnoDiagnostico;
+    private javax.swing.JLabel errCrearTurnoDni;
+    private javax.swing.JLabel errCrearTurnoMedico;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
@@ -2852,10 +2977,7 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -2878,6 +3000,7 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBuscarAnalisisMetodoUsado;
     private javax.swing.JLabel jLabelBuscarAnalisisMonto;
     private javax.swing.JLabel jLabelBuscarAnalisisValorReferencia;
+    private javax.swing.JLabel jLabelCargarResultadoTurnoCargado;
     private javax.swing.JList<String> jLabelConfirmacionAnalisisList;
     private javax.swing.JLabel jLabelConfirmacionApellido;
     private javax.swing.JLabel jLabelConfirmacionDiagnostico;
@@ -2934,6 +3057,7 @@ public class Laboratorio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPanelAgregarAnalisis;
     private javax.swing.JTabbedPane jTabbedPanelCrearPaciente;
     private javax.swing.JTable jTableAgregarPacienteReactivos;
